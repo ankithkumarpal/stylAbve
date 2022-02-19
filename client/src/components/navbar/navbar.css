@@ -1,0 +1,130 @@
+.navbar{
+    width:100vw;
+    height: 7vh;
+    background-color: rgb(248, 82, 82);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    font-family: "Goudy Bookletter 1911", sans-serif;
+    color: white;
+    text-transform: capitalize;
+    
+   
+}
+
+.left{
+ flex: 1;
+ align-items: center;
+ width: 53px;
+ justify-content: center;
+ color: white;
+ /* background-color: yellow; */
+}
+.left span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.right{
+  flex: 4;
+  display: flex;
+  /* background-color: blue; */
+}
+.right ul{
+  display: flex;
+  height: 3vh;
+  margin-top: 3px;
+  margin-left: 2.5rem;
+  /* background-color: green; */
+ 
+}
+
+.right ul li{
+  margin-left: 2.3rem;
+  margin-right: 0.3rem;
+  font-size: 1rem;
+  list-style: none;
+  /* background-color:black; */
+  color: white;
+}
+
+ .right ul li:hover{
+   border-bottom: 1px solid white;
+  color: white;
+  cursor: pointer;
+  transition: 0.4s ease;
+} 
+
+.cart{
+  margin-left: 3rem;
+  font-size: 1rem;
+}
+.cart:hover{
+  border-bottom: 1px solid white;
+  color: white;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+@media only screen and (max-width:1245px) {
+  .navbar{
+    width:100vw;
+    height: 7vh;
+    background-color: red;
+    font-family: "Goudy Bookletter 1911", sans-serif;
+    color: white;
+    flex-direction: column;
+    text-transform: capitalize; 
+}
+
+.left{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  color: white;
+  font-size: 0.6rem;
+  /* background-color: yellow; */
+  margin-left: 0px;
+ }
+
+ .right{
+  /* display: flex; */
+  height: inherit;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* background-color: red; */
+} 
+
+.right ul{
+  /* display: flex; */
+  height: 3vh;
+  width: min-content;
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: inherit;
+  margin-top: 14px;
+  align-items: center;
+  padding-left: -12rem;
+  /* background-color: green; */
+}
+
+
+.right ul li{
+  font-size: 0.4rem;
+  width: max-content;
+  list-style: none;
+  /* background-color:black; */
+  color: white;
+  margin-left: 6px;
+}
+
+.cart{
+  font-size: 1rem;
+  /* background-color: blue; */
+  margin-left: 2px;
+  
+}
+
+}

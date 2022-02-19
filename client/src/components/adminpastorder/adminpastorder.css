@@ -1,0 +1,33 @@
+.pastorder{
+    width: 100%;
+    min-height: 20%;
+    /* background-color: blue; */
+}
+
+.pastorder_inner{
+    width: 99%;
+    min-height: 20%;
+    background-color: rgb(235, 173, 166);
+    margin: 4px;
+    border-radius: 9px ; 
+}
+.pastorder_inner p{
+    margin-left: 14px;
+    margin-top: 14px;
+    margin-right: 3rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.pastorder_billing{
+    display: flex;
+}
+.pastorder_billing select{
+    width: 10rem;
+    height: 2rem;
+    margin-top: 14px;
+}
+.admin_select{
+    width: 6rem;
+}
+

@@ -1,0 +1,18 @@
+.Name{
+     width: 30%;
+     /* background-color:red; */
+}
+
+.name_inner{
+    width: 100%;
+    margin-left: 20px;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 4px;
+}
+
+@media only screen and (max-width: 460px) {
+   .name_inner{
+       font-size: 0.8rem;
+   }
+  }

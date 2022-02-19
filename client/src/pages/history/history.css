@@ -1,0 +1,19 @@
+
+.order{
+
+    width: 100vw;
+    height: 93vh;
+   background-color:  rgb(207, 201, 201);
+   display: flex;
+   align-items: center;
+   justify-content:center;
+   flex-wrap: wrap;
+   overflow-x: hidden;
+}
+.order_inner{
+    border: 2 px solid red;
+    width: 87vw;
+    height: 80vh;
+   /* background-color: black; */
+   overflow-y: auto;
+}

@@ -1,0 +1,91 @@
+.contacts{
+    display: flex;
+    height: 93vh;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(238, 238, 22, 0.726);
+    flex-wrap: wrap;
+}
+.cont_lefts{
+    background-color: white;
+    height: 500px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+    justify-content: space-around;
+    
+    
+   
+}
+
+.conatact_information{
+    flex:2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    margin-top: 50px;
+    width: 400px;
+    height: 250px;
+ 
+}
+
+.conatact_information h2 {
+    font-family: 'Courier New', Courier, monospace;  
+    border-bottom: 3px solid red;
+    color:black;
+    
+
+}
+
+.information{
+    margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-weight: bold;
+}
+.contact_name{
+    margin-bottom:10px;
+}
+.conatact_no{
+    margin-bottom:10px;
+}
+.conatact_email{
+    margin-bottom: 10px;
+}
+.conatact_address{
+    margin-bottom:10px;
+}
+.followus{
+    flex: 1;
+    margin-top: 20px;
+}
+.followus i {
+    font-size: 28px;
+}
+
+.insta{
+    color: red;
+    margin-top:10px;
+}
+.insta:hover{
+    cursor: pointer;
+}
+
+.whatsapp:hover{
+    cursor: pointer;
+}
+.twitter:hover{
+    cursor: pointer;
+}
+.whatsapp{
+    color: green;
+    margin-top: 10px;
+}
+
+.twitter{
+    color: blue;
+    margin-top: 10px;
+}

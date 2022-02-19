@@ -1,0 +1,43 @@
+.pastorder{
+    width: 100%;
+    min-height: 20%;
+    /* background-color: blue; */
+}
+
+.pastorder_inner{
+    width: 99%;
+    min-height: 20%;
+    background-color: rgb(235, 173, 166);
+    margin: 4px;
+    border-radius: 9px ; 
+}
+.pastorder_inner p{
+    margin-left: 14px;
+    margin-top: 14px;
+    margin-right: 3rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.pastorder_billing{
+    display: flex;
+}
+
+@media only screen and (max-width:460px) {
+    .pastorder_inner{
+        /* background-color: red; */
+    }
+    .pastorder_inner p{
+        margin-left: 5px;
+        margin-top: 14px;
+        margin-right: 1rem;
+        font-size: 0.6rem;
+        width: 6rem;
+        font-family: 'Courier New', Courier, monospace;
+        /* font-weight: bold; */
+        /* background-color: red; */
+    }
+    .pastorder_billing.orderdate{
+        width: 6.3rem;
+    }
+  }

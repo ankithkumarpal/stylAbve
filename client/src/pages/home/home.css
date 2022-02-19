@@ -1,0 +1,81 @@
+.home{
+    width: 100vw;
+    height: 93vh;
+    background-image: url(../../assests/carving_home-page.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home_inner{
+    margin-top: 4rem;
+    width: 60vw;
+    height: 40vh;
+    margin-left: -10rem;
+    /* background-color: red; */
+}
+.home_content h1{
+    color: grey;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.home_content p{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.home_content{
+    margin-top: 2rem;
+    margin-left: 4rem;
+    /* background-color: red; */
+}
+
+.details_order{
+    /* background-color: black; */
+    width: 40vw;
+    margin-top: 3rem;
+    margin-left: 7rem;
+    height: 9rem;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+@media only screen and (max-width: 1245px) {
+    .home{
+        width: 100vw;
+        height: 93vh;
+        background-image: url(../../assests/carving_home-page.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .home_content{
+        /* background-color: red; */
+        width: 265px;
+    }
+    .home_content h1{
+        color: grey;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 1rem;
+        /* background-color: blue; */
+        margin-top: -4rem;
+    }
+    .home_content p{
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.8rem;
+    }
+    .details_order{
+        /* background-color: black; */
+        width: 70vw;
+        margin-top: 4rem;
+        margin-left: 4rem;
+        height: 9rem;
+        font-size: 1rem;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    .details_order p {
+        font-size: 1rem;
+    }
+  }

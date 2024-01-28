@@ -1,0 +1,10 @@
+.prod-img{
+    width: 90%;
+    height: 60%;
+    background-color: red;
+}
+.prod-section{
+    width: 90%;
+    height: 40%;
+    /* background-color: green; */
+}

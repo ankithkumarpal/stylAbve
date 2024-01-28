@@ -4,7 +4,6 @@ const Orders = require('../models/Orders');
 const Users = require('../models/Users');
 
 router.post('/order', async (req,res)=>{
-
     try{
         const newOrder = new Orders({
             phone:req.body.phone,
@@ -56,8 +55,5 @@ router.get('/',async(req,res)=>{
         res.status(500).json(err);
     }
 })
-
-
-
 
 module.exports=router;

@@ -6,21 +6,21 @@ function Contact() {
     return (
         <>
             <Navbar />
-            <div className="homes">
+            <div className="home">
                 <div className="contacts">
                     <div className='cont_lefts'>
                     <div className="conatact_information">
-                            <h2>contact information </h2>
+                            <h2>Contact Details  </h2>
                             <div className="information">
-                            <div className="contact_name"> <span>Name : ankith kumar pal </span></div>
-                            <div className="conatact_no"> <span>contact no : 999999999 </span></div>
-                            <div className="conatact_email"> <span>Gmail : ankithpal721@gmail.com </span></div>
+                            <div className="contact_name" > <span >Name : ankith kumar pal</span></div>
+                            <div className="conatact_no"> <span >contact no : 999999999 </span></div>
+                            <div className="conatact_email"> <span >Gmail : ankithpal721@gmail.com </span></div>
                             <div className="conatact_address">
-                            <div className="conatact_email"> Address : ankith kumar pal </div>
-                            <div className="conatact_email"> city  : ankith kumar pal </div>
+                            <div className="conatact_email"> <span> Address : ankith kumar pal</span> </div>
+                            <div className="conatact_email"> <span> city  : ankith kumar pal</span> </div>
                            
-                             <div className="conatact_email">state : ankith kumar pal </div>
-                             <div className="conatact_email">pincode : ankith kumar pal </div>
+                             <div className="conatact_email"> <span>state : ankith kumar pal</span> </div>
+                             <div className="conatact_email"> <span>pincode : ankith kumar pal </span> </div>
                             </div>
                             </div>
                         </div>

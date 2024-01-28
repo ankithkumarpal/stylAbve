@@ -1,43 +1,90 @@
+import "./pencil.css";
+import Navbar from "../../components/navbar/Navbar";
+import { useContext, useState, useEffect } from "react";
+import { Context } from "../../context/Context";
+import Model from "../PaymentModel/modal";
+import axios from "axios";
+import { useToasts } from 'react-toast-notifications';
+import {BeatLoader} from 'react-spinners';
 
-import './pencil.css';
-import Navbar from '../../components/navbar/Navbar';
-import image from '../../assests/pencil_demo.jpg'
-import {Link}  from 'react-router-dom';
-import {products} from '../../assests/products'
-import { useContext, useReducer, useState } from 'react';
-import { Context } from '../../context/Context';
 function Pencil() {
-    const [item,setItem]=useState(products);
-    const {user} = useContext(Context);
- //   console.log(item);
-    return (
-        <>
-           <Navbar/>
-            <div className="home">
-            <div className="pencil">
-               { item.map((pro)=>( 
-                <div className="container" key={pro.id}>
-                    <div className='image'>
-                        <img src={pro.image}alt={""} />
-                    </div>
-                    <div className="items_desc">
-                        <span className="color">color : <span  style={{color: `${pro.color}`}} >{pro.color}</span>  </span>
-                        <span className="line"></span>
-                        <span className='price'> price :₹ {pro.price}/- </span>
-                    </div>
-                    <div className="orderNow">
-                        <Link to={user ?"/payment":"/login"}>
-                               <button > Order Now</button>
-                        </Link>
-                    </div>
+  const [item, setItem] = useState([]);
+  const { addToast } = useToasts();
+  const [isLoading , setIsLoading] = useState(true);
+  const user = useContext(Context)
+  
+  useEffect(() => {
+    if(item.length === 0){
+      getProducts();
+    }
+  }, []);
+  
+  const getProducts = async () => {
+    try {
+      const response = await axios.get("/product/get-products");
+      setItem(response.data);
+      addToast('This is a toast message', { appearance: 'success' });
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      setIsLoading(false);
+    }
+  };
 
+  const addToCart = async(product , imageSrc)=>{
+     setIsLoading(true);
+    let cartDetail = {
+      color : product.color,
+      price : product.price,
+      email : user.user.email,
+      productId : product._id
+    }
+    await axios
+      .post("/cart/add-to-cart", cartDetail , {
+      })
+      .then((res) => {
+        if(res.data == "Already Exist"){
+          setIsLoading(false);
+          addToast("Already Exists", { appearance: 'success' });
+        }else{
+          setIsLoading(false);
+          addToast("Added successfully", { appearance: 'success' });
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
+         addToast('Failed to add cart', { appearance: 'error' });
+      });
+  }
+  return (
+    <>
+      <Navbar />
+      <div className="home pencil-home">
+        <div className="spinner">
+            <BeatLoader loading={isLoading} color="white"/>
+        </div>
+        <div className="product">
+          {item?.map((pro) => {
+              const base64String = Buffer.from(pro.image.data.data).toString("base64");
+              const imageSrc = `data:image/png;base64,${base64String}`;
+            return (
+              <div className="product-container">
+                <div className="image">
+                  <div className="image-contaner">
+                    <span> &nbsp;Rs:{pro.price}/-</span>
+                    <img src={imageSrc} alt={pro._id} key={pro._id} />
+                  </div>
                 </div>
-                ))} 
-            </div>
-            </div>
-      
-        </>
-    );
+                <div className="button">
+                  <Model product={pro} imageSrc = {imageSrc} />
+                  <button class="btn btn-warning" onClick={() => addToCart(pro , imageSrc)}>Add to cart</button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
 }
-
 export default Pencil;

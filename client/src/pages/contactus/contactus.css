@@ -1,13 +1,14 @@
 .contacts{
     display: flex;
     height: 93vh;
+    width: 100%;
     align-items: center;
     justify-content: space-around;
-    background-color: rgba(238, 238, 22, 0.726);
+    background-color: rgba(238, 238, 22, 0.186);
     flex-wrap: wrap;
 }
 .cont_lefts{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.617);
     height: 500px;
     width: 450px;
     display: flex;
@@ -20,12 +21,16 @@
    
 }
 
+span{
+    font-family: cursive;
+}
+
 .conatact_information{
     flex:2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    /* background-color: white; */
     margin-top: 50px;
     width: 400px;
     height: 250px;
@@ -33,7 +38,7 @@
 }
 
 .conatact_information h2 {
-    font-family: 'Courier New', Courier, monospace;  
+   font-family: cursive;
     border-bottom: 3px solid red;
     color:black;
     
@@ -61,6 +66,7 @@
 .followus{
     flex: 1;
     margin-top: 20px;
+    font-weight: bold;
 }
 .followus i {
     font-size: 28px;

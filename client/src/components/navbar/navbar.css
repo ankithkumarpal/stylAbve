@@ -2,14 +2,19 @@
     width:100vw;
     height: 7vh;
     background-color: rgb(248, 82, 82);
+    background-color: rgba(121, 10, 10, 0.77);
     display: flex; 
     align-items: center;
     justify-content: center;
-    font-family: "Goudy Bookletter 1911", sans-serif;
     color: white;
     text-transform: capitalize;
-    
-   
+}
+
+.drop-down-button{
+  padding: 1px;
+  border: none;
+  background-color: inherit;
+  color: white;
 }
 
 .left{
@@ -18,26 +23,27 @@
  width: 53px;
  justify-content: center;
  color: white;
- /* background-color: yellow; */
 }
 .left span{
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
+    font-family: cursive;
 }
 .right{
   flex: 4;
-  display: flex;
-  /* background-color: blue; */
+  align-items: center;
+  height: 4vh;
+  /* background-color: red */
 }
 .right ul{
   display: flex;
   height: 3vh;
-  margin-top: 3px;
-  margin-left: 2.5rem;
-  /* background-color: green; */
- 
+  /* margin-top: 3px;
+  margin-left: 2.5rem;  */
+  display: flex;
+  align-items: center;
 }
 
 .right ul li{
@@ -45,13 +51,14 @@
   margin-right: 0.3rem;
   font-size: 1rem;
   list-style: none;
-  /* background-color:black; */
   color: white;
+  font-family: cursive;
+  width: fit-content;
 }
 
  .right ul li:hover{
    border-bottom: 1px solid white;
-  color: white;
+   color: white;
   cursor: pointer;
   transition: 0.4s ease;
 } 
@@ -67,11 +74,20 @@
   transition: 0.4s ease;
 }
 
+/* .drop-down-menu-bg{
+   background-color: grey
+} */
+/* .drop-down-menu-bg Link li{
+  margin-left: 0px;
+  margin-right: 0px;
+} */
+
 @media only screen and (max-width:1245px) {
   .navbar{
     width:100vw;
     height: 7vh;
     background-color: red;
+    background-color: rgba(121, 10, 10, 0.77);
     font-family: "Goudy Bookletter 1911", sans-serif;
     color: white;
     flex-direction: column;

@@ -1,27 +1,25 @@
 
 import Home from './pages/home/Home';
 import Pencil from './pages/pencilarts/Pencil';
-import Navbar from './components/navbar/Navbar';
-import Login from './pages/login/Login';
-import Logout from './pages/logout/Logout';
 import Contactus from './pages/contactus/Contactus';
 import Payment from './pages/payment/Payment';
 import TrackOrder from './pages/trackOrder/Trackorder'
-
+import AuthLogin from './pages/Authentication/authLogin'
+import AuthSignUp from './pages/Authentication/authSignUp'
+import Product  from './pages/Add-Product/add-product'
+import { ToastProvider } from 'react-toast-notifications';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
-import { useState } from 'react';
 import History from './pages/history/History';
-import Admin from './pages/admin/Admin';
+
+
 function App() {
-  
-  return (
+  return ( 
+   <ToastProvider autoDismiss autoDismissTimeout={2000}>
      <Router>
-        
            <Switch>
              <Route exact path="/">
                 <Home/>
@@ -32,27 +30,27 @@ function App() {
              <Route path='/payment'>
                  <Payment/>
               </Route>
-              <Route path='/cart/:id'>
+              <Route path='/cart'>
                  <History/>
               </Route>
               <Route path='/admin/:id'>
-                 <Admin/>
+                 <Product/>
               </Route>
               <Route path='/trackOrder/:id'>
                  <TrackOrder/>
               </Route>
              <Route path='/login'>
-                 <Login/>
+               <AuthLogin/>
               </Route>
              <Route path='/signup'>
-                 <Logout/>
+               <AuthSignUp/>
               </Route>
              <Route path='/contact'>
                  <Contactus/>
               </Route>
            </Switch>
     </Router>
-     
+ </ToastProvider>
   );
 }
 

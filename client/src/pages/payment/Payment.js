@@ -5,7 +5,6 @@ import { Context } from '../../context/Context';
 import axios from'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import { useHistory } from 'react-router';
-// import axiosInstance from '../../config';
 
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -29,7 +28,6 @@ function Payment() {
     const generatetoken=(token)=>{
            setstripeToken(token);
     }
-   // stripeToken && console.log(stripeToken.id);
       
     useEffect(()=>{
 
@@ -40,7 +38,6 @@ function Payment() {
                     amount:total*100,
                     email:username.email
                 });
-                 //console.log(resData.data);
                   resData && handleSubmit()
           }catch(err){
               console.log(err);
@@ -51,11 +48,9 @@ function Payment() {
     
     const handleChange = (e,index) => {
       let  values=[...username];
-    //  console.log(values)
       values[index][e.target.name]=e.target.value;
       setUsername(values)
     }
-   //console.log(username)
 
     const  handleAdd=()=>{
         let values = [...username]
@@ -82,11 +77,7 @@ function Payment() {
     }
 
    const handleSubmit= async (e)=>{
-  //  e.preventDefault();
     try{
-        //console.log(user.phone);
-        // console.log(username);
-        // console.log(total)
        const res = await axios.post("/orders/order",{
              phone:user.phone,
              names:username,
@@ -94,17 +85,11 @@ function Payment() {
              amount:total
        })
        res.data && history.push(`/cart/${user._id}`);
-     // console.log(res.data)
-    //    console.log(res.data.amount)
-    //console.log(username)
     }catch(err){
        seterror(true)
        console.log(err);
     }
    }
-   
-//    console.log(username[0].name)
-
     return (
         <>
             <Navbar />
@@ -157,6 +142,3 @@ function Payment() {
 }
 
 export default Payment;
-
-
-//onClick={(e)=>handleSubmit(e)}

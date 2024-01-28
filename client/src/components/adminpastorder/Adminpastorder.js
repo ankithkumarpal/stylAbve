@@ -13,16 +13,11 @@ function PastOrder({orderDetail}) {
  
     const handleChange= async (e)=>{
         e.preventDefault();
-      
-        
         const updatedata = await axios.put(`/orders/update/${orderDetail._id}`,{
             status:e.target.value
         })
-
         setoptionvalue(updatedata.data);
-        console.log("updated field  "+updatedata.data);
     }
-   // console.log(optionvalue);
     return (
         <>
           <div className="pastorder">

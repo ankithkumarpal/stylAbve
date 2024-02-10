@@ -5,7 +5,6 @@ const dotenv = require('dotenv');
 const bodyParser = require("body-parser");
 const authRoute = require('./routes/auth');
 const orderRoute = require('./routes/order');
-const stripeRoute = require('./routes/stripe');
 const productRoute = require('./routes/products');
 const cartRoute = require("./routes/cart");
 const cors  = require('cors');
@@ -27,7 +26,6 @@ app.use(cors());
 app.use('/files' , express.static("files"));
 app.use('/api/auth',authRoute);
 app.use('/api/orders',orderRoute);
-app.use('/api/pay',stripeRoute);
 app.use('/api/product',productRoute);
 app.use('/api/cart' , cartRoute)
 

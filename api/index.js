@@ -8,7 +8,7 @@ const orderRoute = require('./routes/order');
 const productRoute = require('./routes/products');
 const cartRoute = require("./routes/cart");
 const cors  = require('cors');
-
+const verifyToken = require('./Middleware/Authorization');
 
 dotenv.config();
 app.use(express.json());
@@ -25,9 +25,9 @@ app.use(cors());
 
 app.use('/files' , express.static("files"));
 app.use('/api/auth',authRoute);
-app.use('/api/orders',orderRoute);
-app.use('/api/product',productRoute);
-app.use('/api/cart' , cartRoute)
+app.use('/api/orders' , verifyToken, orderRoute);
+app.use('/api/product', verifyToken , productRoute);
+app.use('/api/cart' , verifyToken , cartRoute)
 
 app.listen(process.env.PORT || 5000,()=>{
     console.log("successful server connection ")

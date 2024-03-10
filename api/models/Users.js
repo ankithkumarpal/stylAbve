@@ -23,12 +23,12 @@ const UserSchema = new mongoose.Schema(
     isAdmin: {
       type: Boolean,
       default: false,
-    },
-    Address : {
-      type : mongoose.Schema.Types.ObjectId,
-      ref : Address,
-      required : true
-  }
+    }
+  //   Address : {
+  //     type : mongoose.Schema.Types.ObjectId,
+  //     ref : Address,
+  //     required : true
+  // }
   },
   { timestamps: true }
 );

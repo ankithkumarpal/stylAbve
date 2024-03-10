@@ -1,13 +1,12 @@
-
 const mongoose = require('mongoose');
 
-const AddressSchema = new mongoose.Schema({
+const Address = new mongoose.Schema({
     area: {
         type: String,
         required: true
     },
-    doorNo: {
-        type: String,
+    doorno: {
+        type: Number,
         required: true
     },
     landmark: {
@@ -18,12 +17,10 @@ const AddressSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    country : {
-        type : String , 
-        required : true
+    country: {
+        type: String,
+        required: true
     }
 });
-
-const Address = mongoose.model("Address",AddressSchema);
 
 module.exports = Address;

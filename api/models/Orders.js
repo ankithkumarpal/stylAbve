@@ -1,17 +1,10 @@
 const mongoose = require('mongoose');
-const Address = require('./Address')
+const Address = require("./Address");
+
 const OrdersSchema = new mongoose.Schema({
     userId : {
         type : String,
         required : true
-    },
-    names:{
-        type:Array,
-        required:true
-    },
-    email:{
-        type:String,
-        required:true
     },
     productId : {
         type : [String],
@@ -21,11 +14,9 @@ const OrdersSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    Address : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : Address,
-        required : true
-    },
+    address : {
+        type : Address
+        },
     status:{
         type:String,
         default:"placed"

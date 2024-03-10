@@ -4,6 +4,8 @@ const Product = require("../models/Product");
 const multer = require("multer");
 const path = require("path");
 const fs = require('fs');
+const verifyToken = require('../Middleware/Authorization');
+const Response = require("../provider/requestResponse");
 
 
 const storage = multer.diskStorage({
@@ -18,7 +20,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage : storage});
 
-router.post("/upload-files", upload.single("image"), async (req, res) => {
+router.post("/upload-files",verifyToken, upload.single("image"), async (req, res) => {
   try {
     const newProduct = new Product({
       price : req.body.price,
@@ -29,18 +31,18 @@ router.post("/upload-files", upload.single("image"), async (req, res) => {
       }
     });
     const product = await newProduct.save();
-    res.status(200).json("saved sucessfully");
+    res.status(200).json(new Response(true, "Saved sucessfully", product));
   } catch (err) {
-    res.status(503).json("Unable to save product");
+    res.status(503).json(new Response(false, "Unable to save product", null));
   }
 });
 
 router.get("/get-products", (req, res) => {
   Product.find().then((data, err) => {
     if (err) {
-      res.status(200).json(err);
+      return res.status(200).json(err);
     }
-    res.status(200).json(data);
+     return res.status(200).json(new Response(true, "products fetched successfully", data));
   });
 });
 

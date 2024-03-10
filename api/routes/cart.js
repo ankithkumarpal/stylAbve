@@ -2,14 +2,13 @@ const router = require("express").Router();
 const Cart = require("../models/Cart");
 const User = require('../models/Users');
 const Product = require("../models/Product");
-
-
+const Response = require("../provider/requestResponse");
 
 router.post("/add-to-cart", async (req, res) => {
   try {
     const isExist = await Cart.find({email : req.body.email , productId : req.body.productId});
     if(isExist.length !==0){
-      res.status(200).json("Already Exist");
+      return res.status(200).json(new Response(true, "Already Exist", null));
     }else{
       const newCart = new Cart({
         email: req.body.email,
@@ -23,7 +22,7 @@ router.post("/add-to-cart", async (req, res) => {
         // }
         });
         const cart = await newCart.save();
-        res.status(200).json(cart);
+        return res.status(200).json(new Response(true, "Added to cart sucessfully", cart));
       }
   } catch (err) {
     res.status(503).json(err);
@@ -33,6 +32,10 @@ router.post("/add-to-cart", async (req, res) => {
 router.get("/get-cart/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    
+    if(!user) {
+      return res.status(200).json(new Response(false, "Product fetching failed", null));
+    }
     const email = user.email;
     const cartDetail = await Cart.find({ email }).sort({ createdAt: -1 });
 
@@ -50,18 +53,18 @@ router.get("/get-cart/:id", async (req, res) => {
         };
       })
     );
-    res.status(200).json(products);
+    return res.status(200).json(new Response(true, "Product fetched successfully", products));
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 });
 
 router.get("/remove-product/:id", async (req, res) => {
     try {
       await Cart.deleteOne({_id:req.params.id})
-      res.status(200).json("Product removed successfully");
+      return res.status(200).json(new Response(true, "Product removed successfully", null));
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
 });
 

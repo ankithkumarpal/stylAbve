@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Address = require("./Address");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -23,6 +24,11 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    Address : {
+      type : mongoose.Schema.Types.ObjectId,
+      ref : Address,
+      required : true
+  }
   },
   { timestamps: true }
 );

@@ -30,7 +30,7 @@ function Navbar() {
               </Link>
             ) : (
               <>
-                <li>{user.email.split("@")[0]}</li>
+                <li>{user.user.name}</li>
                 <li onClick={handleClick}>{user && "logout"}</li>
               </>
             )}

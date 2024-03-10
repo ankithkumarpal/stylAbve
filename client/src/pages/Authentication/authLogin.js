@@ -17,8 +17,8 @@ function AuthLogin() {
             const res = await axios.post("/auth/login",{
                 email,password
             })
-             res.data && window.location.replace('/');
-             dispatch({type:"LOGIN_SUCCESS", payload:res.data});  
+             res.data.data && window.location.replace('/');
+             dispatch({type:"LOGIN_SUCCESS", payload:res.data.data});  
         }catch(err){
             dispatch({type:"LOGIN_FAILURE"});  
         }

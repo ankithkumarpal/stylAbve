@@ -26,7 +26,7 @@ app.use(cors());
 app.use('/files' , express.static("files"));
 app.use('/api/auth',authRoute);
 app.use('/api/orders' , verifyToken, orderRoute);
-app.use('/api/product', verifyToken , productRoute);
+app.use('/api/product' , productRoute);
 app.use('/api/cart' , verifyToken , cartRoute)
 
 app.listen(process.env.PORT || 5000,()=>{

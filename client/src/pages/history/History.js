@@ -23,8 +23,13 @@ function Order() {
 
   const getpost = async () => {
     setIsLoading(true);
-    const response = await axios.get(`/cart/get-cart/${user._id}`);
-    setCartItems(response.data);
+    const response = await axios.get(`/cart/get-cart/${user.user.id}` ,  {
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    setCartItems(response.data.data);
     setIsLoading(false);
   };
 
@@ -41,7 +46,12 @@ function Order() {
 
   const removeItem = async (id) =>{
     setIsLoading(true);
-  await axios.get(`/cart/remove-product/${id}`).then((res) => {
+  await axios.get(`/cart/remove-product/${id}` ,  {
+    headers: {
+      'Authorization': `Bearer ${user.token}`,
+      'Content-Type': 'application/json'
+    }
+  }).then((res) => {
       console.log(res);
       addToast('Item removed successfully', { appearance: 'success' });
       getpost();

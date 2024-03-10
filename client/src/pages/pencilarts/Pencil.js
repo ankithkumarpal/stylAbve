@@ -22,7 +22,7 @@ function Pencil() {
   const getProducts = async () => {
     try {
       const response = await axios.get("/product/get-products");
-      setItem(response.data);
+      setItem(response.data.data);
       addToast('This is a toast message', { appearance: 'success' });
       setIsLoading(false);
     } catch (error) {
@@ -36,11 +36,15 @@ function Pencil() {
     let cartDetail = {
       color : product.color,
       price : product.price,
-      email : user.user.email,
+      email : user.user.user.email,
       productId : product._id
     }
     await axios
       .post("/cart/add-to-cart", cartDetail , {
+        headers: {
+          'Authorization': `Bearer ${user.user.token}`,
+          'Content-Type': 'application/json'
+        }
       })
       .then((res) => {
         if(res.data == "Already Exist"){

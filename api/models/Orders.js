@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const Address = require('./Address')
 const OrdersSchema = new mongoose.Schema({
-    phone:{
-       type:String,
-       required:true
+    userId : {
+        type : String,
+        required : true
     },
     names:{
         type:Array,
@@ -12,9 +13,18 @@ const OrdersSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    productId : {
+        type : [String],
+        required : true
+    },
     amount:{
         type:String,
         required:true
+    },
+    Address : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : Address,
+        required : true
     },
     status:{
         type:String,

@@ -9,31 +9,30 @@ import { BeatLoader } from 'react-spinners';
 import { useHistory } from "react-router-dom";
 
 function Pencil() {
-  const [item, setItem] = useState([]);
+  const [items, setItems] = useState([]);
   const { addToast } = useToasts();
   const [isLoading, setIsLoading] = useState(true);
   const user = useContext(Context);
   const history = useHistory();
 
   useEffect(() => {
-    if (item.length === 0) {
-      getProducts();
-    }
+    getProducts();
   }, []);
 
   const getProducts = async () => {
     try {
       const response = await axios.get("/product/get-products");
-      setItem(response.data.data);
+      setItems(response.data.data);
       addToast('Products fetched successfully', { appearance: 'success' });
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
+      addToast('Failed to fetch products', { appearance: 'error' });
       setIsLoading(false);
     }
   };
 
-  const addToCart = async (product, imageSrc) => {
+  const addToCart = async (product) => {
     if (!user.user) {
       addToast('Please login to add items to the cart', { appearance: 'warning' });
       history.push("/login");  // Redirect to login page
@@ -42,7 +41,6 @@ function Pencil() {
 
     setIsLoading(true);
     let cartDetail = {
-      color: product.color,
       price: product.price,
       email: user.user.email,
       productId: product._id
@@ -76,24 +74,24 @@ function Pencil() {
           <BeatLoader loading={isLoading} color="white" />
         </div>
         <div className="product">
-          {item?.map((pro) => {
-            const base64String = Buffer.from(pro.image.data.data).toString("base64");
-            const imageSrc = `data:image/png;base64,${base64String}`;
-            return (
-              <div className="product-container" key={pro._id}>
-                <div className="image">
-                  <div className="image-contaner">
-                    <span> &nbsp;Rs:{pro.price}/-</span>
-                    <img src={imageSrc} alt={pro._id} />
-                  </div>
-                </div>
-                <div className="button">
-                  <Model product={pro} imageSrc={imageSrc} />
-                  <button className="btn btn-warning" onClick={() => addToCart(pro, imageSrc)}>Add to cart</button>
+          {items.map((product) => (
+            <div className="product-container" key={product._id}>
+              <div className="image">
+                <div className="image-container">
+                  <span className="price">Rs: {product.price}/-</span>
+                  {product.imageUrls && product.imageUrls.length > 0 ? (
+                    <img src={product.imageUrls[0]} alt={product._id} />
+                  ) : (
+                    <p>No Image Available</p>
+                  )}
                 </div>
               </div>
-            );
-          })}
+              <div className="button">
+                <Model product={product} />
+                <button className="btn btn-warning" onClick={() => addToCart(product)}>Add to cart</button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </>

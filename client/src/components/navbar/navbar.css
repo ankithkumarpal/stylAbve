@@ -1,152 +1,125 @@
-.navbar{
-    width:100vw;
-    height: 7vh;
-    /* background-color: #d3b46dd5; */
-    background-color: rgba(255, 255, 255, 0.389);
-    /* background-color: #ffebf0c2; */
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    color: black;
-    text-transform: capitalize;
-}
-
-.drop-down-button{
-  padding: 1px;
-  border: none;
-  background-color: inherit;
-  color: black;
-}
-
-.left{
- flex: 1;
- align-items: center;
- width: 53px;
- justify-content: center;
- color: black;
-}
-.left span{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: black;
-    font-family: cursive;
-}
-.left a span {
-  font-size: 1.5rem;
-  color: black;
-  font-weight: bolder;
-}
-.right{
-  flex: 4;
-  align-items: center;
-  height: 4vh;
-  /* background-color: red */
-}
-.right ul{
-  display: flex;
-  height: 3vh;
-  /* margin-top: 3px;
-  margin-left: 2.5rem;  */
+/* Navbar Styles */
+.navbar {
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.389);
   display: flex;
   align-items: center;
-}
-
-.right ul li{
-  margin-left: 2.3rem;
-  margin-right: 0.3rem;
-  font-size: 1rem;
-  list-style: none;
+  justify-content: space-between;
+  padding: 0 20px;
   color: black;
-  font-family: cursive;
-  width: fit-content;
+  text-transform: capitalize;
+  box-sizing: border-box;
+  /* flex-wrap: wrap; */
 }
 
- .right ul li:hover{
-   border-bottom: 1px solid black;
-   color: purple;
-  cursor: pointer;
-  transition: 0.4s ease;
-} 
-
-.cart{
-  margin-left: 3rem;
-  font-size: 1rem;
-}
-.cart:hover{
-  border-bottom: 1px solid black;
-  color: black;
-  cursor: pointer;
-  transition: 0.4s ease;
-}
-
-/* .drop-down-menu-bg{
-   background-color: grey
-} */
-/* .drop-down-menu-bg Link li{
-  margin-left: 0px;
-  margin-right: 0px;
-} */
-
-@media only screen and (max-width:1245px) {
-  .navbar{
-    width:100vw;
-    height: 7vh;
-    background-color: red;
-    background-color: rgba(121, 10, 10, 0.77);
-    font-family: "Goudy Bookletter 1911", sans-serif;
-    color: white;
-    flex-direction: column;
-    text-transform: capitalize; 
-}
-
-.left{
+.left {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5rem;
-  color: white;
-  font-size: 0.6rem;
-  /* background-color: yellow; */
-  margin-left: 0px;
- }
+  color: black;
+  /* margin-left: 2rem; */
+}
 
- .right{
-  /* display: flex; */
-  height: inherit;
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* background-color: red; */
-} 
+.left span {
+  color: black;
+  font-family: cursive;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
 
-.right ul{
-  /* display: flex; */
-  height: 3vh;
-  width: min-content;
-  /* align-items: center; */
-  /* justify-content: center; */
-  width: inherit;
-  margin-top: 14px;
+.right {
+  display: flex;
   align-items: center;
-  padding-left: -12rem;
-  /* background-color: green; */
 }
 
-
-.right ul li{
-  font-size: 0.4rem;
-  width: max-content;
-  list-style: none;
-  /* background-color:black; */
-  color: white;
-  margin-left: 6px;
+.marquee {
+  width: 100%;
+  color: black;
+  font-size: 14px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0.3rem;
 }
 
-.cart{
-  font-size: 1rem;
-  /* background-color: blue; */
-  margin-left: 2px;
-  
+.marquee span {
+  display: block;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
 }
 
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left {
+    margin-bottom: 10px;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    top: 7vh;
+    left: 0;
+    text-align: center;
+    padding: 0;
+  }
+
+  .dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dropdown-menu ul li {
+    margin: 15px 0;
+  }
+
+  .dropdown-menu ul li .link {
+    font-size: 1rem;
+    color: black;
+    font-family: cursive;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .dropdown-menu ul li .link:hover {
+    border-bottom: 1px solid black;
+    color: purple;
+    transition: 0.4s ease;
+  }
 }

@@ -1,97 +1,140 @@
-.contacts{
+.contacts {
     display: flex;
     height: 100%;
     width: 100%;
-    align-items: center;
     justify-content: space-around;
     background-color: rgba(238, 238, 22, 0.186);
-    flex-wrap: wrap;
 }
-.cont_lefts{
+
+.cont_lefts {
     background-color: rgba(255, 255, 255, 0.617);
-    height: 500px;
+    height: auto;
     width: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 30px;
-    justify-content: space-around;
-    
-    
-   
+    justify-content: flex-start;
+    margin: 20px;
+    padding: 20px;
 }
 
-span{
+.content-section span{
+    margin: 0 !important;
+}
+span {
     font-family: cursive;
 }
 
-.conatact_information{
-    flex:2;
+.conatact_information {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: white; */
-    margin-top: 50px;
-    width: 400px;
-    height: 250px;
- 
+    width: 100%;
 }
 
 .conatact_information h2 {
-   font-family: cursive;
+    font-family: cursive;
     border-bottom: 3px solid red;
-    color:black;
-    
-
+    color: black;
 }
 
-.information{
+.information {
     margin-top: 20px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 15px;
     font-weight: bold;
 }
-.contact_name{
-    margin-bottom:10px;
-}
-.conatact_no{
-    margin-bottom:10px;
-}
-.conatact_email{
+
+.contact_name,
+.conatact_no,
+.conatact_email,
+.conatact_address {
     margin-bottom: 10px;
 }
-.conatact_address{
-    margin-bottom:10px;
-}
-.followus{
-    flex: 1;
+
+.followus {
     margin-top: 20px;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
 }
+
+.followus div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.social a{
+    text-decoration: none;
+}
+
 .followus i {
     font-size: 28px;
+    margin-right: 10px;
 }
 
-.insta{
+.insta {
     color: red;
-    margin-top:10px;
 }
-.insta:hover{
+
+.insta:hover,
+.whatsapp:hover,
+.twitter:hover {
     cursor: pointer;
 }
 
-.whatsapp:hover{
-    cursor: pointer;
-}
-.twitter:hover{
-    cursor: pointer;
-}
-.whatsapp{
+.whatsapp {
     color: green;
-    margin-top: 10px;
 }
 
-.twitter{
+.twitter {
     color: blue;
-    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .contacts {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cont_lefts {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .conatact_information {
+        margin-top: 0; /* Remove top margin to reduce gap */
+    }
+
+    .conatact_information h2 {
+        font-size: 1.5rem;
+    }
+
+    .information {
+        font-size: 14px;
+    }
+
+    .followus {
+        margin-top: 0; /* Remove top margin to reduce gap */
+        margin-bottom: 20px;
+    }
+
+    .followus i {
+        font-size: 24px;
+    }
+
+    .followus span {
+        font-size: 14px;
+    }
+
+    .followus div {
+        justify-content: center;
+        width: 100%;
+    }
 }

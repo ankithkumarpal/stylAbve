@@ -1,40 +1,79 @@
-
-.landing{
-    background-image: url(../../assests/flower.jpeg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: rgba(255, 192, 203, 0.627) !important;
-}
-.content-section{
-    max-height: 92.5vh;
-    margin-left: 0.11rem;
-    overflow-y: scroll;
+.landing {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-image: url(../../assests/flower.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.sidebar{
-    height: 92.5vh;
-    overflow-y: scroll;
+.main-content {
+  display: flex;
+  flex: 1;
+  position: relative;
+  height: 94vh !important;
 }
 
-.sidebar::-webkit-scrollbar {
-    width: 3px; /* Adjust the width of the scrollbar */
-  }
-  .sidebar::-webkit-scrollbar-thumb {
-    background: white; /* Color of the scrollbar */
-  }
-  
-  .sidebar::-webkit-scrollbar-thumb:hover {
-    background: white; /* Color of the scrollbar on hover */
+.sidebar {
+  width: 20%;
+  height: 100%;
+  overflow-y: auto; /* Use auto for better scroll control */
+  transition: transform 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.645);
+}
+
+.content-section {
+  flex: 1; 
+  height: inherit !important;
+  overflow-y: auto;
+  flex-wrap: wrap !important;
+}
+
+.sidebar::-webkit-scrollbar,
+.content-section::-webkit-scrollbar {
+  width: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.content-section::-webkit-scrollbar-thumb {
+  background: white;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+.content-section::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+.hamburger {
+  display: none;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
   }
 
-  .content-section::-webkit-scrollbar {
-    width: 3px; /* Adjust the width of the scrollbar */
-  }
-  .content-section::-webkit-scrollbar-thumb {
-    background: white; /* Color of the scrollbar */
-  }
-  
-  .content-section::-webkit-scrollbar-thumb:hover {
-    background: white; /* Color of the scrollbar on hover */
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    transform: translateX(-100%);
+    height: 100vh; /* Ensure sidebar takes full height in mobile view */
   }
 
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .content-section {
+    margin-left: 0;
+  }
+}

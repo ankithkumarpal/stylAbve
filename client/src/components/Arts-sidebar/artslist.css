@@ -1,18 +1,25 @@
-.pencil-art{
+.pencil-art {
     font-family: cursive;
     width: 100%;
     display: flex;
     background-color: #ffebf0c2;
     padding-left: 1rem;
     border-radius: 10px;
-}
-
-.pencil-art:hover{
+  }
+  
+  .pencil-art:hover {
     background-color: #e3c3c6f0;
     cursor: pointer;
-}
-
-.link{
+  }
+  
+  .link {
     text-decoration: none;
     color: inherit;
-}
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+    }
+  }
+  

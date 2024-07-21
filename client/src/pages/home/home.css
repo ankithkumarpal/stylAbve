@@ -1,100 +1,90 @@
-.home{
+.home {
     width: 100%;
     height: 100%;
-    background-image: url(../../assests/flower.jpeg);
+    /* background-image: url(../../assests/flower.jpeg); */
     background-size: cover;
     background-repeat: no-repeat;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
-}
-.upper-layer{
+  }
+  
+  .upper-layer {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.126);
-}
-.info-container{
-    width: 80%;
+  }
+  
+  .info-container {
+    width: 92%;
     height: 80%;
     border-radius: 24px;
     background-color: rgba(255, 255, 255, 0.389);
-    padding: 1rem 1rem 1rem 1rem;
-}
-.header{
+    padding: 1rem;
+  }
+  
+  .header {
     width: 100%;
     text-align: center;
-}
-.header h1{
-    /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+  }
+  
+  .header h1 {
     font-family: cursive;
-}
-.home_content p{
+  }
+  
+  .home_content p {
     font-weight: bold;
     font-family: cursive;
-}
-.details_order{
+  }
+  
+  .details_order {
     margin-top: 2%;
     margin-left: 7%;
     margin-right: 5%;
     text-align: center;
     font-weight: bold;
-}
-
-.details_order p{
+  }
+  
+  .details_order p {
     font-family: cursive;
-}
-
-.home_content{
+  }
+  
+  .home_content {
     margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
-
-}
-.home_content p:first-child {
-   width: 80%;
-   text-align: center;
-}
-.image-section{
-    width: 100%;
-    background-color: green;
-    height: 50%;
-}
-.explore-btn{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-@media only screen and (max-width: 1245px) {
-    .header{text-align: center;}
-    .home{
-        width: 100vw;
-        height: 93vh;
-        background-image: url(../../assests/flower.jpeg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+  }
+  
+  .home_content p:first-child {
+    width: 80%;
+    text-align: center;
+  }
+  
+  @media only screen and (max-width: 1245px) {
+    .home {
+      width: 100vw;
+      height: 93vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .home_content{
-        width: 265px;
+  
+    .home_content {
+      width: 265px;
     }
-    .home_content h1{
-        color: grey;
-          font-size: 1rem;
-        margin-top: -4rem;
+  
+    .home_content h1 {
+      color: grey;
+      font-size: 1rem;
+      margin-top: -4rem;
     }
-    .home_content p{
-        font-size: 0.8rem;
-    }
+  
+    .home_content p,
     .details_order p {
-        font-size: 0.8rem;
+      font-size: 0.8rem;
     }
   }
+  

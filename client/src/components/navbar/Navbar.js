@@ -1,8 +1,8 @@
 import "./navbar.css";
-import react from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useState, useContext } from "react";
 import { Context } from "../../context/Context";
+
 function Navbar() {
   const { user, dispatch } = useContext(Context);
   const history = useHistory();
@@ -11,6 +11,12 @@ function Navbar() {
     dispatch({ type: "LOGOUT" });
     history.push("/pencilarts");
   };
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <>
       <div className="navbar">
@@ -20,76 +26,52 @@ function Navbar() {
           </Link>
         </div>
         <div className="right">
-        <div style={{ width: '100%', backgroundColor: '', color: 'black', fontSize: '14px', overflow: 'hidden', position: 'relative' , display:'flex'}}>
-      <span style={{ display: 'block', whiteSpace: 'wrap', animation: 'marquee 15s linear infinite' }}>
-        
-        🚀 Big Sale! Everything 50% OFF! Hurry up and grab your favorite products now! 🚀
-        🚀 Big Sale! Everything 50% OFF! Hurry up and grab your favorite products now! 🚀
-      </span>
-      <style jsx>{`
-        @keyframes marquee {
-          0% { transform: translateX(100%); }
-          100% { transform: translateX(-100%); }
-        }
-      `}</style>
-    </div>
-
-          {/* <ul>
-            <Link to="/pencilarts" className="link">
-              <li>penicl arts</li>
-            </Link>
-            {!user ? (
-              <Link to="/login" className="link">
-                <li>login</li>
-              </Link>
-            ) : (
-              <>
-                <li>{user.user.name}</li>
-                <li onClick={handleClick}>{user && "logout"}</li>
-              </>
-            )}
-
-            {user && (
-              <Link to={`/cart`} className="link cart">
-                <i class="fas fa-shopping-cart"></i>
-              </Link>
-            )}
-
-            <li>
-
-            <div class="dropdown">
-              <button
-                class="dropdown-toggle drop-down-button"
-                type="button"
-                id="dropdownMenuButton"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Explore options
-              </button>
-              <div
-                class="dropdown-menu"
-                aria-labelledby="dropdownMenuButton"
-                style={{ backgroundColor: "grey" }}
-              >
-                <Link to="/profile" className="link">
-                  <li>profile</li>
-                </Link>
-                <Link to="/contact" className="link">
-                  <li>contact us </li>
-                </Link>
-                {user && user.isAdmin && (
-                  <Link to={`/admin/${user._id}`} className="link admin">
-                    <li>admin</li>
-                  </Link>
-                )}
-              </div>
-            </div>
-            </li>
-          </ul> */}
+          <div className="marquee">
+            <span>
+              🚀 Big Sale! Everything 50% OFF! Hurry up and grab your favorite products now! 🚀
+              🚀 Big Sale! Everything 50% OFF! Hurry up and grab your favorite products now! 🚀
+            </span>
+          </div>
+          <div className={`hamburger ${isMenuOpen ? "open" : ""}`} onClick={toggleMenu}>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
       </div>
+      {isMenuOpen && (
+        <div className="dropdown-menu">
+          <ul>
+            <li>
+              <Link to="/pencilarts" className="link" onClick={toggleMenu}>Pencil Arts</Link>
+            </li>
+            <li>
+              <Link to="/scrunchies" className="link" onClick={toggleMenu}>Scrunchies</Link>
+            </li>
+            <li>
+              <Link to="/bike-arts" className="link" onClick={toggleMenu}>Bike Arts</Link>
+            </li>
+            <li>
+              <Link to="/gift-card" className="link" onClick={toggleMenu}>Gift cards</Link>
+            </li>
+            <li>
+              <Link to="/apparel-printing" className="link" onClick={toggleMenu}>Apparel printing</Link>
+            </li>
+            <li>
+              <Link to="/my-cart" className="link" onClick={toggleMenu}>My cart</Link>
+            </li>
+            <li>
+              <Link to="/order-history" className="link" onClick={toggleMenu}>Order history</Link>
+            </li>
+            <li>
+              <Link to="/contact" className="link" onClick={toggleMenu}>Contact us</Link>
+            </li>
+            <li>
+              <Link to="/profile-setting" className="link" onClick={toggleMenu}>Profile setting</Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   );
 }

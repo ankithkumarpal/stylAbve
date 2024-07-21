@@ -1,11 +1,8 @@
 import './contactus.css';
-import Navbar from '../../components/navbar/Navbar';
-import {Link} from 'react-router-dom';
 
 function Contact() {
     return (
         <>
-            <Navbar />
             <div className="home">
                 <div className="contacts">
                     <div className='cont_lefts'>

@@ -8,7 +8,6 @@ import { useHistory } from 'react-router';
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var ScrollArea = require('react-scrollbar');
 
 const STRIPE_PUBLIC_KEY="pk_test_51JyAT3SC7uOQJa7qOGILU9ryNUDcPgcZTfEfqHpKfTa5CiFp1YEtAraWpzVVlfWeOg2yKPQ9JMvfczsFKTP0j4Qm00aRwoSuwu"
 

@@ -20,7 +20,21 @@ function Navbar() {
           </Link>
         </div>
         <div className="right">
-          <ul>
+        <div style={{ width: '100%', backgroundColor: '', color: 'black', fontSize: '14px', overflow: 'hidden', position: 'relative' , display:'flex'}}>
+      <span style={{ display: 'block', whiteSpace: 'wrap', animation: 'marquee 15s linear infinite' }}>
+        
+        🚀 Big Sale! Everything 50% OFF! Hurry up and grab your favorite products now! 🚀
+        🚀 Big Sale! Everything 50% OFF! Hurry up and grab your favorite products now! 🚀
+      </span>
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+      `}</style>
+    </div>
+
+          {/* <ul>
             <Link to="/pencilarts" className="link">
               <li>penicl arts</li>
             </Link>
@@ -73,7 +87,7 @@ function Navbar() {
               </div>
             </div>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     </>

@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json())
 
+console.log(process.env.MONOGO_URL);
 mongoose.connect(process.env.MONOGO_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true,

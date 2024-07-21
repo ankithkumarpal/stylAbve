@@ -1,6 +1,7 @@
 
 .pencil-home{
     position:relative;
+    background-color: blue;
 }
 .spinner{
     position: absolute;
@@ -10,15 +11,11 @@
 .product{
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
     background-color: rgba(12, 11, 11, 0.428);
     -ms-overflow-style: none; 
-    scrollbar-width: none; 
-}
-.product::-webkit-scrollbar {
-    display: none;
+    scrollbar-width: none;
 }
 .product-container{
     margin-top: 1rem;
@@ -50,6 +47,7 @@
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.69);
     font-family: cursive;
+    
 }
 .image-contaner img {
     width: 100%;

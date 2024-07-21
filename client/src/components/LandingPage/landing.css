@@ -1,0 +1,40 @@
+
+.landing{
+    background-image: url(../../assests/flower.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 192, 203, 0.627) !important;
+}
+.content-section{
+    max-height: 92.5vh;
+    margin-left: 0.11rem;
+    overflow-y: scroll;
+}
+
+.sidebar{
+    height: 92.5vh;
+    overflow-y: scroll;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 3px; /* Adjust the width of the scrollbar */
+  }
+  .sidebar::-webkit-scrollbar-thumb {
+    background: white; /* Color of the scrollbar */
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb:hover {
+    background: white; /* Color of the scrollbar on hover */
+  }
+
+  .content-section::-webkit-scrollbar {
+    width: 3px; /* Adjust the width of the scrollbar */
+  }
+  .content-section::-webkit-scrollbar-thumb {
+    background: white; /* Color of the scrollbar */
+  }
+  
+  .content-section::-webkit-scrollbar-thumb:hover {
+    background: white; /* Color of the scrollbar on hover */
+  }
+

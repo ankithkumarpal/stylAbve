@@ -5,14 +5,6 @@ const OrdersSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    names:{
-        type:Array,
-        required:true
-    },
-    email:{
-        type:String,
-        required:true
-    },
     productId : {
         type : [String],
         required : true
@@ -24,7 +16,7 @@ const OrdersSchema = new mongoose.Schema({
     Address : {
         type : mongoose.Schema.Types.ObjectId,
         ref : Address,
-        required : true
+        required : false
     },
     status:{
         type:String,

@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
     Address : {
       type : mongoose.Schema.Types.ObjectId,
       ref : Address,
-      required : true
+      required : false
   }
   },
   { timestamps: true }

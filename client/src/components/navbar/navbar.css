@@ -1,12 +1,13 @@
 .navbar{
     width:100vw;
     height: 7vh;
-    background-color: rgb(248, 82, 82);
-    background-color: rgba(121, 10, 10, 0.77);
+    /* background-color: #d3b46dd5; */
+    background-color: rgba(255, 255, 255, 0.389);
+    /* background-color: #ffebf0c2; */
     display: flex; 
     align-items: center;
     justify-content: center;
-    color: white;
+    color: black;
     text-transform: capitalize;
 }
 
@@ -14,7 +15,7 @@
   padding: 1px;
   border: none;
   background-color: inherit;
-  color: white;
+  color: black;
 }
 
 .left{
@@ -22,14 +23,19 @@
  align-items: center;
  width: 53px;
  justify-content: center;
- color: white;
+ color: black;
 }
 .left span{
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: black;
     font-family: cursive;
+}
+.left a span {
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bolder;
 }
 .right{
   flex: 4;
@@ -51,14 +57,14 @@
   margin-right: 0.3rem;
   font-size: 1rem;
   list-style: none;
-  color: white;
+  color: black;
   font-family: cursive;
   width: fit-content;
 }
 
  .right ul li:hover{
-   border-bottom: 1px solid white;
-   color: white;
+   border-bottom: 1px solid black;
+   color: purple;
   cursor: pointer;
   transition: 0.4s ease;
 } 
@@ -68,8 +74,8 @@
   font-size: 1rem;
 }
 .cart:hover{
-  border-bottom: 1px solid white;
-  color: white;
+  border-bottom: 1px solid black;
+  color: black;
   cursor: pointer;
   transition: 0.4s ease;
 }

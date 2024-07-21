@@ -9,7 +9,6 @@ function Home() {
   const location = useLocation();
   return (
     <>
-      <Navbar />
       <div className="home">
         <div className="upper-layer">
           <div className="info-container">

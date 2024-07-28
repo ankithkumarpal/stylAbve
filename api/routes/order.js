@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { findById } = require("../models/Orders");
 const Orders = require("../models/Orders");
 const Users = require("../models/Users");
+const Product = require("../models/Product");
 
 
 const serializeProductDetails = (productDetails) => {
@@ -56,19 +57,37 @@ router.get("/get-order", async (req, res) => {
     if (orders.length === 0) {
       return res.status(404).json({ error: 'No orders found for the specified userId' });
     }
-    const ordersPlain = orders.map(order => order.toObject());
 
-    ordersPlain.forEach(item => {
-      item.productDetails = deserializeProductDetails(item.productDetails);
-      item.address = item.address ? deserializeAddress(item.address) : null;
-    });
+    const ordersPlain = await Promise.all(orders.map(async (order) => {
+      const orderPlain = order.toObject();
+      const productDetails = deserializeProductDetails(orderPlain.productDetails);
+
+      const products = await Promise.all(
+        productDetails.map(async (detail) => {
+          const product = await Product.findById(detail.productId).populate('imageIds').lean();
+          const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
+          const images = product.imageIds.map(image => `${baseUrl}/api/product/image/${image.filename}`);
+          
+          return {
+            productId: product._id,
+            quantity: detail.quantity,
+            images
+          };
+        })
+      );
+
+      return {
+        ...orderPlain,
+        productDetails: products,
+        address: orderPlain.address ? deserializeAddress(orderPlain.address) : null
+      };
+    }));
 
     res.status(200).json(ordersPlain);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 // update order based on orderId 
 router.put("/update-order", async (req, res) => {

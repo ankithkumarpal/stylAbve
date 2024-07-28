@@ -33,12 +33,13 @@ function Pencil() {
   };
 
   const addToCart = async (product) => {
-   
+ 
     setIsLoading(true);
     let cartDetail = {
       price: product.price,
-      email: user.user.email,
-      productId: product._id
+      email: "ankith@gmail.com",
+      productId: product._id,
+      quantity:1
     };
 
     try {
@@ -49,7 +50,7 @@ function Pencil() {
         }
       });
       
-      if (res.data === "Already Exist") {
+      if (res.data.message === "Already Exist") {
         addToast("Item already exists in cart", { appearance: 'info' });
       } else {
         addToast("Item added to cart successfully", { appearance: 'success' });
@@ -65,9 +66,9 @@ function Pencil() {
   return (
     <>
       <div className="home pencil-home">
-        {/* <div className="spinner">
+        <div className="spinner">
           <BeatLoader loading={isLoading} color="white" />
-        </div> */}
+        </div>
         <div className="product">
           {items.map((product) => (
             <div className="product-container" key={product._id}>
@@ -83,6 +84,7 @@ function Pencil() {
               </div>
               <div className="button">
                 <Model product={product} />
+                {/* <button className="btn btn-success" >Buy Now</button> */}
                 <button className="btn btn-warning" onClick={() => addToCart(product)}>Add to cart</button>
               </div>
             </div>

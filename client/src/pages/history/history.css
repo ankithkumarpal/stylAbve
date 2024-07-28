@@ -17,6 +17,7 @@ body {
 
 .table-body{
     border-bottom: 1px solid saddlebrown;
+    border-top: 1px solid saddlebrown;
 }
 /* Cart content */
 .cart-content {
@@ -91,7 +92,7 @@ a {
 .card {
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.617) !important;
+    /* background-color: rgba(255, 255, 255, 0.617) !important; */
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 12px;
 }
@@ -177,7 +178,6 @@ a {
     text-align: center;
 }
 
-/* Media queries for responsiveness */
 @media (max-width: 768px) {
     .container-fluid {
         margin-top: 20px;

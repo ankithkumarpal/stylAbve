@@ -56,6 +56,10 @@
 }
 
 @media (max-width: 768px) {
+  .landing {
+    height: fit-content;
+  }
+
   .hamburger {
     display: block;
   }

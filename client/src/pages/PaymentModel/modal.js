@@ -1,31 +1,35 @@
-import { useEffect, useState ,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useHistory } from "react-router-dom";
-import flower from "../../assests/1.jpeg"
+import flower from "../../assests/1.jpeg";
 import "./modal.css";
 import { Context } from "../../context/Context";
 
-
-function Example({product , imageSrc}) {
+function Example({ product, imageSrc }) {
   const history = useHistory();
   const { user } = useContext(Context);
   const [show, setShow] = useState(false);
-  const [quantity , setQuantity] = useState(1);
-  const [totalPrice , setTotalPrice] = useState(product.price)
+  const [quantity, setQuantity] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(product.price);
   const handleClose = () => setShow(false);
+
+
   const handleShow = () => {
-    console.log(user);
-    if(!user){
-      history.push('/login')
-      return 
-    }
     setShow(true);
+    console.log(product);
+  };
+
+  const incrementQuantity = ()=>{
+    setQuantity(quantity + 1);
   }
-  const [shouldDisableButton , setShouldDisableButton] = useState(false);
+  const decreaseQuantity = ()=>{
+    setQuantity(quantity - 1);
+  }
+  const [shouldDisableButton, setShouldDisableButton] = useState(false);
 
   useEffect(() => {
-    setTotalPrice(quantity*product.price);
+    setTotalPrice(quantity * product.price);
     setShouldDisableButton(quantity < 1 ? true : false);
   }, [quantity]);
 
@@ -45,21 +49,27 @@ function Example({product , imageSrc}) {
           <Modal.Title>Select Qunatity</Modal.Title>
         </Modal.Header>
         <Modal.Body className="payment-model">
-           <div className="model-content">
+          <div className="model-content">
             <div className="order-img">
-            <img src={imageSrc}></img>
+              <img src={product.imageUrls[0]}></img>
             </div>
-            <div className="content-section">
-               <input min={1} type="number" placeholder="Enter Quantity"  value={quantity}  onChange={(e)=>setQuantity(e.target.value)} />
-               <span>Total Amount : {totalPrice}/-</span>
+            <div className="content-section mt-3">
+              <div className="mb-3 disply-flex align-items-center justify-content-center">
+                <button className="btn btn-light me-4" onClick={decreaseQuantity}>-</button>
+                <span className="quantity">{quantity}</span>
+                <button className="btn btn-light ms-4" onClick={incrementQuantity}>+</button>
+              </div>
+              <span>Total Amount : {totalPrice}/-</span>
             </div>
-           </div>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
             cancel
           </Button>
-          <Button variant="success" disabled={shouldDisableButton}>Proceed payment</Button>
+          <Button variant="success" disabled={shouldDisableButton}>
+            Proceed payment
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

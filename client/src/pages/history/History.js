@@ -104,9 +104,9 @@ function Order() {
                             ></th>
                           </tr>
                         </thead>
-                        <tbody className="table-body">
+                        <tbody className="">
                           {cartItems.map((product) => (
-                            <tr key={product._id}>
+                            <tr key={product._id} className="table-body">
                               <td>
                                 <figure className="itemside align-items-center">
                                   <div className="aside">

@@ -7,6 +7,7 @@ import { ArtsList } from "../Arts-sidebar/ArtsList";
 import Contact from "../../pages/contactus/Contactus";
 import Pencil from "../../pages/pencilarts/Pencil";
 import History from "../../pages/history/History";
+import { orderHistory } from "../../pages/OrderHistory/orderHistory";
 
 export const Landing = () => {
   let { path } = useRouteMatch();
@@ -29,6 +30,7 @@ export const Landing = () => {
             <Route path={`/contact`} component={Contact} />
             <Route path={`/pencilarts`} component={Pencil} />
             <Route path={`/my-cart`} component={History}/>
+            <Route path={'/order-history'} component={orderHistory}/>
           </Switch>
         </div>
       </div>

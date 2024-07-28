@@ -92,6 +92,7 @@
       /* flex-direction: column; */
       /* background-color: red; */
       flex-wrap: wrap;
+      justify-content: space-around;
     }
     .product-container {
       margin-top: 1rem;

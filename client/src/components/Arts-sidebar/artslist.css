@@ -11,6 +11,10 @@
     background-color: #e3c3c6f0;
     cursor: pointer;
   }
+
+  .active{
+    background-color: #e3c3c6f0;
+  }
   
   .link {
     text-decoration: none;

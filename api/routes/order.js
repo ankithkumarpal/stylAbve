@@ -3,60 +3,117 @@ const { findById } = require("../models/Orders");
 const Orders = require("../models/Orders");
 const Users = require("../models/Users");
 
-router.post("/order", async (req, res) => {
+
+const serializeProductDetails = (productDetails) => {
+  return productDetails.map(detail => JSON.stringify(detail));
+};
+
+const deserializeProductDetails = (productDetails) => {
+  return productDetails.map(detail => JSON.parse(detail));
+};
+
+const serializeAddress = (address) => {
+  return JSON.stringify(address);
+};
+
+const deserializeAddress = (address) => {
+  return JSON.parse(address);
+};
+
+router.post("/place-order", async (req, res) => {
   try {
+    const { userId, productDetails, amount, address } = req.body;
+
+    const serializedProductDetails = serializeProductDetails(productDetails);
+    if(!address) return res.status(400).json("Address required.");
+    const serializedAddress = address ? serializeAddress(address) : null;
+
     const newOrder = new Orders({
-      phone: req.body.phone,
-      names: req.body.names,
-      email: req.body.email,
-      amount: req.body.amount,
+      userId,
+      productDetails: serializedProductDetails,
+      amount,
+      address: serializedAddress
     });
+
     const order = await newOrder.save();
     res.status(200).json(order);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-router.put("/update/:id", async (req, res) => {
+// Fetching orders of a particular user based on userId
+router.get("/get-order", async (req, res) => {
   try {
+    const { userId } = req.query;
+
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is required' });
+    }
+
+    const orders = await Orders.find({ userId });
+
+    if (orders.length === 0) {
+      return res.status(404).json({ error: 'No orders found for the specified userId' });
+    }
+    const ordersPlain = orders.map(order => order.toObject());
+
+    ordersPlain.forEach(item => {
+      item.productDetails = deserializeProductDetails(item.productDetails);
+      item.address = item.address ? deserializeAddress(item.address) : null;
+    });
+
+    res.status(200).json(ordersPlain);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+// update order based on orderId 
+router.put("/update-order", async (req, res) => {
+  try {
+    const { id } = req.query; 
+    if (!id) {
+      return res.status(400).json({ error: 'Order ID is required' });
+    }
+
     const updated = await Orders.findByIdAndUpdate(
-      req.params.id,
-      { status: req.body.status },
-      { new: true }
+      id,
+      { 
+        status: req.body.status,
+        updatedAt: Date.now() 
+      },
+      { new: true } 
     );
 
-    res.status(200).json(updated.status);
+    if (!updated) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+
+    res.status(200).json(updated);
   } catch (err) {
-    res.status(200).json(err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-router.get("/:id", async (req, res) => {
-  try {
-    const user = await Users.findById(req.params.id);
-    const email = user.email;
-    const userOrder = await Orders.find({ email }).sort({ createdAt: -1 });
-    res.status(200).json(userOrder);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-router.get("/singleorder/:id", async (req, res) => {
-  try {
-    const user = await Orders.findById(req.params.id);
-    res.status(200).json(user);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get("/", async (req, res) => {
+// fetch all orders
+router.get("/get-all-orders", async (req, res) => {
   try {
     const orders = await Orders.find().sort({ createdAt: -1 });
-    res.status(200).json(orders);
+    if (orders.length === 0) {
+      return res.status(404).json({ error: 'No orders found' });
+    }
+    const ordersPlain = orders.map(order => order.toObject());
+
+    ordersPlain.forEach(item => {
+      item.productDetails = deserializeProductDetails(item.productDetails);
+      item.address = item.address ? deserializeAddress(item.address) : null;
+    });
+
+    res.status(200).json(ordersPlain);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err.message });
   }
 });
 

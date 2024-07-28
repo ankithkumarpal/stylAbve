@@ -5,7 +5,7 @@ const OrdersSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    productId : {
+    productDetails : {
         type : [String],
         required : true
     },
@@ -13,15 +13,22 @@ const OrdersSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    Address : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : Address,
-        required : false
+    address : {
+        type : String,
+        required : true
     },
     status:{
         type:String,
         default:"placed"
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+      },
+      updatedAt: {
+        type: Date,
+        default: Date.now
+      }
 },{timestamps:true})
 
 module.exports= mongoose.model("Orders",OrdersSchema);

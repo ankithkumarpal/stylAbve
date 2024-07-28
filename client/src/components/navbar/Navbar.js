@@ -1,11 +1,14 @@
 import "./navbar.css";
-import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useContext, useEffect} from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { Context } from "../../context/Context";
+import { ArtsList } from "../Arts-sidebar/ArtsList";
 
 function Navbar() {
   const { user, dispatch } = useContext(Context);
   const history = useHistory();
+  const location = useLocation();
+  
   const handleClick = (e) => {
     e.preventDefault();
     dispatch({ type: "LOGOUT" });
@@ -16,6 +19,16 @@ function Navbar() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  }, [location.pathname]);
 
   return (
     <>
@@ -40,36 +53,11 @@ function Navbar() {
         </div>
       </div>
       {isMenuOpen && (
-        <div className="dropdown-menu">
-          <ul>
-            <li>
-              <Link to="/pencilarts" className="link" onClick={toggleMenu}>Pencil Arts</Link>
-            </li>
-            <li>
-              <Link to="/scrunchies" className="link" onClick={toggleMenu}>Scrunchies</Link>
-            </li>
-            <li>
-              <Link to="/bike-arts" className="link" onClick={toggleMenu}>Bike Arts</Link>
-            </li>
-            <li>
-              <Link to="/gift-card" className="link" onClick={toggleMenu}>Gift cards</Link>
-            </li>
-            <li>
-              <Link to="/apparel-printing" className="link" onClick={toggleMenu}>Apparel printing</Link>
-            </li>
-            <li>
-              <Link to="/my-cart" className="link" onClick={toggleMenu}>My cart</Link>
-            </li>
-            <li>
-              <Link to="/order-history" className="link" onClick={toggleMenu}>Order history</Link>
-            </li>
-            <li>
-              <Link to="/contact" className="link" onClick={toggleMenu}>Contact us</Link>
-            </li>
-            <li>
-              <Link to="/profile-setting" className="link" onClick={toggleMenu}>Profile setting</Link>
-            </li>
-          </ul>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="close-button" onClick={closeMenu}>X</button>
+            <ArtsList />
+          </div>
         </div>
       )}
     </>

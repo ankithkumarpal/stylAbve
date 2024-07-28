@@ -32,7 +32,6 @@ function PastOrder({orderDetail}) {
                         }
                       </div>
                 </div>
-              
           </div>
         </>
     );

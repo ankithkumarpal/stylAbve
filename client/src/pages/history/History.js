@@ -4,88 +4,90 @@ import PastOrders from "../../components/pastorder/Pastorder";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../context/Context";
 import axios from "axios";
-import flower from "../../assests/flower.jpeg";
 import { Link } from "react-router-dom";
 import { useToasts } from 'react-toast-notifications';
-import {BeatLoader} from 'react-spinners';
-
+import { BeatLoader } from 'react-spinners';
 
 function Order() {
   const { addToast } = useToasts();
   const { user } = useContext(Context);
-  const [cartItem, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [isLoading , setIsLoading] = useState(true);
- 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    getpost();
+    getCartItems();
   }, []);
 
-  const getpost = async () => {
+  const getCartItems = async () => {
     setIsLoading(true);
-    const response = await axios.get(`/cart/get-cart/${user.user.id}` ,  {
-      headers: {
-        'Authorization': `Bearer ${user.token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    setCartItems(response.data.data);
-    setIsLoading(false);
+    try {
+      const response = await axios.get(`/cart/get-cart/${"669bed6db7745e761a308068"}`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      setCartItems(response.data.data);
+    } catch (error) {
+      addToast('Failed to fetch cart items', { appearance: 'error' });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-      caluclateTotalPrice();
-  }, [cartItem]);
+    calculateTotalPrice();
+  }, [cartItems]);
 
-  const caluclateTotalPrice = ()=>{
-    const total = cartItem.reduce((acc, product) => {
+  const calculateTotalPrice = () => {
+    const total = cartItems.reduce((acc, product) => {
       return acc + product.price * product.quantity;
     }, 0);
     setTotalPrice(total);
   }
 
-  const removeItem = async (id) =>{
+  const removeItem = async (id) => {
     setIsLoading(true);
-  await axios.get(`/cart/remove-product/${id}` ,  {
-    headers: {
-      'Authorization': `Bearer ${user.token}`,
-      'Content-Type': 'application/json'
-    }
-  }).then((res) => {
-      console.log(res);
+    try {
+      await axios.get(`/cart/remove-product/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
+        }
+      });
       addToast('Item removed successfully', { appearance: 'success' });
-      getpost();
+      getCartItems();
+    } catch (error) {
+      addToast('Failed to remove item', { appearance: 'error' });
+    } finally {
       setIsLoading(false);
-    })
-    .catch((err) => {
-       addToast('Failed to remove item', { appearance: 'error' });
-       setIsLoading(false);
-    });
+    }
   }
 
-  const purchaseOrder = ()=>{
-      console.log(cartItem);
+  const purchaseOrder = () => {
+    console.log(cartItems);
   }
+
   return (
     <>
-      <Navbar />
       <div className="home">
-      <div className="spinner">
-            <BeatLoader loading={isLoading} color="black"/>
+        <div className="spinner">
+          <BeatLoader loading={isLoading} color="black" />
         </div>
         <div className="cart-content">
-          <div className="cart-header ">
+          <div className="cart-header">
             <h1>Shopping Cart</h1>
           </div>
-          <div className="cart-product-container ">
-            <div class="container-fluid mt-0">
-              <div class="row mt-1">
-                <aside class="col-lg-9">
-                  <div class="card">
-                    <div class="table-responsive">
-                      <table class="table table-borderless table-shopping-cart">
-                        <thead class="text-muted">
-                          <tr class="small text-uppercase">
+          <div className="cart-product-container">
+            <div className="container-fluid mt-0">
+              <div className="row mt-1">
+                <aside className="col-lg-9">
+                  <div className="card">
+                    <div className="table-responsive">
+                      <table className="table table-borderless table-shopping-cart">
+                        <thead className="text-muted">
+                          <tr className="small text-uppercase">
                             <th scope="col" className="columns">
                               Product
                             </th>
@@ -97,88 +99,100 @@ function Order() {
                             </th>
                             <th
                               scope="col"
-                              className="columns"
-                              class="text-right d-none d-md-block"
+                              className="columns text-right d-none d-md-block"
                               width="200"
                             ></th>
                           </tr>
                         </thead>
-                        <tbody>
-                          {cartItem.map((product) => {
-                              const base64String = Buffer.from(product.image.data.data).toString("base64");
-                              const imageSrc = `data:image/png;base64,${base64String}`;
-                            return (
-                              <>
-                            <tr>
+                        <tbody className="table-body">
+                          {cartItems.map((product) => (
+                            <tr key={product._id}>
                               <td>
-                                <figure class="itemside align-items-center">
-                                  <div class="aside">
-                                    <img src={imageSrc} class="img-sm" />
+                                <figure className="itemside align-items-center">
+                                  <div className="aside">
+                                    <img src={product.productDetails.images[0]} className="img-sm" alt="Product" />
                                   </div>
+                                  <figcaption className="info">
+                                     
+                                  </figcaption>
                                 </figure>
                               </td>
                               <td>
-                                <input min={1} type="number" class="form-control" placeholder="Qunatity" value={product.quantity} 
-                                 onChange={(e) => {
-                                  product.quantity = e.target.value;
-                                  caluclateTotalPrice(); // Update the total price when the quantity changes
-                                }}
-                                />
-                              </td>
-                              <td>
-                                <div class="price-wrap">
-                                  {" "}
-                                  <var class="price">Rs : {product.price*product.quantity}</var>{" "}
-                                  <small class="text-muted"> {product.price} Rs/- each </small>{" "}
+                                <div className="quantity-control">
+                                  <button 
+                                    className="btn btn-light"
+                                    onClick={() => {
+                                      setCartItems(cartItems.map(item => 
+                                        item._id === product._id 
+                                          ? { ...item, quantity: Math.max(1, item.quantity - 1) } 
+                                          : item
+                                      ));
+                                      calculateTotalPrice();
+                                    }}
+                                  >
+                                    -
+                                  </button>
+                                  <span className="quantity">{product.quantity}</span>
+                                  <button 
+                                    className="btn btn-light"
+                                    onClick={() => {
+                                      setCartItems(cartItems.map(item => 
+                                        item._id === product._id 
+                                          ? { ...item, quantity: item.quantity + 1 }
+                                          : item
+                                      ));
+                                      calculateTotalPrice();
+                                    }}
+                                  >
+                                    +
+                                  </button>
                                 </div>
                               </td>
-                              <td class="text-right">
-                                {" "}
-                                <button class="btn btn-light" data-abc="true" onClick={(e)=>{removeItem(product._id)}}>
-                                  {" "}
+                              <td>
+                                <div className="price-wrap">
+                                  <var className="price">Rs: {product.price * product.quantity}</var>
+                                  <small className="text-muted"> {product.price} Rs/- each </small>
+                                </div>
+                              </td>
+                              <td className="text-right">
+                                <button className="btn btn-light" onClick={() => removeItem(product._id)}>
                                   Remove
                                 </button>
                               </td>
-                            </tr>;
-                              </>
-                            )
-                          })}
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>
                   </div>
                 </aside>
-                <aside class="col-lg-3">
-                  <div class="card mt-1">
-                    <div class="card-body">
-                      <dl class="dlist-align">
-                        <dt>Total price : </dt>
-                        <dd class="text-right ml-3"> Rs : {totalPrice} /-</dd>
+                <aside className="col-lg-3">
+                  <div className="card mt-1">
+                    <div className="card-body">
+                      <dl className="dlist-align">
+                        <dt>Total price: </dt>
+                        <dd className="text-right ml-3"> Rs: {totalPrice} /-</dd>
                       </dl>
-                      <dl class="dlist-align">
+                      <dl className="dlist-align">
                         <dt>Discount:</dt>
-                        <dd class="text-right text-danger ml-3">Rs : 0.00/-</dd>
+                        <dd className="text-right text-danger ml-3">Rs: 0.00/-</dd>
                       </dl>
-                      <dl class="dlist-align">
+                      <dl className="dlist-align">
                         <dt>Total:</dt>
-                        <dd class="text-right text-dark b ml-3">
-                          <strong>Rs : {totalPrice} /-</strong>
+                        <dd className="text-right text-dark b ml-3">
+                          <strong>Rs: {totalPrice} /-</strong>
                         </dd>
                       </dl>
-                      <hr />{" "}
+                      <hr />
                       <button
-                        to={"#"}
-                        class="btn btn-out btn-primary btn-square btn-main"
-                        data-abc="true"
+                        className="btn btn-out btn-primary btn-square btn-main"
                         onClick={purchaseOrder}
                       >
-                        {" "}
-                        Make Purchase{" "}
-                      </button>{" "}
+                        Make Purchase
+                      </button>
                       <Link
                         to={`/pencilarts`}
-                        class="btn btn-out btn-success btn-square btn-main mt-2"
-                        data-abc="true"
+                        className="btn btn-out btn-success btn-square btn-main mt-2"
                       >
                         Continue Shopping
                       </Link>

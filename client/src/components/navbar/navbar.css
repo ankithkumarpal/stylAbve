@@ -1,4 +1,4 @@
-/* Navbar Styles */
+/* General navbar styles */
 .navbar {
   width: 100vw;
   background-color: rgba(255, 255, 255, 0.389);
@@ -69,6 +69,44 @@
   transition: 0.4s;
 }
 
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Media queries */
 @media only screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;

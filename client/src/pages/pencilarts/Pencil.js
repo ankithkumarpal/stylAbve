@@ -33,12 +33,7 @@ function Pencil() {
   };
 
   const addToCart = async (product) => {
-    if (!user.user) {
-      addToast('Please login to add items to the cart', { appearance: 'warning' });
-      history.push("/login");  // Redirect to login page
-      return;
-    }
-
+   
     setIsLoading(true);
     let cartDetail = {
       price: product.price,
@@ -53,7 +48,7 @@ function Pencil() {
           'Content-Type': 'application/json'
         }
       });
-
+      
       if (res.data === "Already Exist") {
         addToast("Item already exists in cart", { appearance: 'info' });
       } else {
@@ -70,9 +65,9 @@ function Pencil() {
   return (
     <>
       <div className="home pencil-home">
-        <div className="spinner">
+        {/* <div className="spinner">
           <BeatLoader loading={isLoading} color="white" />
-        </div>
+        </div> */}
         <div className="product">
           {items.map((product) => (
             <div className="product-container" key={product._id}>
@@ -80,7 +75,7 @@ function Pencil() {
                 <div className="image-container">
                   <span className="price">Rs: {product.price}/-</span>
                   {product.imageUrls && product.imageUrls.length > 0 ? (
-                    <img src={product.imageUrls[0]} alt={product._id} />
+                    <img src={product.imageUrls[0]} />
                   ) : (
                     <p>No Image Available</p>
                   )}

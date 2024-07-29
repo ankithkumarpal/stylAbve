@@ -24,7 +24,7 @@ export const Landing = () => {
         <div className={`sidebar`}>
           <ArtsList />
         </div>
-        <div className="content-section">
+        <div className="landing-content-section">
           <Switch>
             <Route exact path={path} component={Home} />
             <Route path={`/contact`} component={Contact} />

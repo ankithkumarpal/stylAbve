@@ -1,6 +1,4 @@
 import "./history.css";
-import Navbar from "../../components/navbar/Navbar";
-import PastOrders from "../../components/pastorder/Pastorder";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../context/Context";
 import axios from "axios";
@@ -29,6 +27,7 @@ function Order() {
         }
       });
       setCartItems(response.data.data);
+      
     } catch (error) {
       addToast('Failed to fetch cart items', { appearance: 'error' });
     } finally {
@@ -120,7 +119,7 @@ function Order() {
                               <td>
                                 <div className="quantity-control">
                                   <button 
-                                    className="btn btn-light"
+                                    className="dec-button"
                                     onClick={() => {
                                       setCartItems(cartItems.map(item => 
                                         item._id === product._id 
@@ -134,7 +133,7 @@ function Order() {
                                   </button>
                                   <span className="quantity">{product.quantity}</span>
                                   <button 
-                                    className="btn btn-light"
+                                    className="dec-button"
                                     onClick={() => {
                                       setCartItems(cartItems.map(item => 
                                         item._id === product._id 
@@ -155,7 +154,7 @@ function Order() {
                                 </div>
                               </td>
                               <td className="text-right">
-                                <button className="btn btn-light" onClick={() => removeItem(product._id)}>
+                                <button className="remove-button" onClick={() => removeItem(product._id)}>
                                   Remove
                                 </button>
                               </td>
@@ -171,7 +170,7 @@ function Order() {
                     <div className="card-body">
                       <dl className="dlist-align">
                         <dt>Total price: </dt>
-                        <dd className="text-right ml-3"> Rs: {totalPrice} /-</dd>
+                        <dd className="text-right ml-3">  Rs: {totalPrice} /-</dd>
                       </dl>
                       <dl className="dlist-align">
                         <dt>Discount:</dt>
@@ -180,7 +179,7 @@ function Order() {
                       <dl className="dlist-align">
                         <dt>Total:</dt>
                         <dd className="text-right text-dark b ml-3">
-                          <strong>Rs: {totalPrice} /-</strong>
+                          <strong>Rs : { totalPrice} /-</strong>
                         </dd>
                       </dl>
                       <hr />

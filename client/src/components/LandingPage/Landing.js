@@ -7,7 +7,9 @@ import { ArtsList } from "../Arts-sidebar/ArtsList";
 import Contact from "../../pages/contactus/Contactus";
 import Pencil from "../../pages/pencilarts/Pencil";
 import History from "../../pages/history/History";
-import { orderHistory } from "../../pages/OrderHistory/orderHistory";
+import { OrderHistory } from "../../pages/OrderHistory/orderHistory";
+import AboutUs from "../../pages/AboutUs/Aboutus";
+import ProfileSetting from "../../pages/ProfileSetting/Profilesetting";
 
 export const Landing = () => {
   let { path } = useRouteMatch();
@@ -19,7 +21,9 @@ export const Landing = () => {
 
   return (
     <div className="landing">
+      <div className="landing-navbar">
       <Navbar />
+      </div>
       <div className="main-content">
         <div className={`sidebar`}>
           <ArtsList />
@@ -30,7 +34,9 @@ export const Landing = () => {
             <Route path={`/contact`} component={Contact} />
             <Route path={`/pencilarts`} component={Pencil} />
             <Route path={`/my-cart`} component={History}/>
-            <Route path={'/order-history'} component={orderHistory}/>
+            <Route path={'/order-history'} component={OrderHistory}/>
+            <Route path={`/aboutus`} component={AboutUs}/>
+            <Route path={`/profile-setting`} component={ProfileSetting}/>
           </Switch>
         </div>
       </div>

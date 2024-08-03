@@ -72,10 +72,10 @@ export const ArtsList = () => {
         </div> 
       </Link>
 
-      <Link to="/contact" className={getLinkClassName('/contact')}>   
+      <Link to="/aboutus" className={getLinkClassName('/aboutus')}>   
         <div className='' style={{fontFamily:"cursive" , height:"max-content" ,alignContent:"center", width:"100%" , display:'flex'}}>
           <i className="bi bi-person-lines-fill" style={{marginRight:"1.2rem" , fontSize:"1.2rem" , color:"saddlebrown"}}></i>
-          <span style={{fontFamily:'cursive' , color:'saddlebrown'}}>Contact us</span>
+          <span style={{fontFamily:'cursive' , color:'saddlebrown'}}>About us</span>
         </div> 
       </Link>
 

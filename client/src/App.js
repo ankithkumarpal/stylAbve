@@ -7,7 +7,7 @@ import {Signup} from './pages/Authentication/signup';
 
 function App() {
   return (
-    <div  style={{backgroundColor:"red"}}>
+    <div  style={{backgroundColor:"red", width:"100vw" , height:"100vh"}}>
     <ToastProvider autoDismiss autoDismissTimeout={2000}>
       <Router>
         <Switch>

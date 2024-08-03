@@ -1,11 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling on the body */
+}
+
 .landing {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: inherit;
   width: 100vw;
   background-image: url(../../assests/flower.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
+  margin: 0 !important;
 }
 
 .main-content {
@@ -13,7 +25,6 @@
   flex: 1;
   position: relative;
   height: 90vh !important;
-  /* background-color: red; */
 }
 
 .sidebar {
@@ -57,15 +68,29 @@
   cursor: pointer;
 }
 
+.landing-navbar{
+  height: 10vh;
+  width: 100vw;
+  background-color: rgba(0, 128, 0, 0.041);
+}
+
 @media (max-width: 768px) {
   .landing {
     height: fit-content;
   }
-
   .hamburger {
     display: block;
   }
-
+  .main-content{
+    min-height: 90vh !important;
+    /* background-color: blue; */
+    margin-top: 1rem;
+  }
+  .landing-navbar{
+    height: 10vh;
+    width: 100vw;
+    /* background-color: green; */
+  }
   .sidebar {
     position: absolute;
     top: 0;

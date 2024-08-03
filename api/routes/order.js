@@ -71,6 +71,7 @@ router.get("/get-order", async (req, res) => {
           return {
             productId: product._id,
             quantity: detail.quantity,
+            price: product.price,
             images
           };
         })

@@ -67,9 +67,10 @@ function Pencil() {
     <>
       <div className="home pencil-home">
         <div className="spinner">
-          <BeatLoader loading={isLoading} color="white" />
+          <BeatLoader loading={isLoading} color="#26aefc" />
         </div>
-        <div className="product">
+        <h3 style={{margin:"0%" , padding:"0%", color:"#eb2869"}} className="pencil-art-header">Pencils arts</h3>
+        <div className="product pb-3">
           {items.map((product) => (
             <div className="product-container" key={product._id}>
               <div className="image">

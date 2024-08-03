@@ -1,5 +1,7 @@
 .pencil-home {
     position: relative;
+    /* background-color: green; */
+    /* background-color: rgba(60, 53, 53, 0.638); */
   }
   
   .spinner {
@@ -8,11 +10,15 @@
     top: 40%;
   }
   
+  .pencil-art-header{
+    display: none;
+  }
   .product {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    background-color: rgba(60, 53, 53, 0.638);
+    background-color: rgba(60, 53, 53, 0.288);
+
     -ms-overflow-style: none;
     scrollbar-width: none;
     background-color:'red' !important;
@@ -85,6 +91,10 @@
   }
   
   @media only screen and (max-width: 1000px) {
+    .pencil-art-header{
+      display: block;
+      font-weight: bolder;
+    }
     .product {
       display: flex;
       align-items: center;

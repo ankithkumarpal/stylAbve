@@ -1,4 +1,4 @@
-import {createContext,useEffect,useReducer} from "react";
+import React,{createContext,useEffect,useReducer} from "react";
 import Reducer from "./Reducer";
 const INTIAL_STATE={
     user:JSON.parse(localStorage.getItem("user"))|| false,

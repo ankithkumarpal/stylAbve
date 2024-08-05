@@ -1,3 +1,4 @@
+import React from 'react';
 import './name.css';
 
 function Name({namesDetail}) {

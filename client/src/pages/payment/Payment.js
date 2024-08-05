@@ -1,3 +1,4 @@
+import React from 'react';
 import './payment.css';
 import Navbar from '../../components/navbar/Navbar';
 import { useContext, useEffect, useState } from 'react';

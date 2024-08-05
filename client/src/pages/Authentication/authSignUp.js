@@ -1,3 +1,4 @@
+import React from 'react'
 import Navbar from "../../components/navbar/Navbar";
 import "./authLogin.css";
 import React, { useState, useEffect } from "react";

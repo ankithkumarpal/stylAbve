@@ -1,14 +1,11 @@
-import { useEffect, useState, useContext } from "react";
+import React,{ useEffect, useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useHistory } from "react-router-dom";
-import flower from "../../assests/1.jpeg";
 import "./modal.css";
 import { Context } from "../../context/Context";
 
 function Example({ product, imageSrc }) {
-  const history = useHistory();
-  const { user } = useContext(Context);
   const [show, setShow] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(product.price);

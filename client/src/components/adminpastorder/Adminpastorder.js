@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useContext, useState,useEffect } from 'react';
 import { Context } from '../../context/Context';
 import axios from'axios';
-// import axiosInstance from '../../config'
 
 function PastOrder({orderDetail}) {
    const names= orderDetail.names;

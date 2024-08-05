@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import "./landing.css";
 import Navbar from "../navbar/Navbar";
@@ -13,19 +13,13 @@ import ProfileSetting from "../../pages/ProfileSetting/Profilesetting";
 
 export const Landing = () => {
   let { path } = useRouteMatch();
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
   return (
     <div className="landing">
       <div className="landing-navbar">
       <Navbar />
       </div>
       <div className="main-content">
-        <div className={`sidebar`}>
+        <div className="sidebar">
           <ArtsList />
         </div>
         <div className="landing-content-section">

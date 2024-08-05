@@ -8,7 +8,7 @@ import axios from'axios';
 export const Login = () => {
   let [email,setEmail]  = useState("")
     let [password,setPassword]=useState("")
-    const {user,dispatch} = useContext(Context);
+    const {dispatch} = useContext(Context);
     const handlSubmit= async (e)=>{
         e.preventDefault();
         dispatch({type:"LOGIN_START"})

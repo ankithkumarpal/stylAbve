@@ -1,20 +1,12 @@
+import React from "react";
 import "./navbar.css";
-import React, { useState, useContext, useEffect} from "react";
+import { useState, useEffect} from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { Context } from "../../context/Context";
 import { ArtsList } from "../Arts-sidebar/ArtsList";
 
 function Navbar() {
-  const { user, dispatch } = useContext(Context);
-  const history = useHistory();
   const location = useLocation();
   
-  const handleClick = (e) => {
-    e.preventDefault();
-    dispatch({ type: "LOGOUT" });
-    history.push("/pencilarts");
-  };
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

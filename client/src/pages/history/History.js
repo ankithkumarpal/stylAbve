@@ -1,3 +1,4 @@
+import React from "react";
 import "./history.css";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../context/Context";

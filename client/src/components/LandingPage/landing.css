@@ -1,3 +1,4 @@
+/* Global styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,40 +7,35 @@
 
 body, html {
   height: 100%;
-  overflow: hidden; /* Prevent scrolling on the body */
+  margin: 0;
 }
 
 .landing {
   display: flex;
   flex-direction: column;
-  height: inherit;
+  height: 100%;
   width: 100vw;
   background-image: url(../../assests/flower.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
-  margin: 0 !important;
 }
 
 .main-content {
   display: flex;
   flex: 1;
-  position: relative;
-  height: 90vh !important;
+  height: calc(100vh - 10vh); /* Adjust height to account for the navbar */
 }
 
 .sidebar {
   width: 20%;
   height: 100%;
-  overflow-y: auto; /* Use auto for better scroll control */
-  transition: transform 0.3s ease;
+  overflow-y: auto;
   background-color: rgba(255, 255, 255, 0.645);
 }
 
 .landing-content-section {
   flex: 1;
-  height: 100%;
-  overflow-y: auto;
-  flex-wrap: wrap !important;
+  overflow-y: auto; /* Enable scrolling */
 }
 
 .sidebar::-webkit-scrollbar,
@@ -68,36 +64,40 @@ body, html {
   cursor: pointer;
 }
 
-.landing-navbar{
+.landing-navbar {
   height: 10vh;
   width: 100vw;
-  background-color: rgba(0, 128, 0, 0.041);
+  /* background-color: rgba(0, 128, 0, 0.041); */
+  /* background-color: red; */
 }
 
 @media (max-width: 768px) {
   .landing {
-    height: fit-content;
+    height: 100%;
   }
+
+  .main-content {
+    /* background-color: blue; */
+    height: auto;
+    height: 90vh; /* Ensure the main content section takes at least full viewport height */
+  }
+
   .hamburger {
     display: block;
   }
-  .main-content{
-    min-height: 90vh !important;
-    /* background-color: blue; */
-    margin-top: 1rem;
-  }
-  .landing-navbar{
-    height: 10vh;
+
+  .landing-navbar {
+    height: 12vh;
     width: 100vw;
-    /* background-color: green; */
   }
+
   .sidebar {
     position: absolute;
     top: 0;
     left: 0;
     width: 60%;
     transform: translateX(-100%);
-    height: 100vh; /* Ensure sidebar takes full height in mobile view */
+    height: 100vh;
   }
 
   .sidebar.open {

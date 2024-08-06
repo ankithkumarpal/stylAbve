@@ -16,7 +16,7 @@ export const Landing = () => {
   return (
     <div className="landing">
       <div className="landing-navbar">
-      <Navbar />
+        <Navbar />
       </div>
       <div className="main-content">
         <div className="sidebar">

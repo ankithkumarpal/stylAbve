@@ -1,110 +1,118 @@
-/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-  }
-  
-  /* Profile container */
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling on the body */
+}
+
+#root {
+  height: 100%; /* Ensure the root element takes full height */
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  background-color: rgba(255, 192, 203, 0.627);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  overflow-y: auto; 
+  /* margin-top: 1rem; */
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 24px;
+  color: #444242;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 18px;
+  color: #444242;
+  margin-bottom: 15px;
+}
+
+.form-group, .address-group {
+  margin-bottom: 10px;
+}
+
+.form-group label, .address-group label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 3px;
+  color: #444242;
+  font-weight: bold;
+}
+
+.form-group input, .address-group input {
+  background-color: rgb(235, 207, 207);
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  border: 2px solid rgb(144, 58, 72);
+  border-radius: 4px;
+  color: saddlebrown;
+}
+
+.form-group input:focus, .address-group input:focus {
+  border: 2px solid rgb(144, 58, 72);
+  outline: none;
+}
+
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.field-row .form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+
+@media (max-width: 600px) {
   .user-profile {
-    padding: 20px;
-    width: inherit;
-    height: inherit;
-    background-color: rgba(255, 192, 203, 0.627) !important;
-    /* background-color: #f9f9f9; Light background color */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */ /* Ensure container takes at least full viewport height */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-    overflow-y: scroll;
+    /* padding: 8px; */
+    height: auto; /* Allow height to be auto on small screens */
+    
+    padding-bottom: 2rem;
   }
-  
-  /* Form styling */
+
   .profile-form {
-    display: flex;
     flex-direction: column;
   }
-  
-  /* Headings */
-  h1 {
-    font-size: 24px; /* Smaller heading size */
-    color: #444242; /* Dark gray for better readability */
-    margin-bottom: 20px;
-  }
-  
-  h2 {
-    font-size: 18px; /* Smaller subheading size */
-    color: #444242; /* Slightly lighter gray for subheadings */
-    margin-bottom: 15px;
-  }
-  
-  /* Form groups and fields */
-  .form-group, .address-group {
-    margin-bottom: 10px;
-  }
-  
-  .form-group label, .address-group label {
-    display: block;
-    font-size: 12px; /* Smaller font size for labels */
-    margin-bottom: 3px;
-    color: #444242; /* Medium gray for labels */
-    font-weight: bold;
-  }
-  
-  .form-group input, .address-group input {
-    background-color: rgb(235, 207, 207);
+
+  .actions button {
     width: 100%;
-    padding: 6px;
-    font-size: 14px; /* Smaller font size for input fields */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-    border: 2px solid rgb(144, 58, 72); /* Light border */
-    border-radius: 4px; /* Rounded corners for inputs */
-    color: saddlebrown;
+    margin-bottom: 8px;
   }
-  .form-group input:focus, .address-group input:focus {
-    border: 2px solid rgb(144, 58, 72); /* Same border style as the normal state */
-    outline: none; /* Remove the default outline */
+
+  .form-group, .address-group {
+    margin-bottom: 8px;
   }
-  
-  /* Flexbox layout for fields */
+
   .field-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Space between fields */
+    flex-direction: column;
   }
-  
+
   .field-row .form-group {
-    flex: 1;
-    min-width: 200px; /* Minimum width for each field */
+    min-width: auto;
   }
-  
-  /* Responsive styles */
-  @media (max-width: 600px) {
-    .user-profile {
-      padding: 8px;
-      height: 100%;
-    }
-  
-    .profile-form {
-      flex-direction: column;
-    }
-  
-    .actions button {
-      width: 100%;
-      margin-bottom: 8px;
-    }
-  
-    .form-group, .address-group {
-      margin-bottom: 8px;
-    }
-  
-    /* Stack fields vertically on small screens */
-    .field-row {
-      flex-direction: column;
-    }
-  
-    .field-row .form-group {
-      min-width: auto; /* Remove minimum width on small screens */
-    }
-  }
+}
+
+
   

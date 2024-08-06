@@ -25,6 +25,7 @@ html, body {
   box-sizing: border-box;
   overflow-y: auto; 
   /* margin-top: 1rem; */
+  /* padding-bottom: 12rem; */
 }
 
 .profile-form {
@@ -88,7 +89,7 @@ h2 {
   .user-profile {
     /* padding: 8px; */
     height: auto; /* Allow height to be auto on small screens */
-    padding-bottom: 5rem;
+    padding-bottom: 6rem !important;
   }
 
   .profile-form {

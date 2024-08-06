@@ -68,7 +68,7 @@ const ProfileSetting = () => {
       </form>
       <h2>Account Management</h2>
       <div className="field-row">
-<button type="button" className="btn btn-success btn-sm m-2" onClick={() => handleNavigate('/order-history')}>Past Orders</button>
+{/* <button type="button" className="btn btn-success btn-sm m-2" onClick={() => handleNavigate('/order-history')}>Past Orders</button> */}
 <button type="button" className="btn btn-secondary btn-sm m-2 delete-account" onClick={handleDeleteAccount}>Delete Account</button>
 <button type="button" className="btn btn-danger btn-sm m-2 delete-account" onClick={handleDeleteAccount}>Sign out</button>
   </div>

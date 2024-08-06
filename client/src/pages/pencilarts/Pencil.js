@@ -22,7 +22,7 @@ function Pencil() {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get("/product/get-products");
+      const response = await axios.get("https://unqiue-carving.onrender.com/api/product/get-products");
       setItems(response.data.data);
       addToast('Products fetched successfully', { appearance: 'success' });
       setIsLoading(false);

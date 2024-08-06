@@ -21,7 +21,7 @@ function Order() {
   const getCartItems = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`/cart/get-cart/${"669bed6db7745e761a308068"}`, {
+      const response = await axios.get(`https://unqiue-carving.onrender.com/api/cart/get-cart/${"669bed6db7745e761a308068"}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`,
           'Content-Type': 'application/json'

@@ -17,7 +17,7 @@ export const OrderHistory = () => {
   const getOrders = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`/orders/get-order?userId=1`, {
+      const response = await axios.get(`https://unqiue-carving.onrender.com/api/orders/get-order?userId=1`, {
         headers: {
           'Authorization': `Bearer`,
           'Content-Type': 'application/json'

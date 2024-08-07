@@ -35,7 +35,7 @@ td {
 .cart-content {
     width: inherit;
     height: 100%;
-    background-color: rgba(238, 238, 22, 0.237);
+    background-color: rgba(255, 192, 203, 0.627);
     padding: 10px;
     overflow-y: scroll;
 }
@@ -61,8 +61,7 @@ td {
 }
 
 .cart-header h1 {
-    font-family: cursive; 
-    color: #dc3545;
+    font-family: cursive;
     font-size: 24px;
     font-weight: bolder;
 }
@@ -116,7 +115,6 @@ a {
 .card {
     display: flex;
     flex-direction: column;
-    /* background-color: rgba(255, 255, 255, 0.617) !important; */
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 12px;
 }

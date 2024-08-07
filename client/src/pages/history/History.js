@@ -30,7 +30,7 @@ function Order() {
       setCartItems(response.data.data);
       
     } catch (error) {
-      addToast('Failed to fetch cart items', { appearance: 'error' });
+      addToast('Failed to fetch cart items', {appearance: 'error'});
     } finally {
       setIsLoading(false);
     }
@@ -113,7 +113,6 @@ function Order() {
                                     <img src={product.productDetails.images[0]} className="img-sm" alt="Product" />
                                   </div>
                                   <figcaption className="info">
-                                     
                                   </figcaption>
                                 </figure>
                               </td>

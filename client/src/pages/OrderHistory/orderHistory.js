@@ -38,7 +38,7 @@ export const OrderHistory = () => {
         <BeatLoader loading={isLoading} color="black" />
       </div>
       <header className="orderhistory-header">
-        <h4 className="" style={{color:"#ed0552"}}>Order history</h4>
+        <h4 className="" style={{color:""}}>Order history</h4>
       {/* <hr></hr> */}
       </header>
       {orders.map((order) => (

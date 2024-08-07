@@ -1,7 +1,5 @@
 .pencil-home {
     position: relative;
-    /* background-color: green; */
-    /* background-color: rgba(60, 53, 53, 0.638); */
   }
   
   .spinner {
@@ -17,7 +15,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    background-color: rgba(60, 53, 53, 0.288);
+    background-color: rgba(255, 192, 203, 0.627);
 
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -94,6 +92,9 @@
     .pencil-art-header{
       display: block;
       font-weight: bolder;
+      display: flex;
+      justify-content: center;
+      font-family: cursive;
     }
     .product {
       display: flex;

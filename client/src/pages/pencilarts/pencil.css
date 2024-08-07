@@ -9,7 +9,11 @@
   }
   
   .pencil-art-header{
-    display: none;
+    /* display: none; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: cursive;
   }
   .product {
     width: 100%;

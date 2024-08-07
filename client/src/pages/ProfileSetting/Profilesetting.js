@@ -15,7 +15,7 @@ const ProfileSetting = () => {
 
   return (
     <div className="user-profile">
-      <h2>User Profile</h2>
+      <h1 style={{display:'flex',alignItems:"center",justifyContent:"center",fontFamily:'cursive'}}>User Profile</h1>
       <form className="profile-form">
         <div className="field-row">
           <div className="form-group">

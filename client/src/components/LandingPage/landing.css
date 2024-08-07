@@ -67,8 +67,6 @@ body, html {
 .landing-navbar {
   height: 10vh;
   width: 100vw;
-  /* background-color: rgba(0, 128, 0, 0.041); */
-  /* background-color: red; */
 }
 
 @media (max-width: 768px) {
@@ -77,9 +75,8 @@ body, html {
   }
 
   .main-content {
-    /* background-color: blue; */
     height: auto;
-    height: 90vh; /* Ensure the main content section takes at least full viewport height */
+    height: 90vh; 
   }
 
   .hamburger {

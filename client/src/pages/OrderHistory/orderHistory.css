@@ -41,7 +41,10 @@
 }
 
 .orderhistory-header{
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.5rem;
 }
 
 .card {

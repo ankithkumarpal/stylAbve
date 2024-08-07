@@ -10,6 +10,7 @@ import History from "../../pages/history/History";
 import { OrderHistory } from "../../pages/OrderHistory/orderHistory";
 import AboutUs from "../../pages/AboutUs/Aboutus";
 import ProfileSetting from "../../pages/ProfileSetting/Profilesetting";
+import { Comingsoon } from "../../pages/Comingsoon/comingsoon";
 
 export const Landing = () => {
   let { path } = useRouteMatch();
@@ -26,6 +27,10 @@ export const Landing = () => {
           <Switch>
             <Route exact path={path} component={Home} />
             <Route path={`/contact`} component={Contact} />
+            <Route path={`/scrunchies`} component={Comingsoon} />
+            <Route path={`/bike-arts`} component={Comingsoon} />
+            <Route path={`/gift-card`} component={Comingsoon} />
+            <Route path={`/apparel-printing+`} component={Comingsoon} />
             <Route path={`/pencilarts`} component={Pencil} />
             <Route path={`/my-cart`} component={History}/>
             <Route path={'/order-history'} component={OrderHistory}/>

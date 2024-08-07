@@ -1,0 +1,9 @@
+.comming-soon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    width: 100%;
+    background-color: rgba(255, 192, 203, 0.627);
+    flex-direction: column;
+}

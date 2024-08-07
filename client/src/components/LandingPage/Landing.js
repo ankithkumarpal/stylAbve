@@ -30,7 +30,7 @@ export const Landing = () => {
             <Route path={`/scrunchies`} component={Comingsoon} />
             <Route path={`/bike-arts`} component={Comingsoon} />
             <Route path={`/gift-card`} component={Comingsoon} />
-            <Route path={`/apparel-printing+`} component={Comingsoon} />
+            <Route path={`/apparel-printing`} component={Comingsoon} />
             <Route path={`/pencilarts`} component={Pencil} />
             <Route path={`/my-cart`} component={History}/>
             <Route path={'/order-history'} component={OrderHistory}/>

@@ -1,4 +1,4 @@
-/* Global styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -23,7 +23,7 @@ body, html {
 .main-content {
   display: flex;
   flex: 1;
-  height: calc(100vh - 10vh); /* Adjust height to account for the navbar */
+  height: calc(100vh - 10vh); 
 }
 
 .sidebar {
@@ -35,7 +35,7 @@ body, html {
 
 .landing-content-section {
   flex: 1;
-  overflow-y: auto; /* Enable scrolling */
+  overflow-y: auto;
 }
 
 .sidebar::-webkit-scrollbar,
@@ -84,7 +84,7 @@ body, html {
   }
 
   .landing-navbar {
-    height: 12vh;
+    height: 10vh;
     width: 100vw;
   }
 

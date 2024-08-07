@@ -17,7 +17,7 @@
   }
   
   .about-us a {
-    color: #4169E1; /* Royal Blue for links */
+    color: #4169E1;
     text-decoration: none;
   }
   
@@ -28,7 +28,6 @@
   
   .about-us-header h1 {
     font-size: 2.5rem;
-    /* color: #2C3E50; Dark Slate Blue */
     color: #ed0552;
   }
   
@@ -38,14 +37,13 @@
   
   .about-us-section h2 {
     font-size: 1.8rem;
-    color: #4682B4; /* Steel Blue */
+    color: #4682B4; 
     margin-bottom: 1px;
   }
   
   .about-us-section p {
     font-size: 1rem;
-    color: #708090; /* Slate Gray */
-    /* line-height: 1.6; */
+    color: #708090;
     margin: 0%;
     height: 0%;
   }
@@ -59,13 +57,13 @@
   
   .team-member h3 {
     font-size: 1.2rem;
-    color: #2C3E50; /* Dark Slate Blue */
+    color: #2C3E50;
     margin: 10px 0 5px 0;
   }
   
   .team-member p {
     font-size: 1rem;
-    color: #777777; /* Darker gray for better readability */
+    color: #777777; 
   }
   
   .social-media {
@@ -77,14 +75,14 @@
   
   .social-media a {
     color: inherit;
-    font-size: 2rem; /* Size of social media icons */
+    font-size: 2rem; 
     text-decoration: none;
   }
   
   .social-media span {
     display: block;
     text-align: center;
-    color: #333333; /* Color for social media handles */
+    color: #333333; 
   }
   
   @media (max-width: 768px) {

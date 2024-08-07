@@ -2,7 +2,6 @@ import React from 'react';
 import './name.css';
 
 function Name({namesDetail}) {
-  //console.log(namesDetail);
     return (
         <>
           <div className="Name">

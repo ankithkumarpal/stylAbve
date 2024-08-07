@@ -15,7 +15,6 @@ function Admin() {
       const   fetchingaAllOrders= async()=>{
            const  fetchedData = await axios.get('/orders/');
            setallOrders(fetchedData.data)
-           // console.log(fetchedData.data);
        }
 
        fetchingaAllOrders();

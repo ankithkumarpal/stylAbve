@@ -5,7 +5,6 @@ import { Link, useLocation } from "react-router-dom";
 export const ArtsList = () => {
   const location = useLocation();
 
-  // for highlighting the active side bar
   useEffect(() => {
   }, [location]);
 

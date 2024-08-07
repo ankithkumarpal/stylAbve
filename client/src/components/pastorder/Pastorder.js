@@ -7,10 +7,8 @@ import { Context } from '../../context/Context';
 import axios from'axios';
 
 function PastOrder({orderDetail}) {
-  // console.log(orderDetail.updatedAt)
    const names= orderDetail.names;
    const {user}=useContext(Context);
- // console.log(orderDetail);
     return (
         <>
           <div className="pastorder">

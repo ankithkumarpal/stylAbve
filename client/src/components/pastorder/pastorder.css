@@ -1,7 +1,6 @@
 .pastorder{
     width: 100%;
     min-height: 20%;
-    /* background-color: blue; */
 }
 
 .pastorder_inner{
@@ -24,9 +23,6 @@
 }
 
 @media only screen and (max-width:460px) {
-    .pastorder_inner{
-        /* background-color: red; */
-    }
     .pastorder_inner p{
         margin-left: 5px;
         margin-top: 14px;
@@ -34,8 +30,6 @@
         font-size: 0.6rem;
         width: 6rem;
         font-family: 'Courier New', Courier, monospace;
-        /* font-weight: bold; */
-        /* background-color: red; */
     }
     .pastorder_billing.orderdate{
         width: 6.3rem;

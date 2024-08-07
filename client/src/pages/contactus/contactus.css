@@ -109,7 +109,7 @@ span {
     }
 
     .conatact_information {
-        margin-top: 0; /* Remove top margin to reduce gap */
+        margin-top: 0;
     }
 
     .conatact_information h2 {
@@ -121,7 +121,7 @@ span {
     }
 
     .followus {
-        margin-top: 0; /* Remove top margin to reduce gap */
+        margin-top: 0;
         margin-bottom: 20px;
     }
 

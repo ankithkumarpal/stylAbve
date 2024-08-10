@@ -42,7 +42,6 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-// Upload file route
 router.post("/upload-files", upload.single("image"), async (req, res) => {
   try {
     const file = req.file;
@@ -61,8 +60,9 @@ router.post("/upload-files", upload.single("image"), async (req, res) => {
     const newProduct = new Product({
       createdAt: new Date().toISOString(),
       price: req.body.price,
-      imageIds: [savedFile._id], // referencing the file table
-      imageUrls: [`/image/${file.filename}`] // Add URL here
+      imageIds: [savedFile._id],
+      imageUrls: [`/image/${file.filename}`],
+      productType:req.body.productType
     });
 
     const product = await newProduct.save();
@@ -73,15 +73,19 @@ router.post("/upload-files", upload.single("image"), async (req, res) => {
   }
 });
 
-// Get products route
 router.get("/get-products", async (req, res) => {
   try {
-    const products = await Product.find().populate('imageIds');
-    
-    // Get base URL from environment variables
+    const { productType } = req.query;
+
+    let query = {};
+    if (productType) {
+      query.productType = productType;
+    }
+
+    const products = await Product.find(query).populate('imageIds');
+
     const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
-    
-    // Construct image URLs for each product
+
     const productsWithImages = products.map(product => {
       return {
         ...product._doc,
@@ -89,15 +93,13 @@ router.get("/get-products", async (req, res) => {
       };
     });
 
-    res.status(200).json(new Response(true, "Products fetched successfully", productsWithImages));
+    res.status(200).json(new Response(true, "Products fetched succ essfully", {count : productsWithImages.length , productsWithImages}));
   } catch (err) {
     console.error("Error fetching products:", err);
     res.status(500).json(new Response(false, "Error fetching products", null));
   }
 });
 
-
-// Serve images route
 router.get('/image/:filename', (req, res) => {
   const { filename } = req.params;
 

@@ -13,6 +13,10 @@ const ProductSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Files',
   }],
+  productType : {
+    type: String, 
+    required : true
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model("Product", ProductSchema);

@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   overflow: hidden;
 }
@@ -20,7 +21,6 @@ html, body {
   width: 100%;
   height: 100vh;
   background-color: rgba(255, 192, 203, 0.627);
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   overflow-y: auto;
@@ -43,11 +43,13 @@ h2 {
   margin-bottom: 15px;
 }
 
-.form-group, .address-group {
+.form-group,
+.address-group {
   margin-bottom: 10px;
 }
 
-.form-group label, .address-group label {
+.form-group label,
+.address-group label {
   display: block;
   font-size: 12px;
   margin-bottom: 3px;
@@ -55,7 +57,8 @@ h2 {
   font-weight: bold;
 }
 
-.form-group input, .address-group input {
+.form-group input,
+.address-group input {
   background-color: rgb(235, 207, 207);
   width: 100%;
   padding: 6px;
@@ -63,10 +66,11 @@ h2 {
   box-sizing: border-box;
   border: 2px solid rgb(144, 58, 72);
   border-radius: 4px;
-  color: saddlebrown;
+  color: black;
 }
 
-.form-group input:focus, .address-group input:focus {
+.form-group input:focus,
+.address-group input:focus {
   border: 2px solid rgb(144, 58, 72);
   outline: none;
 }
@@ -82,6 +86,14 @@ h2 {
   min-width: 200px;
 }
 
+.btn-fixed {
+  width: 120px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
 
 @media (max-width: 600px) {
   .user-profile {
@@ -98,7 +110,8 @@ h2 {
     margin-bottom: 8px;
   }
 
-  .form-group, .address-group {
+  .form-group,
+  .address-group {
     margin-bottom: 8px;
   }
 
@@ -110,5 +123,3 @@ h2 {
     min-width: auto;
   }
 }
-
-

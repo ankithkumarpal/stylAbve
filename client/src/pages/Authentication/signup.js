@@ -38,7 +38,7 @@ export const Signup = () => {
       e.preventDefault();
       setIsLoading(true);
      try{
-        const res = await axios.post("/auth/register",{
+        const res = await axios.post("https://unqiue-carving.onrender.com/api/auth/register",{
             name,email,phone,password
         })
         addToast("Registeration successfull", { appearance: "success" });

@@ -19,7 +19,7 @@ export const Login = () => {
         e.preventDefault();
         setIsLoading(true);
         try{
-            const res = await axios.post("/auth/login",{
+            const res = await axios.post("https://unqiue-carving.onrender.com/api/auth/login",{
                 email,password
             })
             if(res){

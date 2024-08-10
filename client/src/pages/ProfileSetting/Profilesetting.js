@@ -53,7 +53,7 @@ const ProfileSetting = () => {
   const getProfileInfo = () => {
     axios
       .get(
-        `http://localhost:5000/api/profile/fetch/profile-setting?id=${userId}`
+        `https://unqiue-carving.onrender.com/api/profile/fetch/profile-setting?id=${userId}`
       )
       .then((response) => {
         addToast("profile fetched successfully", { appearance: "success" });

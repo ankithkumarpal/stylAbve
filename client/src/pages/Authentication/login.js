@@ -45,7 +45,7 @@ export const Login = () => {
     }, [email , password]);
 
     const handleForgotPassword = ()=>{
-      history.push('/rest-password')
+      history.push('/reset-password')
     }
 
   return (

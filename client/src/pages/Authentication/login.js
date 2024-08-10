@@ -1,7 +1,7 @@
 import React from 'react'
 import './login.css'
 import { Link } from "react-router-dom";
-import { useState ,useEffect,useContext} from 'react';
+import { useState ,useEffect} from 'react';
 import axios from'axios';
 import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router-dom";
@@ -44,6 +44,10 @@ export const Login = () => {
       }
     }, [email , password]);
 
+    const handleForgotPassword = ()=>{
+      history.push('/rest-password')
+    }
+
   return (
     <div className='login-form'>
       <div className='inner-section'>
@@ -63,6 +67,7 @@ export const Login = () => {
               <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
                                        onChange={(e)=>setPassword(e.target.value)}/>
             </div>
+            <span className='forgot-password' onClick={handleForgotPassword}>Forgot password</span>
             <div className='form-footer'>
               <button type="submit" className="btn mt-3 submit-btn btn-fixed"
               disabled={isSaveDisabled || isLoading}

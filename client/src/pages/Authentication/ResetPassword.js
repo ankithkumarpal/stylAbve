@@ -21,7 +21,7 @@ const ResetPassword = () => {
   const handleSendOtp = async () => {
     setLoading(true);
     try {
-      let res = await axios.post('http://localhost:5000/api/email/generate-otp', { email , name});
+      let res = await axios.post('https://unqiue-carving.onrender.com/api/email/generate-otp', { email , name});
       if(res.data.success){
         setOtpSent(true);
         addToast("Otp send successfull", { appearance: "success" });
@@ -39,7 +39,7 @@ const ResetPassword = () => {
   const handleVerifyOtp = async () => {
     setLoading(true);
     try {
-      let res = await axios.post('http://localhost:5000/api/email/verify-otp', { email, otp });
+      let res = await axios.post('https://unqiue-carving.onrender.com/api/email/verify-otp', { email, otp });
       if(res.data.success){
         setOtpVerified(true);
         addToast("Otp verified", { appearance: "success" });
@@ -59,7 +59,7 @@ const ResetPassword = () => {
     } else {
       setLoading(true);
       try {
-        let res = await axios.post('http://localhost:5000/api/auth/reset-password', { email, newPassword, otp });
+        let res = await axios.post('https://unqiue-carving.onrender.com/api/auth/reset-password', { email, newPassword, otp });
         if(res.data.success){
           addToast("Password reset successfully", { appearance: "success" });
           history.push('/login');

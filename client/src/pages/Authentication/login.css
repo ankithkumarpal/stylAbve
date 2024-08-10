@@ -131,7 +131,9 @@
   border: none;
   /* color: cornflowerblue; */
 }
-  
+.forgot-password:hover{
+  cursor: pointer;
+}
   /* Responsive Design */
   @media (max-width: 768px) {
     .form-section {

@@ -103,11 +103,29 @@
   .submit-btn{
     background-color: saddlebrown;
     border: none;
+    color: white;
   }
   .submit-btn:hover{ 
-    background-color: #8b451394  !important;
+    background-color: saddlebrown  !important;
     border: none;
+    color:white;
   }
+  
+.btn-fixed {
+  width: 120px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: white;
+  background-color: saddlebrown  !important;
+}
+
+.btn-fixed:focus {
+  outline: none; 
+  box-shadow: none;
+}
   
   /* Responsive Design */
   @media (max-width: 768px) {

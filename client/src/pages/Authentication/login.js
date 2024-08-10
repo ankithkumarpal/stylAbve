@@ -1,27 +1,48 @@
 import React from 'react'
 import './login.css'
 import { Link } from "react-router-dom";
-import { useState ,useContext} from 'react';
-import { Context } from '../../context/Context'; 
+import { useState ,useEffect,useContext} from 'react';
 import axios from'axios';
+import { useToasts } from "react-toast-notifications";
+import { useHistory } from "react-router-dom";
 
 export const Login = () => {
-  let [email,setEmail]  = useState("")
-    let [password,setPassword]=useState("")
-    const {dispatch} = useContext(Context);
-    const handlSubmit= async (e)=>{
+  const history = useHistory();
+   let [email,setEmail]  = useState("")
+   let [password,setPassword]=useState("")
+   
+   const { addToast } = useToasts();
+   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+   const [isLoading, setIsLoading] = useState(false);
+
+   const handlSubmit= async (e)=>{
         e.preventDefault();
-        dispatch({type:"LOGIN_START"})
+        setIsLoading(true);
         try{
             const res = await axios.post("/auth/login",{
                 email,password
             })
-             res.data.data && window.location.replace('/');
-             dispatch({type:"LOGIN_SUCCESS", payload:res.data.data});  
-        }catch(err){
-            dispatch({type:"LOGIN_FAILURE"});  
+            if(res){
+               localStorage.setItem("access-token",res.data.data.token);
+               localStorage.setItem("user",JSON.stringify(res.data.data.user));
+            }
+            addToast("Login successfull", { appearance: "success" });
+            history.push('/')
+        }catch(err){ 
+           addToast("Login failed", { appearance: "error" });
+        }finally{
+          setIsLoading(false);
         }
     }
+
+    useEffect(() => {
+      if (email && password
+      ) {
+        setIsSaveDisabled(false);
+      } else {
+        setIsSaveDisabled(true);
+      }
+    }, [email , password]);
 
   return (
     <div className='login-form'>
@@ -43,7 +64,19 @@ export const Login = () => {
                                        onChange={(e)=>setPassword(e.target.value)}/>
             </div>
             <div className='form-footer'>
-              <button type="submit" className="btn btn-primary mt-3 submit-btn">Submit</button>
+              <button type="submit" className="btn mt-3 submit-btn btn-fixed"
+              disabled={isSaveDisabled || isLoading}
+              >
+              {isLoading ? (
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              ) : (
+                "Submit"
+              )}
+              </button>
             </div>
             <div className='oauth-section'>
               <span className='oauth-text'>or login through</span>

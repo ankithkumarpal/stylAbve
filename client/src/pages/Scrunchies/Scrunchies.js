@@ -1,5 +1,4 @@
 import React from "react";
-import "./pencil.css";
 import Navbar from "../../components/navbar/Navbar";
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../../context/Context";
@@ -9,7 +8,7 @@ import { useToasts } from 'react-toast-notifications';
 import { BeatLoader } from 'react-spinners';
 import { useHistory } from "react-router-dom";
 
-function Pencil() {
+function Scrunchies() {
   const [items, setItems] = useState([]);
   const { addToast } = useToasts();
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +21,7 @@ function Pencil() {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/product/get-products?productType=pencilcarving");
+      const response = await axios.get("http://localhost:5000/api/product/get-products?productType=scrunchies");
       setItems(response.data.data.productsWithImages);
       addToast('Products fetched successfully', { appearance: 'success' });
       setIsLoading(false);
@@ -70,7 +69,7 @@ function Pencil() {
         <div className="spinner">
           <BeatLoader loading={isLoading} color="#26aefc" />
         </div>
-        <h3 style={{margin:"0%" , padding:"0%", backgroundColor:"rgba(255, 192, 203, 0.627)"}} className="pencil-art-header pt-2">Pencils arts</h3>
+        <h3 style={{margin:"0%" , padding:"0%", backgroundColor:"rgba(255, 192, 203, 0.627)"}} className="pencil-art-header pt-2">Scrunchies</h3>
         <div className="product pb-5">
           {items.map((product) => (
             <div className="product-container" key={product._id}>
@@ -97,4 +96,4 @@ function Pencil() {
   );
 }
 
-export default Pencil;
+export default Scrunchies;

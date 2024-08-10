@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './resetpassword.css';
+import { useToasts } from "react-toast-notifications";
+import { useHistory } from "react-router-dom";
 
 const ResetPassword = () => {
+  const name = "Ankith";
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -11,16 +15,22 @@ const ResetPassword = () => {
   const [otpVerified, setOtpVerified] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const { addToast } = useToasts();
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+
   const handleSendOtp = async () => {
     setLoading(true);
     try {
-      // Simulate API call
-      // await axios.post('/api/forgot-password/request-otp', { email });
-      setOtpSent(true);
-      alert('OTP sent to your email');
+      let res = await axios.post('http://localhost:5000/api/email/generate-otp', { email , name});
+      if(res.data.success){
+        setOtpSent(true);
+        addToast("Otp send successfull", { appearance: "success" });
+      }else {
+        addToast("Otp send failed", { appearance: "error" });
+      }
     } catch (error) {
       console.error('Error sending OTP:', error);
-      alert('Failed to send OTP');
+      addToast("Otp send failed", { appearance: "error" });
     } finally {
       setLoading(false);
     }
@@ -29,45 +39,49 @@ const ResetPassword = () => {
   const handleVerifyOtp = async () => {
     setLoading(true);
     try {
-      // Simulate API call
-      // await axios.post('/api/forgot-password/verify-otp', { email, otp });
-      setOtpVerified(true);
-      alert('OTP verified successfully');
+      let res = await axios.post('http://localhost:5000/api/email/verify-otp', { email, otp });
+      if(res.data.success){
+        setOtpVerified(true);
+        addToast("Otp verified", { appearance: "success" });
+      }else addToast("Otp verification failed" , {appearance:"error"})
     } catch (error) {
-      console.error('Error verifying OTP:', error);
-      alert('Invalid OTP');
+      addToast("Otp verification failed", { appearance: "error" });
     } finally {
       setLoading(false);
     }
   };
 
-  const handleResetPassword = async () => {
+  const handleResetPassword = async (e) => {
+    e.preventDefault(); 
     if (newPassword !== confirmPassword) {
-      alert('Passwords do not match');
+      addToast("Passwords do not match", { appearance: "warning" });
       return;
-    }
-    setLoading(true);
-    try {
-      // Simulate API call
-      // await axios.post('/api/forgot-password/reset-password', { email, newPassword });
-      alert('Password reset successfully');
-    } catch (error) {
-      console.error('Error resetting password:', error);
-      alert('Failed to reset password');
-    } finally {
-      setLoading(false);
+    } else {
+      setLoading(true);
+      try {
+        let res = await axios.post('http://localhost:5000/api/auth/reset-password', { email, newPassword, otp });
+        if(res.data.success){
+          addToast("Password reset successfully", { appearance: "success" });
+          history.push('/login');
+        }else{
+          addToast("Password reset failed", { appearance: "error" });
+        }
+      } catch (error) {
+        addToast("Password reset failed", { appearance: "error" });
+      } finally {
+        setLoading(false);
+      }
     }
   };
+  
 
   return (
     <div className='login-form'>
       <div className='inner-section'>
         <div className='form-section'>
-          <form className='login-form-inner' onSubmit={handleResetPassword}>
+          <form className='login-form-inner'>
             <div className="reset-password-container">
               <h2>Reset Password</h2>
-
-              {/* Step 1: Send OTP */}
               <div className={`field-group ${otpSent ? 'blurred' : ''}`}>
                 <label>Email:</label>
                 <input
@@ -86,8 +100,6 @@ const ResetPassword = () => {
                   </span>
                 )}
               </div>
-              
-              {/* Step 2: Verify OTP */}
               {otpSent && (
                 <div className={`field-group ${otpVerified ? 'blurred' : ''}`}>
                   <label>Enter OTP:</label>
@@ -109,7 +121,6 @@ const ResetPassword = () => {
                 </div>
               )}
               
-              {/* Step 3: Reset Password */}
               {otpVerified && (
                 <div className="field-group">
                   <label>New Password:</label>

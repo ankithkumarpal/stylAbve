@@ -10,6 +10,7 @@ const cartRoute = require("./routes/cart");
 const profileRoute = require('./routes/profile');
 const cors  = require('cors');
 const verifyToken = require('./Middleware/Authorization');
+const emailRoute = require('./routes/email');
 
 dotenv.config();
 app.use(express.json());
@@ -31,6 +32,7 @@ app.use('/api/orders' , orderRoute);
 app.use('/api/product' , productRoute);
 app.use('/api/cart' , cartRoute)
 app.use('/api/profile' ,profileRoute)
+app.use('/api/email',emailRoute)
 app.listen(process.env.PORT || 5000,()=>{
     console.log("successful server connection ")
 })

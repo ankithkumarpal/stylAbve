@@ -3,7 +3,7 @@ const { findById } = require("../models/Orders");
 const Orders = require("../models/Orders");
 const Users = require("../models/Users");
 const Product = require("../models/Product");
-
+const Response = require('../provider/requestResponse');
 
 const serializeProductDetails = (productDetails) => {
   return productDetails.map(detail => JSON.stringify(detail));
@@ -23,6 +23,10 @@ const deserializeAddress = (address) => {
 
 router.post("/place-order", async (req, res) => {
   try {
+    const user = await Users.findOne({_id : req.body.userId})
+    if(user == null){
+      return res.status(200).json(new Response(success = true , message = "no user found"));
+    }
     const { userId, productDetails, amount, address } = req.body;
 
     const serializedProductDetails = serializeProductDetails(productDetails);
@@ -37,27 +41,25 @@ router.post("/place-order", async (req, res) => {
     });
 
     const order = await newOrder.save();
-    res.status(200).json(order);
+    res.status(200).json(new Response(success = true , message = "order placed" , data = order));
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json(new Response(success = true , message = err.message));
   }
 });
 
-// Fetching orders of a particular user based on userId
 router.get("/get-order", async (req, res) => {
   try {
     const { userId } = req.query;
 
     if (!userId) {
-      return res.status(400).json({ error: 'User ID is required' });
+      return res.status(400).json(new Response(success = false , message = "user id requierd"));
     }
 
     const orders = await Orders.find({ userId });
 
     if (orders.length === 0) {
-      return res.status(404).json({ error: 'No orders found for the specified userId' });
+      return res.status(200).json(new Response(success = true , message = "No records found"));
     }
-
     const ordersPlain = await Promise.all(orders.map(async (order) => {
       const orderPlain = order.toObject();
       const productDetails = deserializeProductDetails(orderPlain.productDetails);
@@ -84,18 +86,17 @@ router.get("/get-order", async (req, res) => {
       };
     }));
 
-    res.status(200).json(ordersPlain);
+    res.status(200).json(new Response(success = true , message = "order fetched" , data = ordersPlain));
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json(new Response(success = false , message = err.message));
   }
 });
 
-// update order based on orderId 
 router.put("/update-order", async (req, res) => {
   try {
     const { id } = req.query; 
     if (!id) {
-      return res.status(400).json({ error: 'Order ID is required' });
+      return res.status(400).json(new Response(success = false , message = "user id required"));
     }
 
     const updated = await Orders.findByIdAndUpdate(
@@ -108,21 +109,20 @@ router.put("/update-order", async (req, res) => {
     );
 
     if (!updated) {
-      return res.status(404).json({ error: 'Order not found' });
+      return res.status(404).json(new Response(success = false , message = "Did not found order"));
     }
 
-    res.status(200).json(updated);
+    res.status(200).json(new Response(success = true , message = "update successfull"));
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json(new Response(success = false , message = err.message));
   }
 });
 
-// fetch all orders
 router.get("/get-all-orders", async (req, res) => {
   try {
     const orders = await Orders.find().sort({ createdAt: -1 });
     if (orders.length === 0) {
-      return res.status(404).json({ error: 'No orders found' });
+      return res.status(200).json(new Response(success = true , message = "no record found"));
     }
     const ordersPlain = orders.map(order => order.toObject());
 
@@ -131,9 +131,9 @@ router.get("/get-all-orders", async (req, res) => {
       item.address = item.address ? deserializeAddress(item.address) : null;
     });
 
-    res.status(200).json(ordersPlain);
+    res.status(200).json(new Response(success = true , message = "order fetching successfull" , data = ordersPlain));
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json(new Response(success == false , message = err.message));
   }
 });
 

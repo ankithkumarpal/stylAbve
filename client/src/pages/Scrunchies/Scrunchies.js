@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../../components/navbar/Navbar";
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../../context/Context";
 import Model from "../PaymentModel/modal";
@@ -7,12 +6,12 @@ import axios from "axios";
 import { useToasts } from 'react-toast-notifications';
 import { BeatLoader } from 'react-spinners';
 import { useHistory } from "react-router-dom";
+import { getHeaders, getScrunchies, getUserEmail, getUserId, headers, productAddTocart, userEmail } from "../../services/routpath";
 
 function Scrunchies() {
   const [items, setItems] = useState([]);
   const { addToast } = useToasts();
   const [isLoading, setIsLoading] = useState(true);
-  const user = useContext(Context);
   const history = useHistory();
 
   useEffect(() => {
@@ -21,7 +20,7 @@ function Scrunchies() {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get("https://unqiue-carving.onrender.com/api/product/get-products?productType=scrunchies");
+      const response = await axios.get(getScrunchies);
       setItems(response.data.data.productsWithImages);
       addToast('Products fetched successfully', { appearance: 'success' });
       setIsLoading(false);
@@ -33,21 +32,22 @@ function Scrunchies() {
   };
 
   const addToCart = async (product) => {
- 
+    if(getUserId() == null) {
+      addToast("Please login to add in cart" , {appearance:"warning"});
+      history.push("/login");
+      return;
+    }
     setIsLoading(true);
     let cartDetail = {
       price: product.price,
-      email: "ankith@gmail.com",
+      email: getUserEmail(),
       productId: product._id,
       quantity:1
     };
 
     try {
-      const res = await axios.post("/cart/add-to-cart", cartDetail, {
-        headers: {
-          'Authorization': `Bearer ${user.user.token}`,
-          'Content-Type': 'application/json'
-        }
+      const res = await axios.post(productAddTocart, cartDetail, {
+        headers: getHeaders()
       });
       
       if (res.data.message === "Already Exist") {

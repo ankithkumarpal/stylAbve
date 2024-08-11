@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./orderHistory.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { useToasts } from 'react-toast-notifications';
-import { BeatLoader } from 'react-spinners';
+import { useToasts } from "react-toast-notifications";
+import { BeatLoader } from "react-spinners";
+import { getHeaders, getOrdersInfo, getUserId, headers, userId } from "../../services/routpath";
 
 export const OrderHistory = () => {
   const { addToast } = useToasts();
@@ -17,16 +18,13 @@ export const OrderHistory = () => {
   const getOrders = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`https://unqiue-carving.onrender.com/api/orders/get-order?userId=1`, {
-        headers: {
-          'Authorization': `Bearer`,
-          'Content-Type': 'application/json'
-        }
+      const response = await axios.get(`${getOrdersInfo}?userId=${getUserId()}`, {
+        headers: getHeaders()
       });
       setOrders(response.data);
-      addToast('Orders Fetched successfully', { appearance: 'success' });
+      addToast("Orders Fetched successfully", { appearance: "success" });
     } catch (error) {
-      addToast('Failed to fetch cart items', { appearance: 'error' });
+      addToast("Failed to fetch cart items", { appearance: "error" });
     } finally {
       setIsLoading(false);
     }
@@ -38,8 +36,10 @@ export const OrderHistory = () => {
         <BeatLoader loading={isLoading} color="black" />
       </div>
       <header className="orderhistory-header">
-        <h4 className="" style={{color:""}}>Order history</h4>
-      {/* <hr></hr> */}
+        <h4 className="" style={{ color: "" }}>
+          Order history
+        </h4>
+        {/* <hr></hr> */}
       </header>
       {orders.map((order) => (
         <div
@@ -52,7 +52,17 @@ export const OrderHistory = () => {
               <span className="text-muted">
                 Order ID <strong>: {order._id}</strong>
               </span>
-              <a href="#!" className="text-danger" style={{ fontWeight: 'bolder', width: '60px', height: "15px", letterSpacing: "0.1em", fontSize: "0.8rem" }}>
+              <a
+                href="#!"
+                className="text-danger"
+                style={{
+                  fontWeight: "bolder",
+                  width: "60px",
+                  height: "15px",
+                  letterSpacing: "0.1em",
+                  fontSize: "0.8rem",
+                }}
+              >
                 Cancel
               </a>
             </div>
@@ -63,7 +73,10 @@ export const OrderHistory = () => {
             </div>
             <hr />
             {order.productDetails.map((product) => (
-              <div key={product.productId} style={{ display: "flex", justifyContent: "space-around" }}>
+              <div
+                key={product.productId}
+                style={{ display: "flex", justifyContent: "space-around" }}
+              >
                 <div style={{ width: "60%" }}>
                   <h5>{product.productId}</h5>
                   <p className="text-muted">Qt: {product.quantity}</p>
@@ -80,9 +93,22 @@ export const OrderHistory = () => {
                 via (COD)
               </span>
             </h4>
-            <span className="text-muted">Tracking Status on: 11:30pm, Today</span>
+            <span className="text-muted">
+              Tracking Status on: 11:30pm, Today
+            </span>
             <div>
-              <p className="text-muted">Delivery Address: {order.address.doorno + " " + order.address.area + " " + order.address.landmark + " " + order.address.pincode + " " + order.address.country}</p>
+              <p className="text-muted">
+                Delivery Address:{" "}
+                {order.address.doorno +
+                  " " +
+                  order.address.area +
+                  " " +
+                  order.address.landmark +
+                  " " +
+                  order.address.pincode +
+                  " " +
+                  order.address.country}
+              </p>
             </div>
           </div>
           <div className="card-footer" style={{ fontSize: "0.6rem" }}>
@@ -108,4 +134,4 @@ export const OrderHistory = () => {
       ))}
     </div>
   );
-}
+};

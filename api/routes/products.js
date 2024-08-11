@@ -105,7 +105,6 @@ router.get('/image/:filename', (req, res) => {
 
   bucket.openDownloadStreamByName(filename)
     .on('error', (err) => {
-      console.error("Error downloading file:", err);
       res.status(404).json({ msg: 'No file found' });
     })
     .pipe(res);

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import "./profilesetting.css";
 import { useToasts } from "react-toast-notifications";
+import { getHeaders, getProfileInfo, getUserId, updateProfileInfo} from "../../services/routpath";
 
 const ProfileSetting = () => {
   const history = useHistory();
@@ -20,14 +21,13 @@ const ProfileSetting = () => {
       country: "",
     },
   });
+  
 
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const userId = "669bed6db7745e761a308068";
-
   useEffect(() => {
-    getProfileInfo();
+    getProfileInformation();
   }, []);
 
   useEffect(() => {
@@ -48,38 +48,42 @@ const ProfileSetting = () => {
     } else {
       setIsSaveDisabled(true);
     }
+    console.log(user);
   }, [user]);
 
-  const getProfileInfo = () => {
+  const getProfileInformation = () => {
     axios
-      .get(
-        `https://unqiue-carving.onrender.com/api/profile/fetch/profile-setting?id=${userId}`
-      )
+      .get(`${getProfileInfo}?id=${getUserId()}`, { headers: getHeaders() })
       .then((response) => {
-        addToast("profile fetched successfully", { appearance: "success" });
+        addToast("Profile fetched successfully", { appearance: "success" });
         const userData = response.data.data;
+        
         setUser({
-          id: userId,
-          name: userData.name,
-          email: userData.email,
-          phone: userData.phone,
-          address: userData.Address
-            ? {
-                doorNo: userData.Address.doorNo,
-                area: userData.Address.area,
-                landmark: userData.Address.landmark,
-                pincode: userData.Address.pincode,
-                country: userData.Address.country,
-              }
-            : {},
+          id: getUserId(),
+          name: userData.name || "",
+          email: userData.email || "",
+          phone: userData.phone || "",
+          address: userData.Address ? {
+            doorNo: userData.Address.doorNo || "",
+            area: userData.Address.area || "",
+            landmark: userData.Address.landmark || "",
+            pincode: userData.Address.pincode || "",
+            country: userData.Address.country || "",
+          } : {
+            doorNo: "",
+            area: "",
+            landmark: "",
+            pincode: "",
+            country: "",
+          },
         });
       })
       .catch((error) => {
         console.error("There was an error fetching the user data!", error);
-        addToast("Profile Fetching failed", { appearance: "error" });
+        addToast("Profile fetching failed", { appearance: "error" });
       });
   };
-
+  
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     if (id in user.address) {
@@ -97,21 +101,24 @@ const ProfileSetting = () => {
       }));
     }
   };
-
+  
   const handleSaveChanges = () => {
     setIsLoading(true);
+  
+    const payload = {
+      id: getUserId(),
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      doorNo: user.address.doorNo,
+      area: user.address.area,
+      landmark: user.address.landmark,
+      pincode: user.address.pincode,
+      country: user.address.country,
+    };
+
     axios
-      .patch(`http://localhost:5000/api/profile/update/profile-setting`, {
-        id: userId,
-        name: user.name,
-        email: user.email,
-        phone: user.phone,
-        doorNo: user.address.doorNo,
-        area: user.address.area,
-        landmark: user.address.landmark,
-        pincode: user.address.pincode,
-        country: user.address.country,
-      })
+      .patch(updateProfileInfo, payload, {headers: getHeaders()})
       .then((response) => {
         setUser((prevState) => ({
           ...prevState,
@@ -126,13 +133,15 @@ const ProfileSetting = () => {
         addToast("Update failed", { appearance: "error" });
       });
   };
+  
 
   const handleNavigate = (path) => {
     history.push(path);
   };
 
   const handleLogout = () => {
-    // clear session or local storage token
+    localStorage.clear();
+    addToast("Logged out successfull" , {appearance : "success"})
     history.push("/login");
   };
 
@@ -267,7 +276,7 @@ const ProfileSetting = () => {
               type="button"
               className="btn btn-primary m-2 btn-fixed"
               onClick={handleSaveChanges}
-              disabled={isSaveDisabled || isLoading}
+              disabled={isLoading}
             >
               {isLoading ? (
                 <span

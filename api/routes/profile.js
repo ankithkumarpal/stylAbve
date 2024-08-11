@@ -9,7 +9,7 @@ router.get('/fetch/profile-setting', async (req, res) => {
         const user = await Users.findById(id).populate('Address');
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json(new Response(success = false , message = "user not found"));
         }
 
         return res.status(200).json({ 
@@ -18,7 +18,7 @@ router.get('/fetch/profile-setting', async (req, res) => {
             data: user 
         });
     } catch (error) {
-        return res.status(500).json({ message: 'Server error', error });
+        return res.status(500).json(new Response(success = false , message = error.message));
     }
 });
 
@@ -26,7 +26,7 @@ router.patch('/update/profile-setting', async (req, res) => {
     try {
         let user = await Users.findById(req.body.id);
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json(new Response(success = true , message = "user not found"));
         }
 
         user.email = req.body.email;
@@ -43,7 +43,7 @@ router.patch('/update/profile-setting', async (req, res) => {
                 address.country = req.body.country;
                 await address.save();
             } else {
-                return res.status(404).json({ message: 'Address not found' });
+                return res.status(404).json(new Response(success = false , message = "Address not found"));
             }
         } else {
             let newAddress = new Address({

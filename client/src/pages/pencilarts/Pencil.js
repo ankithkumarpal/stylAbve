@@ -1,19 +1,18 @@
 import React from "react";
 import "./pencil.css";
-import Navbar from "../../components/navbar/Navbar";
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../../context/Context";
 import Model from "../PaymentModel/modal";
 import axios from "axios";
-import { useToasts } from 'react-toast-notifications';
-import { BeatLoader } from 'react-spinners';
-import { useHistory } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
+import { BeatLoader } from "react-spinners";
+import { getHeaders, getPencilCarveProducts, getUserEmail, getUserId, productAddTocart } from "../../services/routpath";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function Pencil() {
   const [items, setItems] = useState([]);
   const { addToast } = useToasts();
   const [isLoading, setIsLoading] = useState(true);
-  const user = useContext(Context);
   const history = useHistory();
 
   useEffect(() => {
@@ -22,43 +21,44 @@ function Pencil() {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get("https://unqiue-carving.onrender.com/api/product/get-products?productType=pencilcarving");
+      const response = await axios.get(getPencilCarveProducts);
       setItems(response.data.data.productsWithImages);
-      addToast('Products fetched successfully', { appearance: 'success' });
+      addToast("Products fetched successfully", { appearance: "success" });
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
-      addToast('Failed to fetch products', { appearance: 'error' });
+      addToast("Failed to fetch products", { appearance: "error" });
       setIsLoading(false);
     }
   };
 
   const addToCart = async (product) => {
- 
+    if(getUserId() == null) {
+      addToast("Please login to add in cart" , {appearance:"warning"});
+      history.push("/login");
+      return;
+    }
     setIsLoading(true);
     let cartDetail = {
       price: product.price,
-      email: "ankith@gmail.com",
+      email: getUserEmail(),
       productId: product._id,
-      quantity:1
+      quantity: 1,
     };
 
     try {
-      const res = await axios.post("/cart/add-to-cart", cartDetail, {
-        headers: {
-          'Authorization': `Bearer ${user.user.token}`,
-          'Content-Type': 'application/json'
-        }
+      const res = await axios.post(productAddTocart, cartDetail, {
+        headers: getHeaders()
       });
-      
+
       if (res.data.message === "Already Exist") {
-        addToast("Item already exists in cart", { appearance: 'info' });
+        addToast("Item already exists in cart", { appearance: "info" });
       } else {
-        addToast("Item added to cart successfully", { appearance: 'success' });
+        addToast("Item added to cart successfully", { appearance: "success" });
       }
     } catch (err) {
       console.error("Error adding to cart:", err);
-      addToast('Failed to add item to cart', { appearance: 'error' });
+      addToast("Failed to add item to cart", { appearance: "error" });
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +70,16 @@ function Pencil() {
         <div className="spinner">
           <BeatLoader loading={isLoading} color="#26aefc" />
         </div>
-        <h3 style={{margin:"0%" , padding:"0%", backgroundColor:"rgba(255, 192, 203, 0.627)"}} className="pencil-art-header pt-2">Pencils arts</h3>
+        <h3
+          style={{
+            margin: "0%",
+            padding: "0%",
+            backgroundColor: "rgba(255, 192, 203, 0.627)",
+          }}
+          className="pencil-art-header pt-2"
+        >
+          Pencils arts
+        </h3>
         <div className="product pb-5">
           {items.map((product) => (
             <div className="product-container" key={product._id}>
@@ -86,8 +95,12 @@ function Pencil() {
               </div>
               <div className="button">
                 <Model product={product} />
-                {/* <button className="btn btn-success" >Buy Now</button> */}
-                <button className="btn btn-warning" onClick={() => addToCart(product)}>Add to cart</button>
+                <button
+                  className="btn btn-warning"
+                  onClick={() => addToCart(product)}
+                >
+                  Add to cart
+                </button>
               </div>
             </div>
           ))}

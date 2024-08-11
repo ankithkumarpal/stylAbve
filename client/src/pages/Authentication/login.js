@@ -5,6 +5,7 @@ import { useState ,useEffect} from 'react';
 import axios from'axios';
 import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router-dom";
+import { getLogin } from '../../services/routpath';
 
 export const Login = () => {
   const history = useHistory();
@@ -19,7 +20,7 @@ export const Login = () => {
         e.preventDefault();
         setIsLoading(true);
         try{
-            const res = await axios.post("https://unqiue-carving.onrender.com/api/auth/login",{
+            const res = await axios.post(getLogin,{
                 email,password
             })
             if(res){

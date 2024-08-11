@@ -1,15 +1,14 @@
 import React from "react";
 import "./history.css";
-import { useContext, useEffect, useState } from "react";
-import { Context } from "../../context/Context";
+import {useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useToasts } from 'react-toast-notifications';
 import { BeatLoader } from 'react-spinners';
+import { getCartProducts, getHeaders, getUserId, removeCartProudct } from "../../services/routpath";
 
 function Order() {
   const { addToast } = useToasts();
-  const { user } = useContext(Context);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,11 +20,8 @@ function Order() {
   const getCartItems = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`https://unqiue-carving.onrender.com/api/cart/get-cart/${"669bed6db7745e761a308068"}`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`,
-          'Content-Type': 'application/json'
-        }
+      const response = await axios.get(`${getCartProducts}${getUserId()}`, {
+        headers: getHeaders()
       });
       setCartItems(response.data.data);
       
@@ -50,11 +46,8 @@ function Order() {
   const removeItem = async (id) => {
     setIsLoading(true);
     try {
-      await axios.get(`/cart/remove-product/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`,
-          'Content-Type': 'application/json'
-        }
+      await axios.get(`${removeCartProudct}/${id}`, {
+        headers: getHeaders()
       });
       addToast('Item removed successfully', { appearance: 'success' });
       getCartItems();

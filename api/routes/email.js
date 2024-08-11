@@ -37,7 +37,7 @@ router.post("/generate-otp", async (req, res) => {
 
     return res
       .status(200)
-      .json(new Response(true, "OTP sent successfully", { otp }));
+      .json(new Response(true, "OTP sent successfully"));
   } catch (error) {
     return res.status(200).json(new Response(false, "OTP send failed"));
   }
@@ -47,7 +47,7 @@ router.post("/verify-otp", async (req, res) => {
   const { email, otp } = req.body;
 
   if (!email || !otp) {
-    return res.status(400).send("Email and OTP are required");
+    return res.status(400).json(new Response(success = false , message = "Email and otp is required"))
   }
 
   try {
@@ -62,7 +62,7 @@ router.post("/verify-otp", async (req, res) => {
     const currentTime = new Date();
     const otpExpirationTime = new Date(otpEntry.updatedAt);
     otpExpirationTime.setMinutes(otpExpirationTime.getMinutes() + 10);
-
+    
     if (currentTime > otpExpirationTime) {
       return res
         .status(400)

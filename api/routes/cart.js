@@ -4,7 +4,6 @@ const Cart = require("../models/Cart");
 const User = require('../models/Users');
 const Product = require("../models/Product");
 const Response = require("../provider/requestResponse");
-const Files = require('../models/files');
 const { GridFSBucket } = require('mongodb');
 const mongoose = require('mongoose');
 
@@ -23,6 +22,11 @@ conn.once('open', () => {
 router.post("/add-to-cart", async (req, res) => {
   try {
     const isExist = await Cart.find({ email: req.body.email, productId: req.body.productId });
+    const user = await User.findOne({email :req.body.email});
+    if(user == null) {
+      return res.status(404).json(new Response(false , "no user found"))
+    }
+    
     if (isExist.length !== 0) {
       return res.status(200).json(new Response(true, "Already Exist", null));
     } else {
@@ -86,7 +90,6 @@ router.get("/remove-product/:id", async (req, res) => {
   }
 });
 
-// Add a new route for updating quantity based on orderId
 router.put("/update-quantity/:orderId", async (req, res) => {
   try {
     const { quantity } = req.body;

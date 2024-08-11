@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './artslist.css';
 import { Link, useLocation } from "react-router-dom";
+import { getLastLogin, getUserName } from '../../services/routpath';
 
 export const ArtsList = () => {
   const location = useLocation();
@@ -82,6 +83,16 @@ export const ArtsList = () => {
         <div className='' style={{fontFamily:"cursive" , height:"max-content" ,alignContent:"center", width:"100%" , display:'flex'}}>
           <i className="bi bi-gear-wide-connected" style={{marginRight:"1.2rem" , fontSize:"1.2rem" , color:"saddlebrown"}}></i>
           <span style={{fontFamily:'cursive' , color:'saddlebrown'}}>Profile setting</span>
+        </div> 
+      </Link>
+
+      <Link to="/profile-setting" className={getLinkClassName('/profile-setting')}>   
+        <div className='' style={{fontFamily:"cursive" , height:"max-content" ,alignContent:"center", width:"100%" , display:'flex'}}>
+          <i className="bi bi-person-fill-check" style={{marginRight:"1.2rem" , fontSize:"1.2rem" , color:"saddlebrown"}}></i>
+        <span style={{fontFamily:'cursive' , color:'saddlebrown'}}>
+          {getUserName()}
+          <p style={{fontSize:"0.5rem" , margin:"0%" , padding:"0%"}}>last login : {getLastLogin()}</p>
+        </span>
         </div> 
       </Link>
     </div>

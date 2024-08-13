@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  height: 10vh;
+  height: inherit;
   background-color: rgba(255, 255, 255, 0.389);
   display: flex;
   align-items: center;
@@ -9,13 +9,30 @@
   color: black;
   text-transform: capitalize;
   box-sizing: border-box;
+  /* background-color: red !important; */
 }
+
+.uniquecarving {
+  /* background-image: url('../../assests/uniquecarving.png') !important; */
+  width: 230px;
+  height: 50px;
+  background-size: contain; 
+  background-repeat: no-repeat;
+}
+
+.uniquecarving img{
+  width: inherit;
+  height: inherit;
+}
+
 
 .left {
   display: flex;
   align-items: center;
   justify-content: center;
   color: black;
+  width: 250px;
+  height: 50px;
 }
 
 .left span {
@@ -31,6 +48,7 @@
 }
 
 .marquee {
+  display: block;
   width: 100%;
   color: black;
   font-size: 14px;
@@ -111,13 +129,16 @@
     flex-direction: column;
     height: auto;
   }
-
+  .marquee{
+    display: none;
+  }
   .left {
     margin-bottom: 10px;
   }
 
   .right {
     width: 100%;
+    background-color: red;
   }
 
   .hamburger {

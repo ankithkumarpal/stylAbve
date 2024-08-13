@@ -21,7 +21,7 @@ export const OrderHistory = () => {
       const response = await axios.get(`${getOrdersInfo}?userId=${getUserId()}`, {
         headers: getHeaders()
       });
-      setOrders(response.data);
+      setOrders(response.data.data);
       addToast("Orders Fetched successfully", { appearance: "success" });
     } catch (error) {
       addToast("Failed to fetch cart items", { appearance: "error" });
@@ -33,7 +33,7 @@ export const OrderHistory = () => {
   return (
     <div className="order-history" style={{ fontFamily: "cursive" }}>
       <div className="spinner">
-        <BeatLoader loading={isLoading} color="black" />
+        <BeatLoader loading={isLoading} color="white" />
       </div>
       <header className="orderhistory-header">
         <h4 className="" style={{ color: "" }}>
@@ -112,24 +112,49 @@ export const OrderHistory = () => {
             </div>
           </div>
           <div className="card-footer" style={{ fontSize: "0.6rem" }}>
-            <div className="position-relative order-tracker pt-3 pb-3">
-              <div className="progress-line"></div>
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="text-center">
-                  <div className={`circle bg-success text-white mb-1`}>1</div>
-                  <span className="text-muted">PLACED</span>
-                </div>
-                <div className="text-center">
-                  <div className="circle bg-success text-white mb-1">2</div>
-                  <span className="text-muted">SHIPPED</span>
-                </div>
-                <div className="text-center">
-                  <div className="circle bg-secondary text-white mb-1">3</div>
-                  <span className="text-muted">DELIVERED</span>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div className="position-relative order-tracker pt-3 pb-3">
+    <div className="progress-line"></div>
+    <div className="d-flex justify-content-between align-items-center">
+      <div className="text-center">
+        <div
+          className={`circle ${
+            order.status === "placed" || order.status === "shipped" || order.status === "delivered"
+              ? "bg-success"
+              : "bg-primary"
+          } text-white mb-1`}
+        >
+          1
+        </div>
+        <span className="text-muted">PLACED</span>
+      </div>
+      <div className="text-center">
+        <div
+          className={`circle ${
+            order.status === "shipped" || order.status === "delivered"
+              ? "bg-success"
+              : "bg-primary"
+          } text-white mb-1`}
+        >
+          2
+        </div>
+        <span className="text-muted">SHIPPED</span>
+      </div>
+      <div className="text-center">
+        <div
+          className={`circle ${
+            order.status === "delivered"
+              ? "bg-success"
+              : "bg-secondary"
+          } text-white mb-1`}
+        >
+          3
+        </div>
+        <span className="text-muted">DELIVERED</span>
+      </div>
+    </div>
+  </div>
+</div>
+
         </div>
       ))}
     </div>

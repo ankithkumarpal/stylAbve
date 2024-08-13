@@ -12,6 +12,7 @@ export const getOrdersInfo = "https://unqiue-carving.onrender.com/api/orders/get
 export const getProfileInfo = "https://unqiue-carving.onrender.com/api/profile/fetch/profile-setting";
 export const updateProfileInfo = "http://localhost:5000/api/profile/update/profile-setting";
 export const deactivateAccount = "http://localhost:5000/api/profile/update/deactivate";
+export const placeOrder = "http://localhost:5000/api/orders/place-order";
 
 
 // auth.js

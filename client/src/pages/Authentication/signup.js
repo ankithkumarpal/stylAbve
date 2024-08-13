@@ -83,12 +83,17 @@ export const Signup = () => {
   return (
     <div className="login-form">
       <div className="inner-section">
-        <div className="form-section">
+        
+        <div className="reset-form-section">
           <form className="login-form-inner" onSubmit={handleSubmit}>
+          <header className="reset-password-header">
+                <h1>Unique Carving</h1>
+                <p>Crafting Unique Perfection</p>
+              </header>
             <div className="form-header">
-              <span className="form-title">Register</span>
+              <span className="form-title">Register <i class="bi bi-lock-fill"></i></span>
             </div>
-            <div className="form-group mt-3">
+            <div className="form-group mt-1">
               <label htmlFor="exampleInputEmail1" className="form-label">
                 Name
               </label>
@@ -189,6 +194,12 @@ export const Signup = () => {
                 </Link>
               </span>
             </div>
+            <footer className="reset-password-footer mt-2">
+                <p>
+                  Thank you for trusting Unique Carving. Need help?{" "}
+                  <a href="/aboutus">Contact us</a>
+                </p>
+              </footer>
           </form>
         </div>
       </div>

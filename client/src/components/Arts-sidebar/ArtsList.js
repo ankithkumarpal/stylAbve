@@ -185,7 +185,10 @@ export const ArtsList = () => {
         </span>
       </div>
 
-      <Link to="/my-cart" className={getLinkClassName("/my-cart")}>
+      {
+        getUserId() &&  (
+          <>
+           <Link to="/my-cart" className={getLinkClassName("/my-cart")}>
         <div
           className=""
           style={{
@@ -234,7 +237,10 @@ export const ArtsList = () => {
           </span>
         </div>
       </Link>
-
+          </>
+        )
+      }
+    
       <Link to="/aboutus" className={getLinkClassName("/aboutus")}>
         <div
           className=""
@@ -260,33 +266,6 @@ export const ArtsList = () => {
         </div>
       </Link>
 
-      <Link
-        to="/profile-setting"
-        className={getLinkClassName("/profile-setting")}
-      >
-        <div
-          className=""
-          style={{
-            fontFamily: "cursive",
-            height: "max-content",
-            alignContent: "center",
-            width: "100%",
-            display: "flex",
-          }}
-        >
-          <i
-            className="bi bi-gear-wide-connected"
-            style={{
-              marginRight: "1.2rem",
-              fontSize: "1.2rem",
-              color: "saddlebrown",
-            }}
-          ></i>
-          <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
-            Profile setting
-          </span>
-        </div>
-      </Link>
       {getUserId() != null ? (
         <Link
           to="/profile-setting"

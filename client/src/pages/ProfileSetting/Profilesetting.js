@@ -274,7 +274,7 @@ const ProfileSetting = () => {
           <div className="field-row">
             <button
               type="button"
-              className="btn btn-primary m-2 btn-fixed"
+              className="btn  m-2 btn-fixed"
               onClick={handleSaveChanges}
               disabled={isLoading}
             >

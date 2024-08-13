@@ -1,10 +1,13 @@
 const nodemailer = require("nodemailer");
+const User = require("../models/Users");
+const Product = require("../models/Product");
+require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.Email,
-    pass: process.env.Pasword,
+    pass: process.env.Password,
   },
 });
 
@@ -36,4 +39,112 @@ The Unique Carving Support Team`,
   }
 };
 
-module.exports = sendOtpEmail;
+const sendOrderConfirmationEmail = async (order) => {
+  try {
+    const user = await User.findById(order.userId);
+    const userEmail = user.email;
+
+    const productDetails = await Product.find({
+      _id: { $in: order.productDetails.map((detail) => detail.productId) },
+    }).populate("imageIds");
+
+    // Ensure the base URL is set correctly, based on your deployment or local setup
+    const baseUrl = process.env.BASE_URL || "http://localhost:5000";
+
+    let productImages = [];
+    let productHtml = "";
+
+    productDetails.forEach((product, index) => {
+      const imgId = `productImg${index}`;
+      const imageUrl = `${baseUrl}/api/product/image/${product.imageIds[0].filename}`;
+
+      // Construct the attachment and HTML image URL
+      productImages.push({
+        filename: product.imageIds[0].filename,
+        path: imageUrl, // Use the image URL for attachment
+        cid: imgId,
+      });
+
+      productHtml += `
+      <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <img src="cid:${imgId}" alt="${product.productType
+        }" style="width: 100px; height: auto; margin-right: 20px;" />
+        <div>
+          <h3>${product.productType}</h3>
+          <p>Price: ${product.price}</p>
+          <p>Quantity: ${order.productDetails.find(
+          (detail) => detail.productId === product._id.toString()
+        ).quantity
+        }</p>
+        </div>
+      </div>
+    `;
+    });
+
+    const mailOptions = {
+      from: process.env.Email,
+      to: [userEmail, process.env.Email],
+      subject: "Order Confirmation - Unique Carving",
+      html: `
+        <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; background-color: #f4f4f4; border-radius: 8px;">
+          <!-- Header Section -->
+          <div style="background-color: #4CAF50; color: #fff; padding: 20px; border-radius: 8px;">
+            <h1>Order Confirmation</h1>
+            <p>Hello ${user.name},</p>
+            <p>Thank you for your order! We're excited to let you know that we have received your order and are currently processing it.</p>
+          </div>
+          
+        <!-- Order Details Section -->
+        <div style="background-color: #F9FBE7; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <h2 style="color: #4CAF50; margin-bottom: 10px; border-bottom: 2px solid #4CAF50; padding-bottom: 5px; font-size: 24px;">Order Details</h2>
+          ${productHtml}
+        </div>
+          <!-- Shipping Address Section -->
+          <div style="background-color: #E9F4FF; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h3 style="color: #007BFF; margin-bottom: 10px; border-bottom: 1px solid #007BFF; padding-bottom: 5px;">Shipping Address</h3>
+            <p>
+              ${order.address.doorno}, ${order.address.area},<br/>
+              ${order.address.landmark}, ${order.address.pincode}, ${order.address.country}
+            </p>
+            <p style="margin: 20px 0; font-size: 16px; text-align: center;">
+  <strong style="background-color: #4CAF50; color: #fff; font-weight: bolder; padding: 10px 15px; border-radius: 5px; box-sizing: border-box; display: inline-block;">
+    Total Amount: ${order.amount}
+  </strong>
+</p>
+
+
+            </div>
+
+           <!-- Visit Us Section -->
+          <div style="background-color: #E3F2FD; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h3 style="color: #007BFF; margin-bottom: 10px; border-bottom: 1px solid #007BFF; padding-bottom: 5px;">Visit Us</h3>
+            <p>We invite you to explore more of our products and updates on our website: <a href="https://styleabove.netlify.app/" style="color: #007BFF;">Style Above</a>.</p>
+          </div>
+    
+          <!-- Thank You Section -->
+          <div style="background-color: #4CAF50;  padding: 20px; margin-top: 20px; border-radius: 8px; color: #fff;">
+            <p>Thank you for choosing Unique Carving!</p>
+            <p>Warm Regards,<br />The Unique Carving Team</p>
+          </div>
+          
+          <!-- Need Assistance Section -->
+          <div style="background-color: #FFF3E0; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h3 style="color: #FF5722; margin-bottom: 10px; border-bottom: 1px solid #FF5722; padding-bottom: 5px;">Need Assistance?</h3>
+            <p>If you have any queries, please don't hesitate to contact us at <a href="mailto:uniquecarving@gmail.com" style="color: #FF5722;">uniquecarving@gmail.com</a>.</p>
+          </div>
+        </div>
+      `,
+      attachments: productImages,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Order confirmation email sent successfully");
+  } catch (error) {
+    console.error("Failed to send order confirmation email:", error);
+  }
+};
+
+module.exports = {
+  sendOtpEmail,
+  sendOrderConfirmationEmail,
+};

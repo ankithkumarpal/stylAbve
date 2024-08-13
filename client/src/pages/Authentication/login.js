@@ -52,8 +52,12 @@ export const Login = () => {
   return (
     <div className='login-form'>
       <div className='inner-section'>
-        <div className='form-section'>
+        <div className='reset-form-section'>
           <form className='login-form-inner' onSubmit={handlSubmit}>
+          <header className="reset-password-header">
+                <h1>Unique Carving</h1>
+                <p>Crafting Unique Perfection</p>
+              </header>
             <div className='form-header'>
               <span className='form-title'>Login</span>
               <i className="bi bi-key form-icon"></i>
@@ -97,6 +101,12 @@ export const Login = () => {
                     cursor: 'pointer'
                   }}>Signup</Link></span>
             </div>
+            <footer className="reset-password-footer mt-2">
+                <p>
+                  Thank you for trusting Unique Carving. Need help?{" "}
+                  <a href="/aboutus">Contact us</a>
+                </p>
+              </footer>
           </form>
         </div>
       </div>

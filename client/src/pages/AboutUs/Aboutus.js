@@ -29,7 +29,7 @@ const AboutUs = () => {
           If you have any questions or would like to learn more about our services. we are eager to resolve any issues you might have, please contact us at:
         </p>
         <div style={{paddingTop:'14px'}}>
-        <p>Email: <b style={{color:"black"}}>ankithpal721@gmail.com</b></p>
+        <p>Email: <b style={{color:"black"}}>uniquecarving@gmail.com</b></p>
         <p>Phone: <b style={{color:"black"}}>(+91) 8309145402</b></p>
         <div className="social-media mt-5">
           <a href="https://www.instagram.com/uniquecarving/" target="_blank" rel="noopener noreferrer" className="bi bi-instagram" style={{color:"red"}}></a>

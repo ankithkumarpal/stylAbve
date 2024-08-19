@@ -1,17 +1,57 @@
-.Name{
-     width: 30%;
-}
+  .pair-quantity-input-group{
+    width: inherit;
+    height: 100%;
+    margin-bottom: 0.2rem;
 
-.name_inner{
-    width: 100%;
-    margin-left: 20px;
-    font-size: 15px;
-    font-family: 'Courier New', Courier, monospace;
-    margin-bottom: 4px;
-}
-
-@media only screen and (max-width: 460px) {
-   .name_inner{
-       font-size: 0.8rem;
-   }
   }
+
+  .quanityt-input-group{
+    width: 90%;
+    height: 100%;
+    background-color: rgba(239, 104, 196, 0.107);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .single-quanityt-input-group{
+    width: 90%;
+    height: 100%;
+    background-color: rgba(239, 104, 196, 0.107);
+    padding: 0.5rem;
+    display: flex;
+  }
+
+
+  .name-form-group{
+    width: 100%;
+    height: 100%;
+    /* background-color: yellow; */
+  }
+
+  .name-input-feild{
+    width: 100%;
+    padding: 0.4rem;
+    border-radius: 2px;
+    border: 1px solid saddlebrown
+  }
+.name-input-feild:focus{
+    outline: none;
+}
+
+.incre-decre-btn{
+    width: 10%;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    /* background-color: green; */
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+.incre-decre-btn div {
+  cursor: pointer;
+}

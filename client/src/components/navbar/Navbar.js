@@ -34,7 +34,7 @@ function Navbar() {
           <div className="marquee">
             <span>
               🚀 Big Sale! Everything 50% OFF! Hurry up and grab your favorite products now! 🚀
-              🚀 Big Sale! Everything 50% OFF! Hurry up and grab your favorite products now! 🚀
+              🚀 Get your products at you in 2-3 days 🚀
             </span>
           </div>
           <div className={`hamburger ${isMenuOpen ? "open" : ""}`} onClick={toggleMenu}>

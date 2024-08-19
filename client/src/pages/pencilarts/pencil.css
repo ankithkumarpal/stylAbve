@@ -1,5 +1,6 @@
 .pencil-home {
     position: relative;
+    /* background-color: rgba(255, 192, 203, 0.627); */
   }
   
   .spinner {
@@ -20,7 +21,6 @@
     display: flex;
     flex-wrap: wrap;
     background-color: rgba(255, 192, 203, 0.627);
-
     -ms-overflow-style: none;
     scrollbar-width: none;
     background-color:'red' !important;

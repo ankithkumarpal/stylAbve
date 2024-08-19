@@ -126,10 +126,12 @@ const ProfileSetting = () => {
           address: response.data.data.Address,
         }));
         setIsLoading(false);
+        setIsSaveDisabled(false);
         addToast("Profile updated successfully", { appearance: "success" });
       })
       .catch((error) => {
         setIsLoading(false);
+        setIsSaveDisabled(false);
         addToast("Update failed", { appearance: "error" });
       });
   };
@@ -202,7 +204,7 @@ const ProfileSetting = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="altPhone">Alternative Phone Number</label>
+            <label htmlFor="altPhone">Alternative Phone Number (Optional)</label>
             <input
               type="tel"
               id="altPhone"
@@ -276,7 +278,7 @@ const ProfileSetting = () => {
               type="button"
               className="btn  m-2 btn-fixed"
               onClick={handleSaveChanges}
-              disabled={isLoading}
+              disabled={isLoading | isSaveDisabled}
             >
               {isLoading ? (
                 <span

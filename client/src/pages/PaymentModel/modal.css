@@ -51,7 +51,7 @@
  }
  
  .order-img {
-     width: 90%;
+     width: 50%;
      height: 45%;
  }
  
@@ -118,4 +118,25 @@
 
  .incre-decre-btn div {
     cursor: pointer !important;
+  }
+
+  .delivery-address{
+    width: 100%;
+    /* background-color: red; */
+  }
+
+  .address-input{
+    width: 100%;
+    /* background-color: green; */
+  }
+
+  .address-input input{
+    width: inherit;
+    height: 2rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .address-input input:focus{
+    outline: none;
   }

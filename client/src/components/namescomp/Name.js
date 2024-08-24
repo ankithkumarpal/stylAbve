@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./name.css";
 
-function QuantityInput({ onPairChange , onInputPairRemove , onAddPairInputFeild}) {
+function QuantityInput({ onPairChange , onInputPairRemove}) {
   const [inputPairs, setInputPairs] = useState([{ id: 1, value1: '', value2: '' }]);
 
   useEffect(() => {
@@ -13,7 +13,6 @@ function QuantityInput({ onPairChange , onInputPairRemove , onAddPairInputFeild}
 
   const handleAddPair = () => {
     setInputPairs([...inputPairs, { id: inputPairs.length + 1, value1: '', value2: '' }]);
-    // onAddPairInputFeild();
   };
 
   const handleRemovePair = (id) => {

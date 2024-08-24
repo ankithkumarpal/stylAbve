@@ -1,21 +1,24 @@
-import React from "react";
-import "./pencil.css";
-import { useContext, useState, useEffect } from "react";
-import { Context } from "../../context/Context";
-import Model from "../PaymentModel/modal";
-import axios from "axios";
+// Pencil.js
+import React, { useContext } from "react";
+import { PaymentContext } from "../../context/PaymentContext";
 import { useToasts } from "react-toast-notifications";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { getHeaders, getPencilCarveProducts, getUserEmail, getUserId, getUserName, getUserPhone, productAddTocart } from "../../services/routpath";
+import "./pencil.css";
 import { BeatLoader } from "react-spinners";
-import { getHeaders, getPencilCarveProducts, getUserEmail, getUserId, productAddTocart } from "../../services/routpath";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import Model from "../PaymentModel/modal";
 
 function Pencil() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = React.useState([]);
   const { addToast } = useToasts();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);
   const history = useHistory();
+  const { initiatePayment } = useContext(PaymentContext);
+  const location = useLocation();
 
-  useEffect(() => {
+  React.useEffect(() => {
     getProducts();
   }, []);
 
@@ -33,8 +36,8 @@ function Pencil() {
   };
 
   const addToCart = async (product) => {
-    if(getUserId() == null) {
-      addToast("Please login to add in cart" , {appearance:"warning"});
+    if (getUserId() == null) {
+      addToast("Please login to add to cart", { appearance: "warning" });
       history.push("/login");
       return;
     }
@@ -48,7 +51,7 @@ function Pencil() {
 
     try {
       const res = await axios.post(productAddTocart, cartDetail, {
-        headers: getHeaders()
+        headers: getHeaders(),
       });
 
       if (res.data.message === "Already Exist") {
@@ -62,6 +65,23 @@ function Pencil() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleBuyNow = async (product) => {
+    if (getUserId() == null) {
+      addToast("Please login to proceed with the purchase", { appearance: "warning" });
+      history.push("/login");
+      return;
+    }
+    const orderData = {
+      amount: product.price,
+      firstname: getUserName(), 
+      email: getUserEmail(),
+      phone: getUserPhone(),
+      productinfo:"pencil-carved-item",
+      productType:'pencilcarve'
+    };
+    await initiatePayment(orderData);
   };
 
   return (
@@ -78,7 +98,7 @@ function Pencil() {
           }}
           className="pencil-art-header pt-2"
         >
-          Pencils arts
+          Pencil arts
         </h3>
         <div className="product pb-5">
           {items.map((product) => (
@@ -87,14 +107,14 @@ function Pencil() {
                 <div className="image-container">
                   <span className="price">Rs: {product.price}/-</span>
                   {product.imageUrls && product.imageUrls.length > 0 ? (
-                    <img src={product.imageUrls[0]} />
+                    <img src={product.imageUrls[0]} alt={product.name} />
                   ) : (
                     <p>No Image Available</p>
                   )}
                 </div>
               </div>
               <div className="button">
-                <Model product={product} />
+              <Model product={product} />
                 <button
                   className="btn btn-warning"
                   onClick={() => addToCart(product)}

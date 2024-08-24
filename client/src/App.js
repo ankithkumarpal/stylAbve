@@ -5,22 +5,30 @@ import { Landing } from './components/LandingPage/Landing';
 import { Login } from './pages/Authentication/login';
 import { Signup } from './pages/Authentication/signup';
 import ResetPassword from './pages/Authentication/ResetPassword';
+import Payment from './components/PaymentGateway/payupayment';
+import { PaymentProvider } from './context/PaymentContext';
+import PaymentSuccessPage from './components/PaymentGateway/PaymentSuccess';
 
 function App() {
-  return (
-    <div style={{ width: "100vw", height: "100vh" }}>
-      <ToastProvider autoDismiss autoDismissTimeout={2000}>
-        <Router>
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path={`/reset-password`} component={ResetPassword}/>
-            <Route path="/" component={Landing} />
-          </Switch>
-        </Router>
-      </ToastProvider>
-    </div>
-  );
+    return (
+        <div style={{ width: "100vw", height: "100vh" }}>
+            <ToastProvider autoDismiss autoDismissTimeout={2000}>
+              <PaymentProvider>
+                <Router>
+                    <Switch>
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/signup" component={Signup} />
+                        <Route exact path="/reset-password" component={ResetPassword} />
+                        <Route exact path="/payment" component={Payment} />
+                        <Route exact path="/success" component={PaymentSuccessPage} />
+                        {/* <Route exact path="/failure" component={FailurePage} /> */}
+                        <Route path="/" component={Landing} />
+                    </Switch>
+                </Router>
+              </PaymentProvider>
+            </ToastProvider>
+        </div>
+    );
 }
 
 export default App;

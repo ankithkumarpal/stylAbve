@@ -1,0 +1,86 @@
+.payment-success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e9f7ef; /* Light green background */
+    padding: 20px;
+}
+
+.payment-success-content {
+    text-align: center;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+.success-icon {
+    font-size: 80px;
+    color: #28a745; /* Green success icon */
+    margin-bottom: 20px;
+}
+
+.success-message {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2e7d32; /* Darker green for the message */
+    margin-bottom: 10px;
+}
+
+.order-summary h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color:grey; /* Dark green heading */
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.summary-label {
+    font-weight: bold;
+    color: grey; /* Medium green for labels */
+}
+
+.summary-value {
+    font-weight: normal;
+    color: #555;
+}
+
+.success-details {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.home-button, .orders-button {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #388e3c; /* Green button background */
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.home-button:hover, .orders-button:hover {
+    background-color: #2e7d32; /* Darker green on hover */
+    color: white;
+}
+
+.orders-button {
+    background-color: #43a047; /* Slightly different green for distinction */
+}
+
+.orders-button:hover {
+    background-color: #388e3c;
+    color: white;
+}

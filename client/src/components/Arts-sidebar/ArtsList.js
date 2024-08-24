@@ -292,7 +292,7 @@ export const ArtsList = () => {
             <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
               {getUserName()}
               <p style={{ fontSize: "0.5rem", margin: "0%", padding: "0%" }}>
-                last login : {getLastLogin()} -UTC+5:30
+                last login : {getLastLogin()}{" "}  - IST
               </p>
             </span>
           </div>

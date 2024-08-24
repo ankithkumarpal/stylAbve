@@ -3,9 +3,8 @@ const Orders = require("../models/Orders");
 const Users = require("../models/Users");
 const Product = require("../models/Product");
 const Response = require('../provider/requestResponse');
-const { sendOrderConfirmationEmail } = require("../provider/mailconfig");
+const { sendOrderConfirmationEmail, sendPencilCarvedOrderConfirmationEmail } = require("../provider/mailconfig");
 
-// Helper functions
 const serializeProductDetails = (productDetails) => {
   return productDetails.map(detail => JSON.stringify(detail));
 };
@@ -22,9 +21,9 @@ const deserializeAddress = (address) => {
   return JSON.parse(address);
 };
 
-router.post("/place-order", async (req, res) => {
+const placeOrder = async (req , res)=>{
   try {
-    const { userId, productDetails, amount, address } = req.body;
+    const { userId, productDetails, amount, address, singleName, pairName, instruction , productType } = req.body;
 
     if (!address) return res.status(400).json(new Response(false, "Address required."));
 
@@ -35,12 +34,49 @@ router.post("/place-order", async (req, res) => {
       userId,
       productDetails: serializedProductDetails,
       amount,
-      address: serializedAddress
+      address: serializedAddress,
+      singleName : singleName,
+      pairName : pairName,
+      instruction : instruction,
+      productType
     });
 
     const order = await newOrder.save();
 
-    // Send order confirmation email with deserialized data
+    await sendPencilCarvedOrderConfirmationEmail({
+      ...req.body,
+      productDetails: deserializeProductDetails(serializedProductDetails),
+      address: deserializeAddress(serializedAddress)
+    });
+
+    res.status(200).json(new Response(true, "Pencil-carved item order placed", order));
+  } catch (err) {
+    console.error("Error placing pencil-carved item order:", err);
+    res.status(500).json(new Response(false, err.message));
+  }
+}
+
+router.post("/pencil-carve/place-order", placeOrder);
+
+router.post("/place-order", async (req, res) => {
+  try {
+    const { userId, productDetails, amount, address, productType } = req.body;
+
+    if (!address) return res.status(400).json(new Response(false, "Address required."));
+
+    const serializedProductDetails = serializeProductDetails(productDetails);
+    const serializedAddress = serializeAddress(address);
+
+    const newOrder = new Orders({
+      userId,
+      productDetails: serializedProductDetails,
+      amount,
+      address: serializedAddress,
+      productType
+    });
+
+    const order = await newOrder.save();
+
     await sendOrderConfirmationEmail({
       ...req.body,
       productDetails: deserializeProductDetails(serializedProductDetails),
@@ -53,6 +89,8 @@ router.post("/place-order", async (req, res) => {
     res.status(500).json(new Response(false, err.message));
   }
 });
+
+
 
 router.get("/get-order", async (req, res) => {
   try {

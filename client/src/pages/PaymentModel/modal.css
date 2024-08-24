@@ -140,3 +140,10 @@
   .address-input input:focus{
     outline: none;
   }
+  .input-group textarea{
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .input-group textarea:focus{
+    outline: none;
+  }

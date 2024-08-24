@@ -5,6 +5,10 @@ const OrdersSchema = new mongoose.Schema({
         type : String,
         required : true
     },
+    productType : {
+        type : String,
+        required : true
+    },
     productDetails : {
         type : [String],
         required : true
@@ -28,6 +32,18 @@ const OrdersSchema = new mongoose.Schema({
       updatedAt: {
         type: Date,
         default: Date.now
+      },
+      instruction : {
+        type : String,
+        required:false
+      },
+      pairName : {
+        type : [],
+        required:false
+      },
+      singleName : {
+        type : [],
+        required : false
       }
 },{timestamps:true})
 

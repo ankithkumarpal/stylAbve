@@ -1,36 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router-dom";
 import "./modal.css";
-import { getUserId, placeOrder } from "../../services/routpath";
+import { getUserEmail, getUserId, getUserName, getUserPhone, pencilCarvePlaceOrder, placeOrder, productAddTocart, ScrunchiesplaceOrder } from "../../services/routpath";
 import { SingleName } from "../../components/namescomp/singleName";
 import QuantityInput from "../../components/namescomp/Name";
+import { PaymentContext } from "../../context/PaymentContext";
 
 function Example({ product }) {
   const [show, setShow] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(product.price);
+  const [totalAmount , setTotalAmount] = useState(0);
   const [totalSingleLetterCount, setTotalSingleLetterCount] = useState(0);
   const [totalPairLetterCount, setTotalPairLetterCount] = useState(0);
   const { addToast } = useToasts();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
+  const [singleTemplateUsed , setSingleTemplateUsed] = useState(0);
+  const [pairTemplateUsed, setPairTemplateUsed] = useState(0);
+  const { initiatePayment } = useContext(PaymentContext);
 
-  const [nameFields, setNameFields] = useState([{ id: 1, type: "1" } , {id : 2 , type:'2'}]);
+  const [nameFields, setNameFields] = useState([
+    { id: 1, type: "1" },
+    { id: 2, type: "2" },
+  ]);
   const [nameData, setNameData] = useState([]);
   const [quantityData, setQuantityData] = useState([]);
-  const [proceedDisabled , setIsProceedDisabled] = useState(true);
+  const [instruction , setInstruction] = useState('');
+  const [proceedDisabled, setIsProceedDisabled] = useState(true);
   const [address, setAddress] = useState({
     doorNo: "",
     area: "",
     landmark: "",
     city: "",
     pincode: "",
-    country:""
+    country: "",
   });
 
   const handleShow = () => setShow(true);
@@ -38,17 +47,16 @@ function Example({ product }) {
   const incrementQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
 
-
-  const reset = ()=>{
+  const reset = () => {
     setQuantity(1);
-    setTotalPrice(product.price);
+    setTotalPrice(0);
     setTotalPairLetterCount(0);
     setTotalSingleLetterCount(0);
     setIsLoading(false);
     setIsSaveDisabled(false);
     setNameData([]);
     setQuantityData([]);
-  }
+  };
 
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
@@ -63,49 +71,60 @@ function Example({ product }) {
     const isQuantityDataValid = quantityData.every(
       (item) => item.names[0].trim() !== "" && item.names[1].trim() !== ""
     );
-  
+
     const isAddressValid = Object.keys(address).every((field) => {
-      if (field === 'pincode') {
+      if (field === "pincode") {
         return /^\d{6}$/.test(address[field]);
       }
       return address[field].trim() !== "";
     });
-  
-    setIsProceedDisabled(!(isNameDataValid && isQuantityDataValid && isAddressValid));
+
+    setIsProceedDisabled(
+      !(isNameDataValid && isQuantityDataValid && isAddressValid)
+    );
   };
-  
 
   const handleClose = () => {
     reset();
     setShow(false);
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     validateProceedButton();
-  },[nameData , quantityData , address]);
+  }, [nameData, quantityData, address]);
 
   useEffect(() => {
     setTotalPrice(quantity * product.price);
   }, [quantity]);
 
-  useEffect(() => {
-     let total = 0;
-    console.log(nameData)
-    for(let i = 0 ;i<nameData.length ; i++){
-      total += nameData[i].name?.length;
+  useEffect(()=>{
+    let TotalAmount = 0;
+    for (let i = 0; i < nameData.length; i++) {
+      let nameLen = (nameData[i].name?.trim()).length;
+      if(nameLen != 0) {
+        TotalAmount += product.price;
+      }
+
+      if(nameLen > 3){
+        TotalAmount += (nameLen - 3)*20;
+      }
     }
-    setTotalSingleLetterCount(total);
-  }, [nameData]);
+
+    for (let i = 0; i < quantityData.length; i++) {
+      let nameLen =  (quantityData[i].names[0].trim()).length + (quantityData[i].names[1].trim()).length;
+      if(nameLen != 0) {
+        TotalAmount += product.price;
+      }
+
+      if(nameLen > 3){
+        TotalAmount += (nameLen -3)*20;
+      }
+    }
+
+    setTotalAmount(TotalAmount)
+  },[nameData , quantityData])
 
 
-  useEffect(() => {
-    let total = 0;
-    console.log(quantityData)
-    for(let i = 0 ;i<quantityData.length ; i++){
-      total += quantityData[i].names[0].length + quantityData[i].names[1].length;
-    }
-    setTotalPairLetterCount(total);
-  }, [quantityData]);
 
   const handleTypeChange = (id, value) => {
     const newFields = nameFields.map((field) =>
@@ -118,30 +137,23 @@ function Example({ product }) {
     setNameData((prevData) => {
       return prevData.filter((item) => item.id !== id);
     });
-  }
-
-  const addSingleNameInput = () => {
-  //  setNameData([...nameFields, { id: nameFields.length + 1, value: '' }]);
-  }
-
-  const addPairNameInput = ()=> {
-    // setQuantityData([...quantityData ,{ id: quantityData.length + 1, names:['',''] }])
-  }
+  };
 
   const removePairNameInput = (id) => {
     setQuantityData((prevData) => {
       return prevData.filter((item) => item.pairId !== id);
     });
-  }
+  };
+
   const handleNameChange = (id, value) => {
     setNameData((prevData) => {
       const itemIndex = prevData.findIndex((item) => item.id === id);
-        if (itemIndex !== -1) {
+      if (itemIndex !== -1) {
         return prevData.map((item, index) =>
           index === itemIndex ? { ...item, name: value } : item
         );
       }
-        return [...prevData, { id, name: value }];
+      return [...prevData, { id, name: value }];
     });
   };
 
@@ -153,34 +165,32 @@ function Example({ product }) {
         updatedData[pairIndex] = {
           ...updatedData[pairIndex],
           names: updatedData[pairIndex].names.map((name, idx) =>
-            idx === index-1 ? value : name
+            idx === index - 1 ? value : name
           ),
         };
         return updatedData;
       }
-        return [
+      return [
         ...prevData,
         {
           pairId,
-          names: ['',''].map((_, idx) => (idx === index-1 ? value : '')),
+          names: ["", ""].map((_, idx) => (idx === index - 1 ? value : "")),
         },
       ];
     });
   };
   
-  const handleProceedPayment = async () => {
-    setIsLoading(true);
-    setIsSaveDisabled(true);
-
+  const pencilArtsPayload = ()=> {
     const orderData = {
       userId: getUserId(),
       productDetails: [
         {
           productId: product._id,
-          quantity: quantity,
+          quantity: quantity
         },
       ],
-      amount: totalPrice,
+      productType:product.productType,
+      amount: totalAmount,
       address: {
         area: address.area,
         doorno: address.doorNo,
@@ -190,16 +200,50 @@ function Example({ product }) {
       },
       singleName: nameData,
       pairName: quantityData,
+      instruction : instruction,
+      firstname: getUserName(), 
+      email: getUserEmail(),
+      phone: getUserPhone(),
+      productinfo:"unqiue carving product",
     };
-    console.log(orderData.singleName);
-    console.log(orderData.pairName)
+    return orderData;
+  }
+
+  const scrunchiesPayload = ()=>{
+   const orderData = {
+      userId: getUserId(),
+      productDetails: [
+        {
+          productId: product._id,
+          quantity: quantity,
+        },
+      ],
+      productType:product.productType,
+      amount: totalPrice,
+      address: {
+        area: address.area,
+        doorno: address.doorNo,
+        landmark: address.landmark,
+        pincode: address.pincode,
+        country: address.country,
+      },
+      instruction : instruction,
+      firstname: getUserName(), 
+      email: getUserEmail(),
+      phone: getUserPhone(),
+      productinfo:"unqiue carving product",
+    };
+    return orderData;
+  }
+  const handleProceedPayment = async () => {
+
+    setIsLoading(true);
+    setIsSaveDisabled(true);
+
+    const orderData = (product.productType == 'scrunchies' ? scrunchiesPayload() : pencilArtsPayload())
     try {
-      const response = await axios.post(placeOrder, orderData);
-      if (response.data.success) {
-        addToast("Order placed successfully", { appearance: "success" });
-      } else {
-        addToast("Failed to place order", { appearance: "error" });
-      }
+      const url = product.productType == 'scrunchies' ? ScrunchiesplaceOrder : pencilCarvePlaceOrder;
+      await initiatePayment(orderData);
     } catch (error) {
       addToast("Failed to place order", { appearance: "error" });
     } finally {
@@ -262,28 +306,24 @@ function Example({ product }) {
                           onChange={(e) =>
                             handleTypeChange(field.id, e.target.value)
                           }
-                          style={{color:"black"}}
+                          style={{ color: "black" }}
                           disabled="true"
                         >
                           <option value="1">Single</option>
                           <option value="2">Pair</option>
                         </select>
                       </div>
-                      
-                      
                     </div>
                     <hr />
                     {field.type === "1" ? (
                       <SingleName
                         onNameChange={handleNameChange}
-                        onInputRemove = {removeSingleNameInput}
-                        onAddSingleInputFeild = {addSingleNameInput}
+                        onInputRemove={removeSingleNameInput}
                       />
                     ) : (
                       <QuantityInput
                         onPairChange={handlePairChange}
-                        onInputPairRemove = {removePairNameInput}
-                        onAddPairInputFeild = {addPairNameInput}
+                        onInputPairRemove={removePairNameInput}
                       />
                     )}
                   </div>
@@ -294,64 +334,72 @@ function Example({ product }) {
               <span>Total Amount: Rs. {totalPrice}/-</span>
             ) : (
               <>
-              <span>
-               Total Amount: Rs. {" "}
-                {((totalPairLetterCount + totalSingleLetterCount > 3) ? ((totalPairLetterCount + totalSingleLetterCount - 3)*20 + ((nameData.length + quantityData.length)*product.price) ): (nameData.length + quantityData.length)*product.price)}
-              </span>
+                <span>
+                  Total Amount: Rs.{" "}
+                  {totalAmount}
+                </span>
               </>
-
             )}
 
             <br />
+
+            <div class="input-group mb-3" style={{width:"100%"}}>
+              <textarea
+                style={{width:"100%"}}
+                aria-label="With textarea"
+                placeholder="Please provide any additional information or special instructions."
+                value ={instruction}
+                onChange={(e)=> setInstruction(e.target.value) }
+              ></textarea>
+            </div>
           </div>
           <div className="delivery-address">
             <span>Delivery Address</span>
             <div className="mt-2 address-input">
-            <input
-                  type="text"
-                  name="doorNo"
-                  value={address.doorNo}
-                  onChange={handleAddressChange}
-                  placeholder="Door No."
-                />
-                <input
-                  type="text"
-                  name="area"
-                  value={address.area}
-                  onChange={handleAddressChange}
-                  placeholder="Area"
-                />
-                <input
-                  type="text"
-                  name="landmark"
-                  value={address.landmark}
-                  onChange={handleAddressChange}
-                  placeholder="Landmark"
-                />
-                <input
-                  type="text"
-                  name="city"
-                  value={address.city}
-                  onChange={handleAddressChange}
-                  placeholder="City"
-                />
-                <input
-                  type="text"
-                  name="pincode"
-                  value={address.pincode}
-                  onChange={handleAddressChange}
-                  placeholder="6 digit pincode"
-                />
-                <input
-                  type="text"
-                  name="country"
-                  value={address.country}
-                  onChange={handleAddressChange}
-                  placeholder="Country"
-                />
+              <input
+                type="text"
+                name="doorNo"
+                value={address.doorNo}
+                onChange={handleAddressChange}
+                placeholder="Door No."
+              />
+              <input
+                type="text"
+                name="area"
+                value={address.area}
+                onChange={handleAddressChange}
+                placeholder="Area"
+              />
+              <input
+                type="text"
+                name="landmark"
+                value={address.landmark}
+                onChange={handleAddressChange}
+                placeholder="Landmark"
+              />
+              <input
+                type="text"
+                name="city"
+                value={address.city}
+                onChange={handleAddressChange}
+                placeholder="City"
+              />
+              <input
+                type="text"
+                name="pincode"
+                value={address.pincode}
+                onChange={handleAddressChange}
+                placeholder="6 digit pincode"
+              />
+              <input
+                type="text"
+                name="country"
+                value={address.country}
+                onChange={handleAddressChange}
+                placeholder="Country"
+              />
             </div>
           </div>
-        
         </Modal.Body>
         <Modal.Footer>
           <Button
@@ -366,7 +414,6 @@ function Example({ product }) {
             onClick={handleProceedPayment}
             style={{ width: "150px", height: "38px" }}
             disabled={isSaveDisabled || proceedDisabled}
-
           >
             {isLoading ? (
               <span

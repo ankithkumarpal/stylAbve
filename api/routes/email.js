@@ -1,9 +1,9 @@
   const router = require("express").Router();
   const Otp = require("../models/Otp");
   const Users = require("../models/Users");
-  const sendOtpEmail = require("../provider/mailconfig");
-  const transporter = require("../provider/mailconfig");
   const Response = require("../provider/requestResponse");
+  
+const { sendOtpEmail } = require("../provider/mailconfig");
 
   const generateOtp = () => {
     return Math.floor(1000 + Math.random() * 9000).toString();
@@ -11,10 +11,10 @@
 
   router.post("/generate-otp", async (req, res) => {
     try {
-      const { email, name } = req.body;
+      const { email} = req.body;
 
       if (!email) {
-        return res.status(200).json(new Response(false, "OTP send failed"));
+        return res.status(200).json(new Response(false, "Email does not found"));
       }
 
       const user = await Users.findOne({ email });
@@ -33,13 +33,13 @@
         await otpEntry.save();
       }
 
-      sendOtpEmail(email, otp,name);
+      await sendOtpEmail(email, otp,user.name);
 
       return res
         .status(200)
         .json(new Response(true, "OTP sent successfully"));
     } catch (error) {
-      return res.status(200).json(new Response(false, "OTP send failed"));
+      return res.status(500).json(new Response(false, error.message));
     }
   });
 

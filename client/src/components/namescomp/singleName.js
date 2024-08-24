@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export const SingleName = ({ onNameChange ,onInputRemove ,onAddSingleInputFeild }) => {
+export const SingleName = ({ onNameChange ,onInputRemove  }) => {
   const [nameFields, setNameFields] = useState([{ id: 1, value: '' }]);
 
   useEffect(() => {
@@ -10,7 +10,6 @@ export const SingleName = ({ onNameChange ,onInputRemove ,onAddSingleInputFeild 
 
   const handleAddNameField = () => {
     setNameFields([...nameFields, { id: nameFields.length + 1, value: '' }]);
-    onAddSingleInputFeild();
   };
 
   const handleRemoveNameField = (id) => {

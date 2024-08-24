@@ -85,7 +85,6 @@ function Scrunchies() {
               </div>
               <div className="button">
                 <Model product={product} />
-                {/* <button className="btn btn-success" >Buy Now</button> */}
                 <button className="btn btn-warning" onClick={() => addToCart(product)}>Add to cart</button>
               </div>
             </div>

@@ -1,5 +1,5 @@
-const pencilCarveSuccess = 'http://localhost:5000/api/payment-gateway/pencil-item/payment-success';
-const scrunchies = 'http://localhost:5000/api/payment-gateway/pencil-item/payment-success'
+const pencilCarveSuccess = 'https://unqiue-carving.onrender.com/api/payment-gateway/pencil-item/payment-success';
+const scrunchies = 'https://unqiue-carving.onrender.com/api/payment-gateway/pencil-item/payment-success'
 
 const getSuccessUrl = (type) => {
     console.log(type)

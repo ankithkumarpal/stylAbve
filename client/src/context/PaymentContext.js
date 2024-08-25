@@ -10,7 +10,7 @@ export const PaymentProvider = ({ children }) => {
 
     const initiatePayment = async (orderData) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/payment-gateway/pay', orderData);
+            const response = await axios.post('https://unqiue-carving.onrender.com/api/payment-gateway/pay', orderData);
             setPaymentData(response.data);
 
             if (response.data) {

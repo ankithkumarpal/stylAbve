@@ -44,7 +44,7 @@ function PaymentSuccessPage() {
 
                 <div className="success-actions">
                     <Link to="/" className="home-button">Back to Home</Link>
-                    <Link to="/orders" className="orders-button">View Your Orders</Link>
+                    <Link to="/order-history" className="orders-button">View Your Orders</Link>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ const PaymentStatus = {
     SUCCESS : 'success',
     FAILED : 'failed'
   };
-  
+
 const ProductType = {
     PencilCarve : 'pencilcarve',
     Scrunchies : 'scrunchies'

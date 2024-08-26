@@ -22,6 +22,26 @@ router.get('/fetch/profile-setting', async (req, res) => {
     }
 });
 
+
+router.get('/fetch/user-address', async (req, res) => {
+    try {
+        const id = req.query.id;
+        const user = await Users.findById(id).populate('Address');
+
+        if (!user) {
+            return res.status(404).json(new Response(success = false , message = "user not found"));
+        }
+
+        return res.status(200).json({ 
+            success: true, 
+            message: 'User address fetched successfully', 
+            data: user.Address
+        });
+    } catch (error) {
+        return res.status(500).json(new Response(success = false , message = error.message));
+    }
+});
+
 router.patch('/update/profile-setting', async (req, res) => {
     try {
         let user = await Users.findById(req.body.id);

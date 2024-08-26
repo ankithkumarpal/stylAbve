@@ -11,6 +11,7 @@ const MERCHANT_SALT = "ZcIIZ3KVeBTWrtEihFGhTbaelfh5EUqc";
 
 router.post("/pay", async (req, res) => {
     try {
+        console.log("payment page /pay " ,req.body);
         const { amount, firstname, email, phone, productType } = req.body;
         const productinfo = productType;
 
@@ -33,7 +34,7 @@ router.post("/pay", async (req, res) => {
             email: email,
             phone: phone,
             surl: surl,
-            furl: "http://localhost:3000/failure",
+            furl: "https://styleabove.netlify.app/failure",
             hash: hash,
             service_provider: "payu_paisa",
         };
@@ -65,16 +66,18 @@ router.post('/pencil-item/payment-success', async (req, res) => {
 
         const orderDetails = JSON.parse(transaction.OrderDetails);
 
-        if (status === 'success') {
+        console.log("suceces order details" , orderDetails);
+
           const response =  await placeOrder(orderDetails);
+          console.log(response)
           if(response.success){
             transaction.Status = 'success';
             await transaction.save();
             const queryParams = `?txnid=${txnid}&status=${status}&amount=${amount}&productinfo=${encodeURIComponent(productinfo)}`;
-            res.redirect(`http://localhost:3000/success${queryParams}`); 
-          }
+            res.redirect(`https://styleabove.netlify.app/success${queryParams}`); 
+          
         }else {
-            res.redirect('http://localhost:3000/failure');
+            res.redirect('https://styleabove.netlify.app/failure');
         }
     } catch (error) {
         console.error('Error processing payment:', error);

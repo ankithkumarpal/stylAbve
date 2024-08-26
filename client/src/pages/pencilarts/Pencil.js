@@ -116,8 +116,9 @@ function Pencil() {
               <div className="button">
               <Model product={product} />
                 <button
-                  className="btn btn-warning"
+                  className="btn btn-warning" 
                   onClick={() => addToCart(product)}
+                  disabled = 'true'
                 >
                   Add to cart
                 </button>

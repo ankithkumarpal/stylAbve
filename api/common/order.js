@@ -46,7 +46,11 @@ const placeOrder = async (orderDetails)=>{
     const order = await newOrder.save();
 
     if(orderDetails.productType == ProductType.Scrunchies){
-        await sendOrderConfirmationEmail(order);
+        await sendOrderConfirmationEmail({
+            ...orderDetails,
+            productDetails: deserializeProductDetails(serializedProductDetails),
+            address: deserializeAddress(serializedAddress)
+          });
     }else {
         await sendPencilCarvedOrderConfirmationEmail({
             ...orderDetails,

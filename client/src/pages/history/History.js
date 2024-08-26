@@ -6,16 +6,45 @@ import { Link } from "react-router-dom";
 import { useToasts } from 'react-toast-notifications';
 import { BeatLoader } from 'react-spinners';
 import { getCartProducts, getHeaders, getUserId, removeCartProudct } from "../../services/routpath";
-
+import PaymentAddressModal from "../Modal/PaymentAddressModal";
 function Order() {
   const { addToast } = useToasts();
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [discount, setDiscount] = useState(10);
+  const [netPayable , setNetPayable] = useState(0);
+  const [address, setAddress] = useState({
+    doorNo: "",
+    area: "",
+    landmark: "",
+    city: "",
+    pincode: "",
+    country: "",
+  });
   useEffect(() => {
     getCartItems();
+    fetchAddress();
   }, []);
+
+  const fetchAddress = async()=>{
+    try {
+       const response = await axios.get(`https://unqiue-carving.onrender.com/api/profile/fetch/user-address?id=${getUserId()}` , { headers: getHeaders() })
+       if(response.data){
+           setAddress({
+               doorNo: response.data.data.doorNo,
+               area: response.data.data.area,
+               landmark: response.data.data.landmark,
+               city: response.data.data.city,
+               pincode: response.data.data.pincode,
+               country: response.data.data.country
+           })
+       }
+       console.log(address);
+    } catch (error) {
+       console.log(error.message);
+    }
+ }
 
   const getCartItems = async () => {
     setIsLoading(true);
@@ -36,9 +65,14 @@ function Order() {
     calculateTotalPrice();
   }, [cartItems]);
 
+  useEffect(()=>{
+    setNetPayable(totalPrice - ((totalPrice*discount)/100))
+  },[totalPrice]);
+
+
   const calculateTotalPrice = () => {
     const total = cartItems.reduce((acc, product) => {
-      return acc + product.price * product.quantity;
+      return acc + product.productDetails.price * product.quantity;
     }, 0);
     setTotalPrice(total);
   }
@@ -56,10 +90,6 @@ function Order() {
     } finally {
       setIsLoading(false);
     }
-  }
-
-  const purchaseOrder = () => {
-    console.log(cartItems);
   }
 
   return (
@@ -142,8 +172,8 @@ function Order() {
                               </td>
                               <td>
                                 <div className="price-wrap">
-                                  <var className="price">Rs: {product.price * product.quantity}</var>
-                                  <small className="text-muted"> {product.price} Rs/- each </small>
+                                  <var className="price">Rs: {product.productDetails.price * product.quantity}</var>
+                                  <small className="text-muted"> {product.productDetails.price} Rs/- each </small>
                                 </div>
                               </td>
                               <td className="text-right">
@@ -163,28 +193,30 @@ function Order() {
                     <div className="card-body">
                       <dl className="dlist-align">
                         <dt>Total price: </dt>
-                        <dd className="text-right ml-3">  Rs: {totalPrice} /-</dd>
+                        <dd className="text-right ml-3 text-dark">  Rs: {totalPrice} /-</dd>
                       </dl>
                       <dl className="dlist-align">
                         <dt>Discount:</dt>
-                        <dd className="text-right text-danger ml-3">Rs: 0.00/-</dd>
+                        <dd className="text-right text-dark ml-3">Rs: {discount}/-</dd>
                       </dl>
                       <dl className="dlist-align">
-                        <dt>Total:</dt>
+                        <dt>Net Pay :</dt>
                         <dd className="text-right text-dark b ml-3">
-                          <strong>Rs : { totalPrice} /-</strong>
+                          <strong className="text-success">Rs : { netPayable} /-</strong>
                         </dd>
                       </dl>
                       <hr />
-                      <button
+                      {/* <button
                         className="btn btn-out btn-primary btn-square btn-main"
                         onClick={purchaseOrder}
                       >
                         Make Purchase
-                      </button>
+                      
+                      </button> */}
+                        <PaymentAddressModal cartItems={cartItems} address={address} setAddress={setAddress} discount={discount} totalAmount={totalPrice} netPayable={netPayable}/>
                       <Link
                         to={`/pencilarts`}
-                        className="btn btn-out btn-success btn-square btn-main mt-2"
+                        className="btn btn-out btn-primary btn-square btn-main mt-2"
                       >
                         Continue Shopping
                       </Link>

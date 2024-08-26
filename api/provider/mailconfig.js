@@ -54,6 +54,8 @@ const sendOrderConfirmationEmail = async (order) => {
     let productImages = [];
     let productHtml = "";
 
+    console.log(order);
+
     productDetails.forEach((product, index) => {
       const imgId = `productImg${index}`;
       const imageUrl = `${baseUrl}/api/product/image/${product.imageIds[0].filename}`;
@@ -63,6 +65,7 @@ const sendOrderConfirmationEmail = async (order) => {
         path: imageUrl, 
         cid: imgId,
       });
+
 
       productHtml += `
       <div style="display: flex; align-items: center; margin-bottom: 20px;">

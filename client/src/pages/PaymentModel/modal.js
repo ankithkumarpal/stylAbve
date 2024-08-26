@@ -5,7 +5,16 @@ import axios from "axios";
 import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router-dom";
 import "./modal.css";
-import { getUserEmail, getUserId, getUserName, getUserPhone, pencilCarvePlaceOrder, placeOrder, productAddTocart, ScrunchiesplaceOrder } from "../../services/routpath";
+import {
+  getUserEmail,
+  getUserId,
+  getUserName,
+  getUserPhone,
+  pencilCarvePlaceOrder,
+  placeOrder,
+  productAddTocart,
+  ScrunchiesplaceOrder,
+} from "../../services/routpath";
 import { SingleName } from "../../components/namescomp/singleName";
 import QuantityInput from "../../components/namescomp/Name";
 import { PaymentContext } from "../../context/PaymentContext";
@@ -14,14 +23,14 @@ function Example({ product }) {
   const [show, setShow] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(product.price);
-  const [totalAmount , setTotalAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
   const [totalSingleLetterCount, setTotalSingleLetterCount] = useState(0);
   const [totalPairLetterCount, setTotalPairLetterCount] = useState(0);
   const { addToast } = useToasts();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
-  const [singleTemplateUsed , setSingleTemplateUsed] = useState(0);
+  const [singleTemplateUsed, setSingleTemplateUsed] = useState(0);
   const [pairTemplateUsed, setPairTemplateUsed] = useState(0);
   const { initiatePayment } = useContext(PaymentContext);
 
@@ -31,7 +40,7 @@ function Example({ product }) {
   ]);
   const [nameData, setNameData] = useState([]);
   const [quantityData, setQuantityData] = useState([]);
-  const [instruction , setInstruction] = useState('');
+  const [instruction, setInstruction] = useState("");
   const [proceedDisabled, setIsProceedDisabled] = useState(true);
   const [address, setAddress] = useState({
     doorNo: "",
@@ -97,34 +106,34 @@ function Example({ product }) {
     setTotalPrice(quantity * product.price);
   }, [quantity]);
 
-  useEffect(()=>{
+  useEffect(() => {
     let TotalAmount = 0;
     for (let i = 0; i < nameData.length; i++) {
       let nameLen = (nameData[i].name?.trim()).length;
-      if(nameLen != 0) {
+      if (nameLen != 0) {
         TotalAmount += product.price;
       }
 
-      if(nameLen > 3){
-        TotalAmount += (nameLen - 3)*20;
+      if (nameLen > 3) {
+        TotalAmount += (nameLen - 3) * 20;
       }
     }
 
     for (let i = 0; i < quantityData.length; i++) {
-      let nameLen =  (quantityData[i].names[0].trim()).length + (quantityData[i].names[1].trim()).length;
-      if(nameLen != 0) {
+      let nameLen =
+        quantityData[i].names[0].trim().length +
+        quantityData[i].names[1].trim().length;
+      if (nameLen != 0) {
         TotalAmount += product.price;
       }
 
-      if(nameLen > 3){
-        TotalAmount += (nameLen -3)*20;
+      if (nameLen > 3) {
+        TotalAmount += (nameLen - 3) * 20;
       }
     }
 
-    setTotalAmount(TotalAmount)
-  },[nameData , quantityData])
-
-
+    setTotalAmount(TotalAmount);
+  }, [nameData, quantityData]);
 
   const handleTypeChange = (id, value) => {
     const newFields = nameFields.map((field) =>
@@ -179,17 +188,17 @@ function Example({ product }) {
       ];
     });
   };
-  
-  const pencilArtsPayload = ()=> {
+
+  const pencilArtsPayload = () => {
     const orderData = {
       userId: getUserId(),
       productDetails: [
         {
           productId: product._id,
-          quantity: quantity
+          quantity: quantity,
         },
       ],
-      productType:product.productType,
+      productType: product.productType,
       amount: totalAmount,
       address: {
         area: address.area,
@@ -200,17 +209,17 @@ function Example({ product }) {
       },
       singleName: nameData,
       pairName: quantityData,
-      instruction : instruction,
-      firstname: getUserName(), 
+      instruction: instruction,
+      firstname: getUserName(),
       email: getUserEmail(),
       phone: getUserPhone(),
-      productinfo:"unqiue carving product",
+      productinfo: "unqiue carving product",
     };
     return orderData;
-  }
+  };
 
-  const scrunchiesPayload = ()=>{
-   const orderData = {
+  const scrunchiesPayload = () => {
+    const orderData = {
       userId: getUserId(),
       productDetails: [
         {
@@ -218,7 +227,7 @@ function Example({ product }) {
           quantity: quantity,
         },
       ],
-      productType:product.productType,
+      productType: product.productType,
       amount: totalPrice,
       address: {
         area: address.area,
@@ -227,22 +236,27 @@ function Example({ product }) {
         pincode: address.pincode,
         country: address.country,
       },
-      instruction : instruction,
-      firstname: getUserName(), 
+      instruction: instruction,
+      firstname: getUserName(),
       email: getUserEmail(),
       phone: getUserPhone(),
-      productinfo:"unqiue carving product",
+      productinfo: "unqiue carving product",
     };
     return orderData;
-  }
+  };
   const handleProceedPayment = async () => {
-
     setIsLoading(true);
     setIsSaveDisabled(true);
 
-    const orderData = (product.productType == 'scrunchies' ? scrunchiesPayload() : pencilArtsPayload())
+    const orderData =
+      product.productType == "scrunchies"
+        ? scrunchiesPayload()
+        : pencilArtsPayload();
     try {
-      const url = product.productType == 'scrunchies' ? ScrunchiesplaceOrder : pencilCarvePlaceOrder;
+      const url =
+        product.productType == "scrunchies"
+          ? ScrunchiesplaceOrder
+          : pencilCarvePlaceOrder;
       await initiatePayment(orderData);
     } catch (error) {
       addToast("Failed to place order", { appearance: "error" });
@@ -334,22 +348,19 @@ function Example({ product }) {
               <span>Total Amount: Rs. {totalPrice}/-</span>
             ) : (
               <>
-                <span>
-                  Total Amount: Rs.{" "}
-                  {totalAmount}
-                </span>
+                <span>Total Amount: Rs. {totalAmount}</span>
               </>
             )}
 
             <br />
 
-            <div class="input-group mb-3" style={{width:"100%"}}>
+            <div class="input-group mb-3" style={{ width: "100%" }}>
               <textarea
-                style={{width:"100%"}}
+                style={{ width: "100%" }}
                 aria-label="With textarea"
                 placeholder="Please provide any additional information or special instructions."
-                value ={instruction}
-                onChange={(e)=> setInstruction(e.target.value) }
+                value={instruction}
+                onChange={(e) => setInstruction(e.target.value)}
               ></textarea>
             </div>
           </div>

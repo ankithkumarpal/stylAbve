@@ -6,6 +6,10 @@ const TransactionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  OrderId : {
+    type: String,
+    required: false,
+  },
   Status : {
     type: String,
     required: true,

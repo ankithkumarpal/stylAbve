@@ -69,7 +69,7 @@ function Scrunchies() {
         <div className="spinner">
           <BeatLoader loading={isLoading} color="#26aefc" />
         </div>
-        <h3 style={{margin:"0%" , padding:"0%", backgroundColor:"rgba(255, 192, 203, 0.627)"}} className="pencil-art-header pt-2">Scrunchies</h3>
+        <h3 style={{margin:"0%" , padding:"0%"}} className="pencil-art-header pt-2">Scrunchies</h3>
         <div className="product pb-5">
           {items.map((product) => (
             <div className="product-container" key={product._id}>

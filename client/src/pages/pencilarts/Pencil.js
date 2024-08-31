@@ -1,4 +1,3 @@
-// Pencil.js
 import React, { useContext } from "react";
 import { PaymentContext } from "../../context/PaymentContext";
 import { useToasts } from "react-toast-notifications";
@@ -94,7 +93,6 @@ function Pencil() {
           style={{
             margin: "0%",
             padding: "0%",
-            backgroundColor: "rgba(255, 192, 203, 0.627)",
           }}
           className="pencil-art-header pt-2"
         >

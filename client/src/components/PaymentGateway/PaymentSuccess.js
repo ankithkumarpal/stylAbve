@@ -6,7 +6,6 @@ function PaymentSuccessPage() {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
 
-    // Extract transaction details from URL parameters
     const txnid = params.get('txnid');
     const status = params.get('status');
     const amount = params.get('amount');

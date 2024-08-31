@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #e9f7ef; /* Light green background */
+    background-color: #e9f7ef;
     padding: 20px;
 }
 
@@ -19,21 +19,21 @@
 
 .success-icon {
     font-size: 80px;
-    color: #28a745; /* Green success icon */
+    color: #28a745; 
     margin-bottom: 20px;
 }
 
 .success-message {
     font-size: 28px;
     font-weight: bold;
-    color: #2e7d32; /* Darker green for the message */
+    color: #2e7d32; 
     margin-bottom: 10px;
 }
 
 .order-summary h3 {
     font-size: 24px;
     margin-bottom: 15px;
-    color:grey; /* Dark green heading */
+    color:grey;
 }
 
 .summary-item {
@@ -44,7 +44,7 @@
 
 .summary-label {
     font-weight: bold;
-    color: grey; /* Medium green for labels */
+    color: grey; 
 }
 
 .summary-value {
@@ -65,19 +65,19 @@
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #388e3c; /* Green button background */
+    background-color: #388e3c; 
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s;
 }
 
 .home-button:hover, .orders-button:hover {
-    background-color: #2e7d32; /* Darker green on hover */
+    background-color: #2e7d32; 
     color: white;
 }
 
 .orders-button {
-    background-color: #43a047; /* Slightly different green for distinction */
+    background-color: #43a047; 
 }
 
 .orders-button:hover {

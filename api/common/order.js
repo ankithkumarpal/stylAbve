@@ -5,6 +5,7 @@ const Product = require("../models/Product");
 const Response = require('../provider/requestResponse');
 const { sendOrderConfirmationEmail, sendPencilCarvedOrderConfirmationEmail } = require("../provider/mailconfig");
 const { ProductType } = require("../provider/Constants");
+const Transaction = require("../models/Transaction");
 
 const serializeProductDetails = (productDetails) => {
   return productDetails.map(detail => JSON.stringify(detail));
@@ -43,23 +44,29 @@ const placeOrder = async (orderDetails)=>{
       productType
     });
 
-    const order = await newOrder.save();
+    
+    const transaction = await Transaction.find({TransactionId :orderDetails.transactionId});
 
-    if(orderDetails.productType == ProductType.Scrunchies){
-        await sendOrderConfirmationEmail({
-            ...orderDetails,
-            productDetails: deserializeProductDetails(serializedProductDetails),
-            address: deserializeAddress(serializedAddress)
-          });
-    }else {
-        await sendPencilCarvedOrderConfirmationEmail({
-            ...orderDetails,
-            productDetails: deserializeProductDetails(serializedProductDetails),
-            address: deserializeAddress(serializedAddress)
-          });
+    if(transaction ){
+        const order = await newOrder.save();
+
+        if(orderDetails.productType == ProductType.Scrunchies){
+            await sendOrderConfirmationEmail({
+                ...orderDetails,
+                productDetails: deserializeProductDetails(serializedProductDetails),
+                address: deserializeAddress(serializedAddress)
+              });
+        }else {
+            await sendPencilCarvedOrderConfirmationEmail({
+                ...orderDetails,
+                productDetails: deserializeProductDetails(serializedProductDetails),
+                address: deserializeAddress(serializedAddress)
+              });
+        }
+    
+        return new Response(success=true , message = 'order placed succesfully', data = order)
     }
 
-    return new Response(success=true , message = 'order placed succesfully', data = order)
   } catch (err) {
      return err;
   }

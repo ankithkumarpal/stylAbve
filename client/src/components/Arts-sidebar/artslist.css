@@ -1,19 +1,21 @@
 .pencil-art {
-    font-family: cursive;
+    font-family: 'Montserrat', sans-serif !important;
     width: 100%;
     display: flex;
-    background-color: #ffebf0c2;
     padding-left: 1rem;
     border-radius: 10px;
+    
+    background-color: #f3e5f5;
   }
+
   
   .pencil-art:hover {
-    background-color: #e3c3c6f0;
+    background-color: #f1d6f5;
     cursor: pointer;
   }
 
   .active{
-    background-color: #e3c3c6f0;
+    background-color: #eca9f6;
   }
   
   .link {

@@ -58,40 +58,6 @@ const placeOrder = async (req , res)=>{
 
 router.post("/pencil-carve/place-order", placeOrder);
 
-router.post("/place-order", async (req, res) => {
-  try {
-    const { userId, productDetails, amount, address, productType } = req.body;
-
-    if (!address) return res.status(400).json(new Response(false, "Address required."));
-
-    const serializedProductDetails = serializeProductDetails(productDetails);
-    const serializedAddress = serializeAddress(address);
-
-    const newOrder = new Orders({
-      userId,
-      productDetails: serializedProductDetails,
-      amount,
-      address: serializedAddress,
-      productType
-    });
-
-    const order = await newOrder.save();
-
-    await sendOrderConfirmationEmail({
-      ...req.body,
-      productDetails: deserializeProductDetails(serializedProductDetails),
-      address: deserializeAddress(serializedAddress)
-    });
-
-    res.status(200).json(new Response(true, "Order placed", order));
-  } catch (err) {
-    console.error("Error placing order:", err);
-    res.status(500).json(new Response(false, err.message));
-  }
-});
-
-
-
 router.get("/get-order", async (req, res) => {
   try {
     const { userId } = req.query;
@@ -100,7 +66,7 @@ router.get("/get-order", async (req, res) => {
       return res.status(400).json(new Response(false, "User ID required"));
     }
 
-    const orders = await Orders.find({ userId });
+    const orders = await Orders.find({ userId }).sort({ createdAt: -1 });
 
     if (orders.length === 0) {
       return res.status(200).json(new Response(true, "No records found"));

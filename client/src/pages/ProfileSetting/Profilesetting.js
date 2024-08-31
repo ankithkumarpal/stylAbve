@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import "./profilesetting.css";
 import { useToasts } from "react-toast-notifications";
 import { getHeaders, getProfileInfo, getUserId, updateProfileInfo} from "../../services/routpath";
+import { BeatLoader } from "react-spinners";
 
 const ProfileSetting = () => {
   const history = useHistory();
@@ -52,6 +53,7 @@ const ProfileSetting = () => {
   }, [user]);
 
   const getProfileInformation = () => {
+    setIsLoading(true);
     axios
       .get(`${getProfileInfo}?id=${getUserId()}`, { headers: getHeaders() })
       .then((response) => {
@@ -81,7 +83,7 @@ const ProfileSetting = () => {
       .catch((error) => {
         console.error("There was an error fetching the user data!", error);
         addToast("Profile fetching failed", { appearance: "error" });
-      });
+      }).finally(()=>{setIsLoading(false)});
   };
   
   const handleInputChange = (e) => {
@@ -153,6 +155,9 @@ const ProfileSetting = () => {
 
   return (
     <div className="user-profile">
+       <div className="spinner">
+        <BeatLoader loading={isLoading} color="white" />
+      </div>
       <h1
         style={{
           display: "flex",
@@ -302,13 +307,13 @@ const ProfileSetting = () => {
         >
           Past orders
         </button>
-        <button
+        {/* <button
           type="button"
           className="btn btn-secondary btn-sm m-2 delete-account"
           onClick={handleDeleteAccount}
         >
           Delete Account
-        </button>
+        </button> */}
         <button
           type="button"
           className="btn btn-danger btn-sm m-2 delete-account"

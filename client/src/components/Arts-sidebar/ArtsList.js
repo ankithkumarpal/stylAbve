@@ -18,7 +18,6 @@ export const ArtsList = () => {
     <div
       style={{
         height: "100%",
-        fontFamily: "cursive",
         display: "flex",
         alignItems: "center",
         padding: "1rem",
@@ -28,7 +27,6 @@ export const ArtsList = () => {
       <div
         className=""
         style={{
-          fontFamily: "cursive",
           height: "max-content",
           width: "100%",
           display: "flex",
@@ -36,7 +34,7 @@ export const ArtsList = () => {
           borderBottom: "1px solid navy",
         }}
       >
-        <span style={{ fontFamily: "cursive", color: "black" }}>
+        <span style={{ color: "black" }}>
           Arts collections
         </span>
       </div>
@@ -45,7 +43,6 @@ export const ArtsList = () => {
         <div
           className=""
           style={{
-            fontFamily: "cursive",
             height: "max-content",
             alignContent: "center",
             width: "100%",
@@ -60,7 +57,7 @@ export const ArtsList = () => {
               color: "saddlebrown",
             }}
           ></i>
-          <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
+          <span style={{color: "saddlebrown" }}>
             Pencil Arts
           </span>
         </div>
@@ -70,7 +67,6 @@ export const ArtsList = () => {
         <div
           className=""
           style={{
-            fontFamily: "cursive",
             height: "max-content",
             alignContent: "center",
             width: "100%",
@@ -85,7 +81,7 @@ export const ArtsList = () => {
               color: "saddlebrown",
             }}
           ></i>
-          <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
+          <span style={{ color: "saddlebrown" }}>
             Scrunchies
           </span>
         </div>
@@ -95,7 +91,6 @@ export const ArtsList = () => {
         <div
           className=""
           style={{
-            fontFamily: "cursive",
             height: "max-content",
             alignContent: "center",
             width: "100%",
@@ -110,7 +105,7 @@ export const ArtsList = () => {
               color: "saddlebrown",
             }}
           ></i>
-          <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
+          <span style={{ color: "saddlebrown" }}>
             Bike Arts
           </span>
         </div>
@@ -120,7 +115,6 @@ export const ArtsList = () => {
         <div
           className=""
           style={{
-            fontFamily: "cursive",
             height: "max-content",
             alignContent: "center",
             width: "100%",
@@ -135,7 +129,7 @@ export const ArtsList = () => {
               color: "saddlebrown",
             }}
           ></i>
-          <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
+          <span style={{color: "saddlebrown" }}>
             Gift cards
           </span>
         </div>
@@ -148,7 +142,6 @@ export const ArtsList = () => {
         <div
           className=""
           style={{
-            fontFamily: "cursive",
             height: "max-content",
             alignContent: "center",
             width: "100%",
@@ -163,7 +156,7 @@ export const ArtsList = () => {
               color: "saddlebrown",
             }}
           ></i>
-          <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
+          <span style={{ color: "saddlebrown" }}>
             Apparel printing
           </span>
         </div>
@@ -172,7 +165,6 @@ export const ArtsList = () => {
       <div
         className="mt-3"
         style={{
-          fontFamily: "cursive",
           height: "max-content",
           width: "100%",
           display: "flex",
@@ -180,7 +172,7 @@ export const ArtsList = () => {
           borderBottom: "1px solid navy",
         }}
       >
-        <span style={{ fontFamily: "cursive", color: "black" }}>
+        <span style={{ color: "black" }}>
           Profile & History
         </span>
       </div>
@@ -192,7 +184,6 @@ export const ArtsList = () => {
         <div
           className=""
           style={{
-            fontFamily: "cursive",
             height: "max-content",
             alignContent: "center",
             width: "100%",
@@ -207,7 +198,7 @@ export const ArtsList = () => {
               color: "saddlebrown",
             }}
           ></i>
-          <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
+          <span style={{ color: "saddlebrown" }}>
             My cart
           </span>
         </div>
@@ -217,7 +208,6 @@ export const ArtsList = () => {
         <div
           className=""
           style={{
-            fontFamily: "cursive",
             height: "max-content",
             alignContent: "center",
             width: "100%",
@@ -232,7 +222,7 @@ export const ArtsList = () => {
               color: "saddlebrown",
             }}
           ></i>
-          <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
+          <span style={{  color: "saddlebrown" }}>
             Order history
           </span>
         </div>
@@ -245,7 +235,6 @@ export const ArtsList = () => {
         <div
           className=""
           style={{
-            fontFamily: "cursive",
             height: "max-content",
             alignContent: "center",
             width: "100%",
@@ -260,7 +249,7 @@ export const ArtsList = () => {
               color: "saddlebrown",
             }}
           ></i>
-          <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
+          <span style={{  color: "saddlebrown" }}>
             About us
           </span>
         </div>
@@ -274,7 +263,6 @@ export const ArtsList = () => {
           <div
             className=""
             style={{
-              fontFamily: "cursive",
               height: "max-content",
               alignContent: "center",
               width: "100%",
@@ -291,7 +279,7 @@ export const ArtsList = () => {
             ></i>
             <span style={{ fontFamily: "cursive", color: "saddlebrown" }}>
               {getUserName()}
-              <p style={{ fontSize: "0.5rem", margin: "0%", padding: "0%" }}>
+              <p style={{ fontSize: "0.7rem", margin: "0%", padding: "0%" }}>
                 last login : {getLastLogin()}{" "}  - IST
               </p>
             </span>
@@ -305,7 +293,6 @@ export const ArtsList = () => {
           <div
             className=""
             style={{
-              fontFamily: "cursive",
               height: "max-content",
               alignContent: "center",
               width: "100%",
@@ -320,7 +307,7 @@ export const ArtsList = () => {
                 color: "saddlebrown",
               }}
             ></i>
-            <span style={{ fontFamily: "cursive", color: "saddlebrown" }}> Login
+            <span style={{color: "saddlebrown" }}> Login
             </span>
           </div>
         </Link>

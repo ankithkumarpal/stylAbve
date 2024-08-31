@@ -1,6 +1,5 @@
 .pencil-home {
     position: relative;
-    /* background-color: rgba(255, 192, 203, 0.627); */
   }
   
   .spinner {
@@ -10,7 +9,6 @@
   }
   
   .pencil-art-header{
-    /* display: none; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,10 +18,10 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    background-color: rgba(255, 192, 203, 0.627);
     -ms-overflow-style: none;
     scrollbar-width: none;
     background-color:'red' !important;
+    padding: 1rem 1rem 1rem 1rem;
   }
   
   .product-container {
@@ -58,18 +56,18 @@
   }
   
   .image-container img {
-    width: 100%; /* Fit image within the container width */
-    height: 100%; /* Fit image within the container height */
-    object-fit: cover; /* Cover the container while preserving aspect ratio */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 12px;
   }
   
   .image-container .price {
     position: absolute;
-    top: 10px; /* Adjust as needed */
-    right: 10px; /* Adjust as needed */
-    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
-    padding: 5px 10px; /* Adjust padding as needed */
+    top: 10px; 
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px 10px;
     border-radius: 5px;
     font-weight: bold;
     font-family: cursive;
@@ -105,17 +103,18 @@
       align-items: center;
       height: fit-content;
       flex-wrap: wrap;
-      justify-content: space-around;
+      padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     }
     .product-container {
       margin-top: 1rem;
-      margin-left: 1rem;
-      width: 150px;
-      height: 200px; /* Adjust height for smaller screens */
-      background-color: pink;
+      margin-left: 0.5rem;
+      width: 45vw;
+      height: 35vh;
+      background-color: rgba(255, 192, 203, 0.395) !important;
+
     }
     .button button {
-      font-size: 0.4rem;
+      font-size: 2.5vw;
       border-radius: 6px !important;
     }
   }

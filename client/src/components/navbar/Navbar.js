@@ -6,6 +6,7 @@ import { ArtsList } from "../Arts-sidebar/ArtsList";
 
 function Navbar() {
   const location = useLocation();
+  const history = useHistory();
   
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
@@ -22,19 +23,21 @@ function Navbar() {
     }
   }, [location.pathname]);
 
+  const redirectToHome = ()=>{
+    history.push('/');
+  }
+
   return (
     <>
       <div className="navbar">
         <div className="left">
-          <Link to="/" className="link">
-            <span>Unique carving</span>
-          </Link>
+          <img src="./images/UC.PNG" alt="Unique Carving Logo" onClick={redirectToHome}/>
+            <span  onClick={redirectToHome}>Unique carving</span>
         </div>
         <div className="right">
           <div className="marquee">
             <span>
-              🚀 Big Sale! Everything 50% OFF! Hurry up and grab your favorite products now! 🚀
-              🚀 Get your products at you in 2-3 days 🚀
+              🚀 Site is under Development 🚀
             </span>
           </div>
           <div className={`hamburger ${isMenuOpen ? "open" : ""}`} onClick={toggleMenu}>

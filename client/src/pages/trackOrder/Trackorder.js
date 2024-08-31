@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Context } from '../../context/Context';
 import { useLocation } from 'react-router';
-// import axiosInstance from '../../config'
  function TrackOrder(){
     const [orderStatus,setorderStatus]=useState("");
     const[orders,setOrders]=useState([])

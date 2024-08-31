@@ -1,12 +1,9 @@
 .about-us {
-  font-family: Arial, sans-serif;
   padding: 20px;
-  background-color: #e3c3c6f0;
   color: #333333; 
   min-height: 88vh; 
   width: 100%;
   overflow-y: auto;
-  font-family: cursive;
 }
 
 .about-us-section {
@@ -67,25 +64,17 @@
 
 @media (max-width: 480px) {
   .about-us-header h1 {
-    font-size: 1.8rem;
+    font-size: 10vw;
     margin-bottom: 12px;
   }
 
   .about-us-section h2 {
-    font-size: 1.3rem;
+    font-size: 8vw;
     margin-bottom: 6px;
   }
 
   .about-us-section p {
-    font-size: 0.8rem;
+    font-size: 4vw;
     margin-bottom: 6px;
-  }
-
-  .team-member h3 {
-    font-size: 0.9rem;
-  }
-
-  .team-member p {
-    font-size: 0.8rem;
   }
 }

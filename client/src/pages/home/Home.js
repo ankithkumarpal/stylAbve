@@ -9,23 +9,25 @@ function Home() {
         <div className="upper-layer">
           <div className="info-container">
             <div className="header">
-              <h1>Welcome to Unique Carving</h1>
+              <h1>Welcome to Unique Carving!</h1>
             </div>
             <div className="home_content">
               <p>
-                We use the quality pencils which gives perfect dimensions for
-                carving and also looks attractive. We have delivered more than
-                100 of our products to our partners and we had a good response
-                for our products so...
+                Discover the art of precision with our expertly crafted pencil carvings. At Unique Carving, we take pride in using the finest quality pencils, ensuring every piece is a masterpiece with perfect dimensions and stunning detail. Our products have delighted over 100 partners, and the positive feedback speaks volumes about our craftsmanship.
               </p>
-              <p>Hope you love our carving products.</p>
-              <p>We are sure that you will keep visiting our website.</p>
-              <p>For sample products click on <Link to='/pencilarts'>pencil arts</Link></p>
+              <p>
+                Dive into our world of intricate pencil art and experience the beauty of our creations firsthand. Click on <Link to='/pencilarts'>Pencil Arts</Link> to see a selection of our most exquisite work.
+              </p>
+              <p>
+                Have questions or need assistance? Visit our <Link to='/aboutus'>Contact Us</Link> page. We’re here to help and look forward to resolving any inquiries you may have.
+              </p>
+              <p>
+                Thank you for visiting Unique Carving. We’re excited to be a part of your artistic journey!
+              </p>
             </div>
             <div className="details_order">
               <p>
-                For any queries please visit the contact us page and reach out to us. We
-                love to resolve your issues.
+                For any queries please visit the contact us page and reach out to us. We love to resolve your issues.
               </p>
             </div>
           </div>

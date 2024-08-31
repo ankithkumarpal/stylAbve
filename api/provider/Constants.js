@@ -5,6 +5,13 @@ const PaymentStatus = {
     FAILED : 'failed'
   };
 
+const OrderStatus = {
+    PLACED : 'placed',
+    SHIPPED : 'shipped',
+    DELIVERED : 'delivered',
+    CANCELLED : 'cancelled'
+}
+
 const ProductType = {
     PencilCarve : 'pencilcarve',
     Scrunchies : 'scrunchies'
@@ -12,6 +19,7 @@ const ProductType = {
   
   module.exports = {
     PaymentStatus,
-    ProductType
+    ProductType,
+    OrderStatus
   };
   

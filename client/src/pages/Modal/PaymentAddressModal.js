@@ -16,11 +16,11 @@ function PaymentAddressModal({ cartItems, totalAmount, discount, address, netPay
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setShow(true);
-    getProductDetails(); // Set product details when the modal is shown
+    getProductDetails();
   };
 
   useEffect(() => {
-    validateForm(); // Validate form on address or instruction change
+    validateForm();
   }, [address, instruction]);
 
   const getorderDetails = () => {
@@ -83,7 +83,7 @@ function PaymentAddressModal({ cartItems, totalAmount, discount, address, netPay
     try {
       await initiatePayment(orderData);
     } catch (error) {
-      // Handle error
+      // handle error
     } finally {
       setIsLoading(false);
       setShow(false);

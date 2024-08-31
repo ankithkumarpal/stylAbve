@@ -5,6 +5,7 @@ import axios from "axios";
 import { useToasts } from "react-toast-notifications";
 import { BeatLoader } from "react-spinners";
 import { getHeaders, getOrdersInfo, getUserId, headers, userId } from "../../services/routpath";
+import CancelorderModal from "../Modal/CancelorderModal";
 
 export const OrderHistory = () => {
   const { addToast } = useToasts();
@@ -30,6 +31,27 @@ export const OrderHistory = () => {
     }
   };
 
+  const cancellOrder = async(order)=>{
+    const body = {
+      "orderId":order._id,
+      "refundAmount":"199.80",
+      "refundReason" : "testing"
+    }
+
+    try {
+      const res = await axios.post('https://unqiue-carving.onrender.com/api/payment-gateway/orders/initiate-refund', body, {headers: getHeaders()});
+      if(res.data.success == true){
+        getOrders();
+        addToast("Product cancelled sucessfully", { appearance: "success" });
+      }else {
+        addToast("Product cancellation failed", { appearance: "error" });
+      }
+    } catch (error) {
+      addToast("Product cancellation failed", { appearance: "error" });
+      throw error;
+    }
+  }
+
   return (
     <div className="order-history" style={{ fontFamily: "cursive" }}>
       <div className="spinner">
@@ -39,7 +61,6 @@ export const OrderHistory = () => {
         <h4 className="" style={{ color: "" }}>
           Order history
         </h4>
-        {/* <hr></hr> */}
       </header>
       {orders.map((order) => (
         <div
@@ -52,9 +73,11 @@ export const OrderHistory = () => {
               <span className="text-muted">
                 Order ID <strong>: {order._id}</strong>
               </span>
-              <a
+
+              {
+                order.status !== "cancelled"  &&  <div
                 href="#!"
-                className="text-danger"
+                className="text-danger cancell-order"
                 style={{
                   fontWeight: "bolder",
                   width: "60px",
@@ -62,9 +85,28 @@ export const OrderHistory = () => {
                   letterSpacing: "0.1em",
                   fontSize: "0.8rem",
                 }}
+                // onClick={() => cancellOrder(order)}
+              >
+                <CancelorderModal/>
+              </div>
+              }
+              {/* {
+                order.status !== "cancelled"  &&  <div
+                href="#!"
+                className="text-danger cancell-order"
+                style={{
+                  fontWeight: "bolder",
+                  width: "60px",
+                  height: "15px",
+                  letterSpacing: "0.1em",
+                  fontSize: "0.8rem",
+                }}
+                onClick={() => cancellOrder(order)}
               >
                 Cancel
-              </a>
+              </div>
+              } */}
+             
             </div>
             <div>
               <span className="text-muted">
@@ -111,7 +153,16 @@ export const OrderHistory = () => {
               </p>
             </div>
           </div>
-          <div className="card-footer" style={{ fontSize: "0.6rem" }}>
+          <div
+  className={`card-footer ${order.status === "cancelled" ? "bg-danger" : ""}`}
+  style={{ fontSize: "0.6rem" }}
+>
+
+          {order.status === "cancelled" ? (
+  <div style={{ color: 'white', fontSize: "0.8rem" }}>
+    Cancelled
+  </div>
+) : (
   <div className="position-relative order-tracker pt-3 pb-3">
     <div className="progress-line"></div>
     <div className="d-flex justify-content-between align-items-center">
@@ -153,6 +204,8 @@ export const OrderHistory = () => {
       </div>
     </div>
   </div>
+)}
+
 </div>
 
         </div>

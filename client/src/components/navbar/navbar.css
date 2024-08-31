@@ -1,7 +1,6 @@
 .navbar {
   width: 100%;
   height: inherit;
-  background-color: rgba(255, 255, 255, 0.389);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,18 +8,17 @@
   color: black;
   text-transform: capitalize;
   box-sizing: border-box;
-  /* background-color: red !important; */
+  background-color: #f3e5f5;
 }
 
 .uniquecarving {
-  /* background-image: url('../../assests/uniquecarving.png') !important; */
   width: 230px;
   height: 50px;
-  background-size: contain; 
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
-.uniquecarving img{
+.uniquecarving img {
   width: inherit;
   height: inherit;
 }
@@ -31,21 +29,42 @@
   align-items: center;
   justify-content: center;
   color: black;
-  width: 250px;
+  width: 300px;
   height: 50px;
+  position: relative;
+}
+
+.left img {
+  max-width: 200px;
+  position: absolute;
+  left: 0;
+  max-height: 145px;
+  display: block;
+  padding: 0;
+  margin: 0;
 }
 
 .left span {
-  color: black;
-  font-family: cursive;
+  position: absolute;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
   font-weight: bolder;
+  left: 7rem;
+  color: rgb(255, 3, 247);
+  text-shadow: 2px 2px 4px rgba(1, 1, 1, 0.6);
+}
+
+.left span:hover {
+  cursor: pointer;
+}
+
+.left img:hover {
+  cursor: pointer;
 }
 
 .right {
   display: flex;
   align-items: center;
-  /* background-color: red; */
   width: 80%;
   height: 100%;
 }
@@ -70,8 +89,13 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .hamburger {
@@ -132,15 +156,9 @@
     flex-direction: column;
     height: auto;
   }
-  .marquee{
-    display: none;
-  }
+
   .left {
     margin-bottom: 10px;
-  }
-
-  .right {
-    width: 100%;
   }
 
   .hamburger {

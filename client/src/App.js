@@ -5,7 +5,6 @@ import { Landing } from './components/LandingPage/Landing';
 import { Login } from './pages/Authentication/login';
 import { Signup } from './pages/Authentication/signup';
 import ResetPassword from './pages/Authentication/ResetPassword';
-import Payment from './components/PaymentGateway/payupayment';
 import { PaymentProvider } from './context/PaymentContext';
 import PaymentSuccessPage from './components/PaymentGateway/PaymentSuccess';
 
@@ -19,8 +18,7 @@ function App() {
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/signup" component={Signup} />
                         <Route exact path="/reset-password" component={ResetPassword} />
-                        <Route exact path="/payment" component={Payment} />
-                        <Route exact path="/success" component={PaymentSuccessPage} />
+                        <Route  path="/success" component={PaymentSuccessPage} />
                         {/* <Route exact path="/failure" component={FailurePage} /> */}
                         <Route path="/" component={Landing} />
                     </Switch>

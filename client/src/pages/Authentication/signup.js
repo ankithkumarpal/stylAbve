@@ -72,6 +72,9 @@ export const Signup = () => {
       if(res.data.success){
         addToast("Registeration successfull", { appearance: "success" });
         history.push("/login");
+      }else {
+        addToast(res.data.message, { appearance: "warning" });
+        history.push("/login");
       }
     } catch (err) {
       addToast("Registeration failed", { appearance: "error" });

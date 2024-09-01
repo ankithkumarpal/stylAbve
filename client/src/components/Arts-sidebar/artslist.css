@@ -4,18 +4,17 @@
     display: flex;
     padding-left: 1rem;
     border-radius: 10px;
-    
     background-color: #f3e5f5;
   }
 
   
   .pencil-art:hover {
-    background-color: #f1d6f5;
+    background-color: lavender; 
     cursor: pointer;
   }
 
   .active{
-    background-color: #eca9f6;
+    background-color: rgb(190, 190, 224); 
   }
   
   .link {

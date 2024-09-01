@@ -51,7 +51,14 @@ function Example({ product }) {
     country: "",
   });
 
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    if (getUserId() == null) {
+      addToast("Please login to proceed with the purchase", { appearance: "warning" });
+      history.push("/login");
+      return;
+    }
+    setShow(true);
+  }
 
   const incrementQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
@@ -65,6 +72,15 @@ function Example({ product }) {
     setIsSaveDisabled(false);
     setNameData([]);
     setQuantityData([]);
+    setAddress({
+      doorNo: "",
+      area: "",
+      landmark: "",
+      city: "",
+      pincode: "",
+      country: "",
+    })
+    setInstruction("")
   };
 
   const handleAddressChange = (e) => {

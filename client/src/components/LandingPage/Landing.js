@@ -12,6 +12,7 @@ import AboutUs from "../../pages/AboutUs/Aboutus";
 import ProfileSetting from "../../pages/ProfileSetting/Profilesetting";
 import { Comingsoon } from "../../pages/Comingsoon/comingsoon";
 import Scrunchies from "../../pages/Scrunchies/Scrunchies";
+import ProtectedRoute from "../../pages/Authentication/ProtectedRoute";
 
 export const Landing = () => {
   let { path } = useRouteMatch();
@@ -27,16 +28,16 @@ export const Landing = () => {
         <div className="landing-content-section">
           <Switch>
             <Route exact path={path} component={Home} />
-            <Route path={`/contact`} component={Contact} />
             <Route path={`/scrunchies`} component={Scrunchies} />
             <Route path={`/bike-arts`} component={Comingsoon} />
             <Route path={`/gift-card`} component={Comingsoon} />
             <Route path={`/apparel-printing`} component={Comingsoon} />
             <Route path={`/pencilarts`} component={Pencil} />
-            <Route path={`/my-cart`} component={History}/>
-            <Route path={'/order-history'} component={OrderHistory}/>
             <Route path={`/aboutus`} component={AboutUs}/>
-            <Route path={`/profile-setting`} component={ProfileSetting}/>
+            <ProtectedRoute path={`/my-cart`} component={History}/>
+            <ProtectedRoute path={'/order-history'} component={OrderHistory}/>
+            <ProtectedRoute path={`/profile-setting`} component={ProfileSetting}/>
+
           </Switch>
         </div>
       </div>

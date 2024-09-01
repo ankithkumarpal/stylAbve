@@ -23,7 +23,7 @@ function Pencil() {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get(getPencilCarveProducts);
+      const response = await axios.get(getPencilCarveProducts , {headers:getHeaders()});
       setItems(response.data.data.productsWithImages);
       addToast("Products fetched successfully", { appearance: "success" });
       setIsLoading(false);
@@ -64,23 +64,6 @@ function Pencil() {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleBuyNow = async (product) => {
-    if (getUserId() == null) {
-      addToast("Please login to proceed with the purchase", { appearance: "warning" });
-      history.push("/login");
-      return;
-    }
-    const orderData = {
-      amount: product.price,
-      firstname: getUserName(), 
-      email: getUserEmail(),
-      phone: getUserPhone(),
-      productinfo:"pencil-carved-item",
-      productType:'pencilcarve'
-    };
-    await initiatePayment(orderData);
   };
 
   return (

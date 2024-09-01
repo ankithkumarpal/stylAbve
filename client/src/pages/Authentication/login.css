@@ -4,7 +4,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../../assests/flower.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -15,7 +14,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 192, 203, 0.627);
+    background-color: #f3e5f5;
     overflow-y: auto;
   }
   .form-group input:focus {
@@ -33,7 +32,7 @@
   
   .login-form-inner {
     width: 40%;
-    background-color: #f8bdbdcf;
+    background-color: #fff5e6af;
     padding: 1.5rem;
     border-radius: 25px;
   }

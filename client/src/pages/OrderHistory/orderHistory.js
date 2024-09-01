@@ -31,31 +31,10 @@ export const OrderHistory = () => {
     }
   };
 
-  const cancellOrder = async(order)=>{
-    const body = {
-      "orderId":order._id,
-      "refundAmount":"199.80",
-      "refundReason" : "testing"
-    }
-
-    try {
-      const res = await axios.post('https://unqiue-carving.onrender.com/api/payment-gateway/orders/initiate-refund', body, {headers: getHeaders()});
-      if(res.data.success == true){
-        getOrders();
-        addToast("Product cancelled sucessfully", { appearance: "success" });
-      }else {
-        addToast("Product cancellation failed", { appearance: "error" });
-      }
-    } catch (error) {
-      addToast("Product cancellation failed", { appearance: "error" });
-      throw error;
-    }
-  }
-
   return (
     <div className="order-history" style={{ fontFamily: "cursive" }}>
       <div className="spinner">
-        <BeatLoader loading={isLoading} color="white" />
+        <BeatLoader loading={isLoading} color="#26aefc"/>
       </div>
       <header className="orderhistory-header">
         <h4 className="" style={{ color: "" }}>
@@ -85,27 +64,10 @@ export const OrderHistory = () => {
                   letterSpacing: "0.1em",
                   fontSize: "0.8rem",
                 }}
-                // onClick={() => cancellOrder(order)}
               >
-                <CancelorderModal/>
+                <CancelorderModal order={order} getOrders={getOrders}/>
               </div>
               }
-              {/* {
-                order.status !== "cancelled"  &&  <div
-                href="#!"
-                className="text-danger cancell-order"
-                style={{
-                  fontWeight: "bolder",
-                  width: "60px",
-                  height: "15px",
-                  letterSpacing: "0.1em",
-                  fontSize: "0.8rem",
-                }}
-                onClick={() => cancellOrder(order)}
-              >
-                Cancel
-              </div>
-              } */}
              
             </div>
             <div>

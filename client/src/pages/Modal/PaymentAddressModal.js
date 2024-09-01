@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { getHeaders, getUserEmail, getUserId, getUserName, getUserPhone } from '../../services/routpath';
 import { PaymentContext } from '../../context/PaymentContext';
-import axios from 'axios';
 
 function PaymentAddressModal({ cartItems, totalAmount, discount, address, netPayable, setAddress }) {
   const { initiatePayment } = useContext(PaymentContext);

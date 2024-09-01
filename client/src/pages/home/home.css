@@ -44,14 +44,13 @@
 }
 
 .home_content p {
-  font-weight: 600;
   color: #2F4F4F;
   font-size: 1.1rem; 
   line-height: 1.6;
 }
 
 .details_order p {
-  color: #FFD700;
+  color: orange; 
 }
 
 .home_content a {
@@ -95,6 +94,7 @@
   .upper-layer {
     padding-top: 0.8rem;
     background-color: rgba(255, 255, 255, 0.2);
+    padding-bottom: 1rem !important;
   }
 
   .home_content h1 {

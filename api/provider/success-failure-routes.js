@@ -4,7 +4,7 @@ const scrunchies = 'https://unqiue-carving.onrender.com/api/payment-gateway/penc
 const getSuccessUrl = (type) => {
     console.log(type)
     switch(type) {
-      case "pencilcarve":
+      case "pencilcarving":
         return pencilCarveSuccess;
       case "scrunchies":
         return scrunchies;

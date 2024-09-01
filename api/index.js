@@ -10,19 +10,19 @@ const cartRoute = require('./routes/cart');
 const profileRoute = require('./routes/profile');
 const emailRoute = require('./routes/email');
 const paymentRoute = require('./routes/payment');
+const Authorization = require('./Middleware/Authorization')
 
 dotenv.config();
 
 const app = express();
 
-// Middleware
-app.use(express.json()); // For JSON data
-app.use(bodyParser.urlencoded({ extended: false })); // For URL-encoded form data
-app.use(bodyParser.json()); // For JSON data (redundant with express.json(), but useful if you want to handle both)
+// Add middleware here only.
+app.use(express.json()); 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.use(cors()); // Enable CORS
+app.use(cors()); 
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONOGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -30,25 +30,21 @@ mongoose.connect(process.env.MONOGO_URL, {
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.error(err));
 
-// Static Files
 app.use('/files', express.static("files"));
 
-// Routes
 app.use('/api/auth', authRoute);
-app.use('/api/orders', orderRoute);
+app.use('/api/orders',Authorization,orderRoute);
 app.use('/api/product', productRoute);
-app.use('/api/cart', cartRoute);
-app.use('/api/profile', profileRoute);
-app.use('/api/email', emailRoute);
-app.use('/api/payment-gateway', paymentRoute);
+app.use('/api/cart', Authorization, cartRoute);
+app.use('/api/profile', Authorization, profileRoute);
+app.use('/api/email', Authorization, emailRoute);
+app.use('/api/payment-gateway',Authorization, paymentRoute);
 
-// Error Handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
 
-// Start Server
 app.listen(process.env.PORT || 5000, () => {
     console.log("Server is running on port", process.env.PORT || 5000);
 });

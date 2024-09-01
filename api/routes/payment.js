@@ -40,7 +40,7 @@ router.post("/pay", async (req, res) => {
             email: email,
             phone: phone,
             surl: surl,
-            furl: "https://styleabove.netlify.app/failure",
+            furl: "https://uniquecarving.in/failure",
             hash: hash,
             service_provider: "payu_paisa",
         };
@@ -78,10 +78,10 @@ router.post('/pencil-item/payment-success', async (req, res) => {
             transaction.OrderId = response.data._id;
             const trs =  await transaction.save();
             const queryParams = `?txnid=${txnid}&status=${status}&amount=${amount}&productinfo=${encodeURIComponent(productinfo)}`;
-            res.redirect(`https://styleabove.netlify.app/success${queryParams}`); 
+            res.redirect(`https://uniquecarving.in/success${queryParams}`); 
           
         }else {
-            res.redirect('https://styleabove.netlify.app/failure');
+            res.redirect('https://uniquecarving.in/failure');
         }
     } catch (error) {
         console.error('Error processing payment:', error);

@@ -120,7 +120,7 @@ const sendOrderConfirmationEmail = async (order) => {
            <!-- Visit Us Section -->
           <div style="background-color: #E3F2FD; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <h3 style="color: #007BFF; margin-bottom: 10px; border-bottom: 1px solid #007BFF; padding-bottom: 5px;">Visit Us</h3>
-            <p>We invite you to explore more of our products and updates on our website: <a href="https://styleabove.netlify.app/" style="color: #007BFF;">Style Above</a>.</p>
+            <p>We invite you to explore more of our products and updates on our website: <a href="https://uniquecarving.in/" style="color: #007BFF;">Style Above</a>.</p>
           </div>
     
           <!-- Thank You Section -->
@@ -225,7 +225,7 @@ const sendPencilCarvedOrderConfirmationEmail = async (order) => {
 
           <div style="background-color: #E3F2FD; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <h3 style="color: #007BFF; margin-bottom: 10px; border-bottom: 1px solid #007BFF; padding-bottom: 5px;">Visit Us</h3>
-            <p>We invite you to explore more of our products and updates on our website: <a href="https://styleabove.netlify.app/" style="color: #007BFF;">Style Above</a>.</p>
+            <p>We invite you to explore more of our products and updates on our website: <a href="https://uniquecarving.in/" style="color: #007BFF;">Style Above</a>.</p>
           </div>
 
           <div style="background-color: #4CAF50;  padding: 20px; margin-top: 20px; border-radius: 8px; color: #fff;">

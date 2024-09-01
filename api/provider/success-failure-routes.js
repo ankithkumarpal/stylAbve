@@ -8,7 +8,7 @@ const getSuccessUrl = (type) => {
         return pencilCarveSuccess;
       case "scrunchies":
         return scrunchies;
-      default:
+      default: 
         return null;
     }
   };

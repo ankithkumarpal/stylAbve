@@ -9,11 +9,12 @@ const Response = require("../provider/requestResponse");
 const axios = require('axios');
 const { OrderStatus } = require("../provider/Constants");
 const Orders = require("../models/Orders");
+const Authorization = require('../Middleware/Authorization');
 
 const MERCHANT_KEY = "7BaVFx";
 const MERCHANT_SALT = "ZcIIZ3KVeBTWrtEihFGhTbaelfh5EUqc";
 
-router.post("/pay", async (req, res) => {
+router.post("/pay",Authorization, async (req, res) => {
     try {
         console.log("payment page /pay " ,req.body);
         const { amount, firstname, email, phone, productType } = req.body;
@@ -89,7 +90,7 @@ router.post('/pencil-item/payment-success', async (req, res) => {
     }
 });
 
-router.post('/orders/initiate-refund', async (req , res) => {
+router.post('/orders/initiate-refund',Authorization ,async (req , res) => {
         const {orderId ,refundAmount, refundReason} = req.body;
         const transaction = await Transaction.findOne({OrderId : orderId});
         const transactionId = transaction?.TransactionId || null;

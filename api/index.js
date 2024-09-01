@@ -38,7 +38,7 @@ app.use('/api/product', productRoute);
 app.use('/api/cart', Authorization, cartRoute);
 app.use('/api/profile', Authorization, profileRoute);
 app.use('/api/email', Authorization, emailRoute);
-app.use('/api/payment-gateway',Authorization, paymentRoute);
+app.use('/api/payment-gateway', paymentRoute);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

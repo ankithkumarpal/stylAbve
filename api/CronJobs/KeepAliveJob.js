@@ -13,7 +13,7 @@ const keepServerAlive = async () => {
   }
 };
 
-cron.schedule('*/1 * * * *', () => {
+cron.schedule('*/5 * * * *', () => {
   console.log('Running keep-alive job...');
   keepServerAlive();
 });

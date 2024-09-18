@@ -11,6 +11,7 @@ const profileRoute = require('./routes/profile');
 const emailRoute = require('./routes/email');
 const paymentRoute = require('./routes/payment');
 const Authorization = require('./Middleware/Authorization')
+require('./CronJobs/KeepAliveJob');
 
 dotenv.config();
 
@@ -37,14 +38,19 @@ app.use('/api/orders',Authorization,orderRoute);
 app.use('/api/product', productRoute);
 app.use('/api/cart', Authorization, cartRoute);
 app.use('/api/profile', Authorization, profileRoute);
-app.use('/api/email', Authorization, emailRoute);
+app.use('/api/email', emailRoute);
 app.use('/api/payment-gateway', paymentRoute);
+
+
+app.get('/keep-alive', (req, res) => {
+    res.send('Server is alive!');
+});
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
-
+  
 app.listen(process.env.PORT || 5000, () => {
     console.log("Server is running on port", process.env.PORT || 5000);
 });

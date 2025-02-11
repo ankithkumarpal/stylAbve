@@ -30,13 +30,13 @@ const AboutUs = () => {
         </p>
         <div style={{paddingTop:'14px'}}>
         <p>Email: <b style={{color:"black"}}>uniquecarving@gmail.com</b></p>
-        <p>Phone: <b style={{color:"black"}}>(+91) 8309145402</b></p>
-        <div className="social-media mt-5">
+        {/* <p>Phone: <b style={{color:"black"}}>(+91) 8309145402</b></p> */}
+        {/* <div className="social-media mt-5">
           <a href="https://www.instagram.com/uniquecarving/" target="_blank" rel="noopener noreferrer" className="bi bi-instagram" style={{color:"red"}}></a>
           <a href="https://www.linkedin.com/in/ankithpal/" target="_blank" rel="noopener noreferrer" className="bi bi-linkedin" style={{color:"blue"}}></a>
           <a href="https://www.twitter.com/ankith_pal" target="_blank" rel="noopener noreferrer" className="bi bi-twitter" style={{color:"blue"}}></a>
 
-        </div>
+        </div> */}
         </div>
       </section>
     </div>
